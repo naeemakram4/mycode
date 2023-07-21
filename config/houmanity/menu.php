@@ -79,7 +79,7 @@ return [
         ],
         [
             'title' => 'Projects',
-            'route' => 'test',
+            'route' => 'admin.project.index',
             'icon' => 'kanban',
         ],
 
