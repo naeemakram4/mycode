@@ -85,7 +85,7 @@ return [
 
         [
             'title' => 'Followups',
-            'route' => 'test',
+            'route' => 'admin.followup.index',
             'heading' => 'Sales Channel',
             'icon' => 'arrow-clockwise',
         ],
