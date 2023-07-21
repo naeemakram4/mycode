@@ -21,7 +21,7 @@ return [
         ],
         [
             'title' => 'Report',
-            'route' => 'test',
+            'route' => 'admin.report.project',
             'icon' => 'activity',
         ],
         [

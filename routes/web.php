@@ -32,11 +32,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::group(['middleware' => 'admin.auth'], function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+        require __DIR__ . '/admin/report.php';
 
         // CompanyHQ
         require __DIR__ . '/admin/department.php';
         require __DIR__ . '/admin/designation.php';
 //        require __DIR__ . '/admin/team.php';
+
+
 
         Route::post('logout', [AdminLoginController::class, 'logout'])->name('logout');
     });
