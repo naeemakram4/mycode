@@ -25,7 +25,7 @@
             <!--begin::Modal body-->
             <div class="modal-body scroll-y mx-3">
                 <!--begin::Form-->
-                <form method="POST" action="{{ route('add_designation_data') }}" class="form">
+                <form method="POST" action="{{ route('admin.designation.store') }}" class="form">
                     @csrf
                     <!--begin::Input group-->
                     <div class="fv-row mb-7 fv-plugins-icon-container">

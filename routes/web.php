@@ -35,7 +35,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
         // CompanyHQ
         require __DIR__ . '/admin/department.php';
-//        require __DIR__ . '/admin/designation.php';
+        require __DIR__ . '/admin/designation.php';
 //        require __DIR__ . '/admin/team.php';
 
         Route::post('logout', [AdminLoginController::class, 'logout'])->name('logout');

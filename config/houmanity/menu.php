@@ -34,7 +34,7 @@ return [
             'route' => 'javascript:void(0);',
             'icon' => 'building',
             'heading' => 'Company',
-            'sub_routes' => ['admin.department.index', 'test', 'test'],
+            'sub_routes' => ['admin.department.index', 'admin.designation.index', 'test'],
             'sub' => [
                 [
                     'title' => 'Departments',
@@ -42,7 +42,7 @@ return [
                 ],
                 [
                     'title' => 'Designations',
-                    'route' => 'test',
+                    'route' => 'admin.designation.index',
                 ],
                 [
                     'title' => 'Employee',

@@ -48,7 +48,7 @@
                         <!--end::Svg Icon-->
                     </a>
                     <form id="delete-designation-{{ $designation->id }}"
-                          action="{{ route('delete.designation', $designation->id) }}"
+                          action="{{ route('admin.designation.destroy', $designation->id) }}"
                           method="POST" style="display: none">
                         @csrf
                         @method('DELETE')
@@ -79,8 +79,8 @@
 
             let id = $(this).data('id');
 
-            $.get('/admin/edit-designation/' + id, function (data) {
-                $('#editDesignationForm').prop('action', '/admin/update_designation/'+data.id);
+            $.get('/admin/designation/' + id + '/edit', function (data) {
+                $('#editDesignationForm').prop('action', '/admin/designation/'+data.id);
 
                 $('select[name="edit_department_id"]').val(data.department_id)
                 $('input[name="edit_name"]').val(data.name);
