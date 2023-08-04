@@ -59,7 +59,7 @@ return [
             'sub' => [
                 [
                     'title' => 'Referrals',
-                    'route' => 'test',
+                    'route' => 'admin.referral.index',
                 ],
                 [
                     'title' => 'Referrals Clients',
