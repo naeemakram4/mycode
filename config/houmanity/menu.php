@@ -74,7 +74,7 @@ return [
 
         [
             'title' => 'Clients',
-            'route' => 'test',
+            'route' => 'admin.client.index',
             'icon' => 'people',
         ],
         [

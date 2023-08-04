@@ -38,11 +38,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         // Company
         require __DIR__ . '/admin/department.php';
         require __DIR__ . '/admin/designation.php';
-//        require __DIR__ . '/admin/team.php';
+        //require __DIR__ . '/admin/team.php';
 
         require __DIR__ . '/admin/referral.php';
         require __DIR__ . '/admin/referred_client.php';
         require __DIR__ . '/admin/website.php';
+        require __DIR__ . '/admin/client.php';
         require __DIR__ . '/admin/project.php';
 
 
