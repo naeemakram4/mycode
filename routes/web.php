@@ -33,6 +33,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::group(['middleware' => 'admin.auth'], function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
         require __DIR__ . '/admin/report.php';
+        require __DIR__ . '/admin/meeting.php';
 
         // Company
         require __DIR__ . '/admin/department.php';

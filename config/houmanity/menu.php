@@ -26,7 +26,7 @@ return [
         ],
         [
             'title' => 'Meeting',
-            'route' => 'test',
+            'route' => 'admin.meeting.index',
             'icon' => 'webcam',
         ],
         [

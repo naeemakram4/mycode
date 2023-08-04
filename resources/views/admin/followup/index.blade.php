@@ -153,7 +153,7 @@
                 },
                 {
                     title: "Testing URL",
-                    url: "#",
+                    url: "https://www.google.com",
                     start: "2023-07-28"
                 }
             ]
