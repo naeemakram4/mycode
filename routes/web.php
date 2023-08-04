@@ -41,6 +41,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 //        require __DIR__ . '/admin/team.php';
 
         require __DIR__ . '/admin/referral.php';
+        require __DIR__ . '/admin/referred_client.php';
+        require __DIR__ . '/admin/website.php';
         require __DIR__ . '/admin/project.php';
 
 

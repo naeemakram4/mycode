@@ -62,12 +62,12 @@ return [
                     'route' => 'admin.referral.index',
                 ],
                 [
-                    'title' => 'Referrals Clients',
-                    'route' => 'test',
+                    'title' => 'Referred Clients',
+                    'route' => 'admin.referred.client.index',
                 ],
                 [
                     'title' => 'Website',
-                    'route' => 'test',
+                    'route' => 'admin.website.index',
                 ]
             ]
         ],
