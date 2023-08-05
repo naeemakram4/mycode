@@ -101,7 +101,7 @@ return [
         ],
         [
             'title' => 'Invoices',
-            'route' => 'test',
+            'route' => 'admin.invoice.index',
             'icon' => 'receipt',
         ],
 
