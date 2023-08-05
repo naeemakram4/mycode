@@ -52,6 +52,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         require __DIR__ . '/admin/proposal.php';
         require __DIR__ . '/admin/invoice.php';
 
+        // System Management
+        require __DIR__ . '/admin/task.php';
+
 
         Route::post('logout', [AdminLoginController::class, 'logout'])->name('logout');
     });

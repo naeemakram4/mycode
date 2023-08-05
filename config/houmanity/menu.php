@@ -107,7 +107,7 @@ return [
 
         [
             'title' => 'Task Management',
-            'route' => 'test',
+            'route' => 'admin.task.index',
             'heading' => 'System Management',
             'icon' => 'list-check',
         ],
