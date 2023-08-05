@@ -46,11 +46,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         require __DIR__ . '/admin/client.php';
         require __DIR__ . '/admin/project.php';
 
-
-
         // Sales Channel
         require __DIR__ . '/admin/followup.php';
-
+        require __DIR__ . '/admin/service.php';
 
         Route::post('logout', [AdminLoginController::class, 'logout'])->name('logout');
     });

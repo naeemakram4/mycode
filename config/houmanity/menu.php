@@ -91,7 +91,7 @@ return [
         ],
         [
             'title' => 'Services',
-            'route' => 'test',
+            'route' => 'admin.service.index',
             'icon' => 'gear-wide-connected',
         ],
         [
