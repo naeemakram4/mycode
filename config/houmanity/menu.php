@@ -96,7 +96,7 @@ return [
         ],
         [
             'title' => 'Proposals',
-            'route' => 'test',
+            'route' => 'admin.proposal.index',
             'icon' => 'card-text',
         ],
         [
