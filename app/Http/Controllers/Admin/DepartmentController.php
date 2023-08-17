@@ -32,11 +32,6 @@ class DepartmentController extends AdminController
         return view('admin.company-hq.department.index', $viewParams);
     }
 
-    public function create()
-    {
-        //
-    }
-
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -63,16 +58,37 @@ class DepartmentController extends AdminController
 
     public function edit(Department $department)
     {
-        //
+        return response()->json($department);
     }
 
     public function update(Request $request, Department $department)
     {
-        //
+        $validatedData = $request->validate([
+            'edit_name' => 'required|unique:departments,name,' . $department->id,
+        ]);
+
+        if ($department) {
+            $department->name = $validatedData['edit_name'];
+            $department->status = ($request->edit_status == "on") ? 1 : 0;
+            $department->save();
+
+            Session::flash('successMessage', 'Department record updated successfully!');
+            return redirect()->back();
+        }
+
+        return redirect()->back()
+            ->withErrors('Invalid data, Try again!');
     }
 
     public function destroy(Department $department)
     {
-        //
+        $department = Department::whereId($department)->first();
+        if ($department->delete()) {
+            Session::flash('successMessage', 'Department has been deleted successfully!');
+            return redirect()->back();
+        }
+
+        return redirect()->back()
+            ->withErrors('Failed to delete department, Try again!');
     }
 }
