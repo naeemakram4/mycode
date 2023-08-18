@@ -46,7 +46,7 @@ return [
                 ],
                 [
                     'title' => 'Employee',
-                    'route' => 'test',
+                    'route' => 'admin.employee.index',
                 ]
             ]
         ],

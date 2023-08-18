@@ -41,8 +41,7 @@
                         <tr class="text-start text-muted text-uppercase gs-0">
                             <th class="min-w-100px">Order ID</th>
                             <th>Status</th>
-                            <th>Platform</th>
-                            <th class="min-w-100px">Item No.</th>
+                            <th>Total Products</th>
                             <th class="text-end min-w-100px pe-4">Order Date</th>
                         </tr>
                         <!--end::Table row-->
@@ -69,8 +68,7 @@
                                             <span class="badge badge-light-primary">{{ ucfirst($order->status) }}</span>
                                         @endif
                                     </td>
-                                    <td>{{ $order->origin->name }}</td>
-                                    <td>{{ $order->product->sku }}</td>
+                                    <td>{{ count($order->products) }}</td>
                                     <td class="pe-0 text-end">{{ $order->order_date }}</td>
                                 </tr>
                             @endforeach
@@ -108,8 +106,6 @@
                         <tr class="text-start text-muted text-uppercase gs-0">
                             <th class="min-w-100px">Replacement ID</th>
                             <th>Status</th>
-                            <th>Platform</th>
-                            <th class="min-w-100px">Item No.</th>
                             <th class="text-end min-w-100px pe-4">Date</th>
                         </tr>
                         <!--end::Table row-->
@@ -136,12 +132,6 @@
                                     @endif
                                 </td>
                                 <!--end::Status=-->
-                                <!--begin::Amount=-->
-                                <td>{{ $replacement->origin->name }}</td>
-                                <!--end::Amount=-->
-                                <!--begin::Date=-->
-                                <td>{{ $replacement->product->sku }}</td>
-                                <!--end::Date=-->
                                 <!--begin::Action=-->
                                 <td class="pe-0 text-end">{{ $replacement->order_date }}</td>
                                 <!--end::Action=-->

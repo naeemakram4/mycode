@@ -3,4 +3,4 @@
 use App\Http\Controllers\Admin\DesignationController;
 
 //Designation
-Route::resource('designation', DesignationController::class)->withTrashed(['edit', 'update']);
+Route::resource('designation', DesignationController::class);

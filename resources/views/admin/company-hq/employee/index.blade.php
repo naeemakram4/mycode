@@ -10,7 +10,7 @@
     <div class="card">
         <!--begin::Card body-->
         <div class="card-body pt-6">
-            @include('admin.company-hq.team.components.table')
+            @include('admin.company-hq.employee.components.table')
         </div>
         <!--end::Card body-->
     </div>

@@ -25,7 +25,7 @@
             <!--begin::Modal body-->
             <div class="modal-body scroll-y mx-3">
                 <!--begin::Form-->
-                <form method="POST" action="{{ route('add_team_data') }}" class="form" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('admin.employee.store') }}" class="form" enctype="multipart/form-data">
                     @csrf
                     <!--begin::Input group-->
                     <div class="row mb-7 fv-plugins-icon-container">

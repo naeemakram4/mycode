@@ -12,9 +12,9 @@ class Designation extends Model
 {
     use HasFactory;
 
-    public function teams(): HasMany
+    public function employees(): HasMany
     {
-        return $this->hasMany(Team::class);
+        return $this->hasMany(Employee::class);
     }
 
     public function department(): BelongsTo

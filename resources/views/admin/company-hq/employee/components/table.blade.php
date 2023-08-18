@@ -16,18 +16,20 @@
         @foreach($employees as $employee)
             <tr>
                 <td>
-                    <a href="{{ route('view.team', $employee->id) }}">{{ $employee->id }}</a>
+                    <a href="{{ route('admin.employee.show', $employee->id) }}">{{ $employee->id }}</a>
                 </td>
                 <td>
                     <div class="d-flex align-items-center">
                         <div class="symbol symbol-45px">
-                            @php $user = DB::table('users')->where('id',$employee->user_id)->first(); @endphp
-                            @if($user->image !== NULL)
-                                @php $image= URL::asset("settings/".$user->image); @endphp
-                                <img alt="image" src="{{ $image }}">
-                            @else
-                                <img alt="image" src="{{URL::asset("settings/top-menu-cooco-logo.png")}}"/>
-                            @endif
+                            <img alt="image" src="{{URL::asset("settings/top-menu-cooco-logo.png")}}"/>
+
+{{--                            @php $user = DB::table('users')->where('id',$employee->user_id)->first(); @endphp--}}
+{{--                            @if($user->image !== NULL)--}}
+{{--                                @php $image= URL::asset("settings/".$user->image); @endphp--}}
+{{--                                <img alt="image" src="{{ $image }}">--}}
+{{--                            @else--}}
+{{--                                <img alt="image" src="{{URL::asset("settings/top-menu-cooco-logo.png")}}"/>--}}
+{{--                            @endif--}}
                         </div>
                     </div>
                 </td>
@@ -63,47 +65,43 @@
                             </span>
                             <!--end::Svg Icon-->
                         </a>
-                        <a href="javascript:void(0);"
-                           onclick="if(confirm('Are you sure to delete?')){ event.preventDefault(); document.getElementById('delete-employee-{{ $employee->id }}').submit();}"
-                           class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
-                            <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
-                            <span class="svg-icon svg-icon-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none">
-                                    <path
-                                        d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z"
-                                        fill="black"></path>
-                                    <path opacity="0.5"
-                                          d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z"
-                                          fill="black"></path>
-                                    <path opacity="0.5"
-                                          d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z"
-                                          fill="black"></path>
-                                </svg>
-                            </span>
-                            <!--end::Svg Icon-->
-                        </a>
-                        <form id="delete-employee-{{ $employee->id }}"
-                              action="{{ route('delete.team', $employee->id) }}"
-                              method="POST" style="display: none">
-                            @csrf
-                            @method('DELETE')
-                        </form>
+{{--                        <a href="javascript:void(0);"--}}
+{{--                           onclick="if(confirm('Are you sure to delete?')){ event.preventDefault(); document.getElementById('delete-employee-{{ $employee->id }}').submit();}"--}}
+{{--                           class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">--}}
+{{--                            <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->--}}
+{{--                            <span class="svg-icon svg-icon-3">--}}
+{{--                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"--}}
+{{--                                     fill="none">--}}
+{{--                                    <path--}}
+{{--                                        d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z"--}}
+{{--                                        fill="black"></path>--}}
+{{--                                    <path opacity="0.5"--}}
+{{--                                          d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z"--}}
+{{--                                          fill="black"></path>--}}
+{{--                                    <path opacity="0.5"--}}
+{{--                                          d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z"--}}
+{{--                                          fill="black"></path>--}}
+{{--                                </svg>--}}
+{{--                            </span>--}}
+{{--                            <!--end::Svg Icon-->--}}
+{{--                        </a>--}}
+{{--                        <form id="delete-employee-{{ $employee->id }}"--}}
+{{--                              action="{{ route('delete.team', $employee->id) }}"--}}
+{{--                              method="POST" style="display: none">--}}
+{{--                            @csrf--}}
+{{--                            @method('DELETE')--}}
+{{--                        </form>--}}
                     </div>
                 </td>
             </tr>
         @endforeach
-    @else
-        <tr class="text-center">
-            <td colspan="3" class="bg-light-danger text-danger">No record found!</td>
-        </tr>
     @endif
     </tbody>
 </table>
 
 @section('pageInnerModals')
-    @include('admin.company-hq.team.components.add_new_team_modal')
-    @include('admin.company-hq.team.components.edit-modal')
+    @include('admin.company-hq.employee.components.add_new_team_modal')
+    @include('admin.company-hq.employee.components.edit-modal')
 @endsection
 
 
@@ -115,8 +113,8 @@
 
             let id = $(this).data('id');
 
-            $.get('/admin/edit-team/' + id, function (data) { console.log(data);
-                $('#editEmployeeForm').prop('action', '/admin/update_team/'+data.id);
+            $.get('/admin/employee/' + id + '/edit', function (data) { console.log(data);
+                $('#editEmployeeForm').prop('action', '/admin/employee/'+data.id);
 
                 $('input[name="edit_name"]').val(data.name);
                 $('input[name="edit_email"]').val(data.email);

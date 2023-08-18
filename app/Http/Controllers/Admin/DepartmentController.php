@@ -82,7 +82,6 @@ class DepartmentController extends AdminController
 
     public function destroy(Department $department)
     {
-        $department = Department::whereId($department)->first();
         if ($department->delete()) {
             Session::flash('successMessage', 'Department has been deleted successfully!');
             return redirect()->back();
