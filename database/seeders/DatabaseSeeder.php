@@ -14,6 +14,8 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             DesignationSeeder::class,
             EmployeeSeeder::class,
+            TaskSeeder::class,
+            TaskGroupSeeder::class,
         ]);
     }
 }

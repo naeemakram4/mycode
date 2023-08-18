@@ -9,17 +9,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('employee_tasks', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('label');
-            $table->string('description')->nullable();
+            $table->foreignId('employee_id')->constrained();
+            $table->foreignId('task_id')->constrained();
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('employee_tasks');
     }
 };

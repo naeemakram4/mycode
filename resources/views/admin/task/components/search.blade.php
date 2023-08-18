@@ -27,120 +27,38 @@
         <div class="card-body pt-5" id="kt_contacts_list_body">
             <!--begin::List-->
             <div class="scroll-y me-n5 pe-5 h-300px h-xl-auto" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_contacts_list_header" data-kt-scroll-wrappers="#kt_content, #kt_contacts_list_body" data-kt-scroll-stretch="#kt_contacts_list, #kt_contacts_main" data-kt-scroll-offset="5px" style="max-height: 544px;">
-                 <!--begin::Task-->
-                <div class="d-flex flex-stack py-4">
-                    <!--begin::Details-->
-                    <div class="d-flex align-items-center">
+                @foreach($tasks as $task)
+                    <!--begin::Task-->
+                    <div class="d-flex flex-stack py-4">
                         <!--begin::Details-->
-                        <span class="bullet bullet-vertical h-40px bg-danger"></span>
-                        <div class="ms-4">
-                            <a href="javascript:void(0);" class="fs-6 fw-bolder text-gray-900 text-hover-primary mb-2">Dummy task subject</a>
-                            <div class="fw-bold fs-7 text-muted">Due: 14/08/2023</div>
-                            <div>
-                                <span class="badge badge-light-danger fs-8  fw-bolder">Urgent</span>
-                                <span class="badge badge-light-info fs-8 ms-4 fw-bolder">In Progress</span>
+                        <div class="d-flex align-items-center">
+                            <!--begin::Details-->
+                            <span class="bullet bullet-vertical h-40px bg-danger"></span>
+                            <div class="ms-4">
+                                <a href="javascript:void(0);" class="fs-6 fw-bolder text-gray-900 text-hover-primary mb-2">{{ $task->subject }}</a>
+                                <div class="fw-bold fs-7 text-muted">Due: {{ $task->due_date }}</div>
+                                <div>
+                                    <span class="fs-8 fw-bolder badge
+                                    {{ ($task->priority == \App\Models\Task::LOW_PRIORITY) ? 'badge-light-primary' :
+                                        (($task->priority == \App\Models\Task::MEDIUM_PRIORITY) ? 'badge-light-warning' : 'badge-light-danger')   }}">
+                                        {{ ucfirst($task->priority)  }}
+                                    </span>
+                                    <span class="badge fs-8 ms-4 fw-bolder
+                                        {{ ($task->status == \App\Models\Task::NOT_STARTED_STATUS) ? 'badge-light-danger' :
+                                        (($task->priority == \App\Models\Task::IN_PROGRESS_STATUS) ? 'badge-light-primary' : 'badge-light-success')   }}">
+                                        {{ ucfirst($task->status)  }}
+                                    </span>
+                                </div>
                             </div>
+                            <!--end::Details-->
                         </div>
                         <!--end::Details-->
                     </div>
-                    <!--end::Details-->
-                </div>
-                <!--end::Task-->
-                <!--begin::Separator-->
-                <div class="separator separator-dashed d-none"></div>
-                <!--end::Separator-->
-
-                <!--begin::Task-->
-                <div class="d-flex flex-stack py-4">
-                    <!--begin::Details-->
-                    <div class="d-flex align-items-center">
-                        <!--begin::Details-->
-                        <span class="bullet bullet-vertical h-40px bg-info"></span>
-                        <div class="ms-4">
-                            <a href="javascript:void(0);" class="fs-6 fw-bolder text-gray-900 text-hover-primary mb-2">Dummy task2 subject</a>
-                            <div class="fw-bold fs-7 text-muted">Due: 14/08/2023</div>
-                            <div>
-                                <span class="badge badge-light-info fs-8 fw-bolder">Medium</span>
-                                <span class="badge badge-light-primary ms-4 fs-8 fw-bolder">No Started</span>
-                            </div>
-                        </div>
-                        <!--end::Details-->
-                    </div>
-                    <!--end::Details-->
-                </div>
-                <!--end::Task-->
-                <!--begin::Separator-->
-                <div class="separator separator-dashed d-none"></div>
-                <!--end::Separator-->
-
-                <!--begin::Task-->
-                <div class="d-flex flex-stack py-4">
-                    <!--begin::Details-->
-                    <div class="d-flex align-items-center">
-                        <!--begin::Details-->
-                        <span class="bullet bullet-vertical h-40px bg-primary"></span>
-                        <div class="ms-4">
-                            <a href="javascript:void(0);" class="fs-6 fw-bolder text-gray-900 text-hover-primary mb-2">Dummy task-3 subject</a>
-                            <div class="fw-bold fs-7 text-muted">Due: 18/08/2023</div>
-                            <div>
-                                <span class="badge badge-light-primary fs-8 fw-bolder">Low</span>
-                                <span class="badge badge-light-success ms-4 fs-8 fw-bolder">Completed</span>
-                            </div>
-                        </div>
-                        <!--end::Details-->
-                    </div>
-                    <!--end::Details-->
-                </div>
-                <!--end::Task-->
-                <!--begin::Separator-->
-                <div class="separator separator-dashed d-none"></div>
-                <!--end::Separator-->
-
-                <!--begin::Task-->
-                <div class="d-flex flex-stack py-4">
-                    <!--begin::Details-->
-                    <div class="d-flex align-items-center">
-                        <!--begin::Details-->
-                        <span class="bullet bullet-vertical h-40px bg-info"></span>
-                        <div class="ms-4">
-                            <a href="javascript:void(0);" class="fs-6 fw-bolder text-gray-900 text-hover-primary mb-2">Dummy task-4 subject</a>
-                            <div class="fw-bold fs-7 text-muted">Due: 14/08/2023</div>
-                            <div>
-                                <span class="badge badge-light-info fs-8 fw-bolder">Medium</span>
-                                <span class="badge badge-light-primary ms-4 fs-8 fw-bolder">No Started</span>
-                            </div>
-                        </div>
-                        <!--end::Details-->
-                    </div>
-                    <!--end::Details-->
-                </div>
-                <!--end::Task-->
-                <!--begin::Separator-->
-                <div class="separator separator-dashed d-none"></div>
-                <!--end::Separator-->
-
-                <!--begin::Task-->
-                <div class="d-flex flex-stack py-4">
-                    <!--begin::Details-->
-                    <div class="d-flex align-items-center">
-                        <!--begin::Details-->
-                        <span class="bullet bullet-vertical h-40px bg-warning"></span>
-                        <div class="ms-4">
-                            <a href="javascript:void(0);" class="fs-6 fw-bolder text-gray-900 text-hover-primary mb-2">Dummy task-5 subject</a>
-                            <div class="fw-bold fs-7 text-muted">Due: 14/08/2023</div>
-                            <div>
-                                <span class="badge badge-light-warning fs-8  fw-bolder">High</span>
-                                <span class="badge badge-light-success fs-8 ms-4 fw-bolder">Completed</span>
-                            </div>
-                        </div>
-                        <!--end::Details-->
-                    </div>
-                    <!--end::Details-->
-                </div>
-                <!--end::Task-->
-                <!--begin::Separator-->
-                <div class="separator separator-dashed d-none"></div>
-                <!--end::Separator-->
+                    <!--end::Task-->
+                    <!--begin::Separator-->
+                    <div class="separator separator-dashed d-none"></div>
+                    <!--end::Separator-->
+                @endforeach
             </div>
             <!--end::List-->
         </div>
