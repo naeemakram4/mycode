@@ -8,3 +8,8 @@
         @include('admin.task.components.content')
     </div>
 @endsection
+
+
+@section('pageInnerModals')
+    @include('admin.task.components.add_task_model')
+@endsection

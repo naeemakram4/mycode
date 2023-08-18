@@ -18,7 +18,7 @@ class TaskController extends Controller
         $action = [
             'text' => 'Add Task',
             'route' => 'javascript:void(0);',
-            'data' => ''
+            'data' => 'data-bs-toggle=modal data-bs-target=#addNewTask'
         ];
 
         $viewParams = [
