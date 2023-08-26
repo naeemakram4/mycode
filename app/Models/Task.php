@@ -6,6 +6,7 @@ use Database\Seeders\TaskGroupSeeder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Task extends Model
 {
@@ -44,5 +45,15 @@ class Task extends Model
     public function taskGroup(): BelongsTo
     {
         return $this->belongsTo(TaskGroup::class);
+    }
+
+    public function service(): BelongsTo
+    {
+        return $this->belongsTo(Service::class);
+    }
+
+    public function employees(): BelongsToMany
+    {
+        return $this->belongsToMany(Employee::class, 'employee_tasks');
     }
 }

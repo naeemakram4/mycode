@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->enum('priority', Task::allTaskPriorities());
             $table->enum('status', Task::allTaskStatus())->default(Task::NOT_STARTED_STATUS);
-            $table->date('start_date');
+            $table->date('start_date')->nullable();
             $table->date('due_date');
             $table->timestamps();
         });

@@ -33,7 +33,9 @@
                         <!--begin::Details-->
                         <div class="d-flex align-items-center">
                             <!--begin::Details-->
-                            <span class="bullet bullet-vertical h-40px bg-danger"></span>
+                            <span class="bullet bullet-vertical h-40px
+                            {{ ($task->priority == \App\Models\Task::LOW_PRIORITY) ? 'bg-primary' :
+                            (($task->priority == \App\Models\Task::MEDIUM_PRIORITY) ? 'bg-warning' : 'bg-danger')   }}"></span>
                             <div class="ms-4">
                                 <a href="javascript:void(0);" class="fs-6 fw-bolder text-gray-900 text-hover-primary mb-2">{{ $task->subject }}</a>
                                 <div class="fw-bold fs-7 text-muted">Due: {{ $task->due_date }}</div>
@@ -46,7 +48,7 @@
                                     <span class="badge fs-8 ms-4 fw-bolder
                                         {{ ($task->status == \App\Models\Task::NOT_STARTED_STATUS) ? 'badge-light-danger' :
                                         (($task->priority == \App\Models\Task::IN_PROGRESS_STATUS) ? 'badge-light-primary' : 'badge-light-success')   }}">
-                                        {{ ucfirst($task->status)  }}
+                                        {{ ucfirst(str_replace('_', ' ', $task->status))  }}
                                     </span>
                                 </div>
                             </div>

@@ -1,6 +1,6 @@
 <div class="modal fade" id="addNewTask" tabindex="-1" role="dialog">
     <!--begin::Modal dialog-->
-    <div class="modal-dialog modal-dialog-centered mw-650px">
+    <div class="modal-dialog modal-dialog-centered mw-850px">
         <!--begin::Modal content-->
         <div class="modal-content">
             <!--begin::Modal header-->
@@ -51,14 +51,20 @@
                     <div class="row mb-7 fv-plugins-icon-container">
                         <div class="col-md-6">
                             <label class="form-label required">Task Group</label>
-                            <select id="Department" name="task_group" class="form-select">
-                                <option value="0" selected="">Select Group</option>
+                            <select name="task_group" data-placeholder="Select Task Group" data-hide-search="true" data-control="select2" class="form-select">
+                                <option></option>
+                                @foreach($groups as $group)
+                                    <option value="{{$group->id}}" >{{ $group->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label required">Service</label>
-                            <select id="Designation" name="designation" class="form-select">
-                                <option value="0" selected="">Select Service</option>
+                            <select name="service" data-control="select2" data-placeholder="Select Service" data-hide-search="true" class="form-select">
+                                <option></option>
+                                @foreach($services as $service)
+                                    <option value="{{ $service->id }}">{{ $service->label }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -68,14 +74,20 @@
                     <div class="row mb-7 fv-plugins-icon-container">
                         <div class="col-md-6">
                             <label class="form-label required">Select Employees</label>
-                            <select id="Department" name="task_employee[]" class="form-select" multiple>
-                                <option value="0" selected="">Select Employees</option>
+                            <select name="task_assignees[]" data-placeholder="Select Employees" data-hide-search="true" data-control="select2" class="form-select" multiple>
+                                <option></option>
+                                @foreach($employees as $employee)
+                                    <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label required">Task Priority</label>
-                            <select id="Designation" name="task_priority" class="form-select">
-                                <option value="0" selected="">Select Priority</option>
+                            <select name="task_priority" data-placeholder="Select Task Priority" data-hide-search="true" data-control="select2" class="form-select">
+                                <option></option>
+                                @foreach($taskPriorities as $taskPriority)
+                                    <option value="{{ $taskPriority }}">{{ ucfirst($taskPriority) }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -84,7 +96,7 @@
                     <!--begin::Input group-->
                     <div class="fv-row mb-7 fv-plugins-icon-container">
                         <label class="form-label required">Description</label>
-                        <textarea name="remarks" class="form-control  form-control-solid" rows="1"></textarea>
+                        <textarea name="description" class="form-control  form-control-solid" rows="1"></textarea>
                     </div>
                     <!--end::Input group-->
 
