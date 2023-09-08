@@ -121,44 +121,25 @@ return [
     'customer' => [
         [
             'title' => 'Dashboard',
-            'route' => 'admin.dashboard',
+            'route' => 'customer.dashboard',
             'icon' => 'grid',
         ],
         [
-            'title' => 'Report',
+            'title' => 'Task Management',
+            'route' => 'customer.task.index',
+            'icon' => 'list-check',
+        ],
+        [
+            'title' => 'SEO',
             'route' => 'test',
             'icon' => 'activity',
+            'heading' => 'Statics',
         ],
 
         [
-            'title' => 'Leads',
-            'route' => 'javascript:void(0);',
+            'title' => 'PPC',
+            'route' => 'test',
             'icon' => 'stars',
-            'heading' => 'Accounts',
-            'sub_routes' => ['test', 'test', 'test'],
-            'sub' => [
-                [
-                    'title' => 'Referrals',
-                    'route' => 'test',
-                ],
-                [
-                    'title' => 'Website',
-                    'route' => 'test',
-                ]
-            ]
         ],
-
-        [
-            'title' => 'Projects',
-            'route' => 'test',
-            'icon' => 'kanban',
-        ],
-
-        [
-            'title' => 'Invoices',
-            'route' => 'test',
-            'icon' => 'receipt',
-        ],
-
     ]
 ];

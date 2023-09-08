@@ -75,7 +75,29 @@ class TaskController extends Controller
 
     public function show(Task $task)
     {
-        //
+        $pageTitle = 'Task';
+        $breadcrumbs = [['text' => $pageTitle]];
+        $action = [
+            'text' => 'Add Task',
+            'route' => 'javascript:void(0);',
+            'data' => 'data-bs-toggle=modal data-bs-target=#addNewTask'
+        ];
+
+        if ($task){
+            $viewParams = [
+                'pageTitle' => $pageTitle,
+                'breadcrumbs' => $breadcrumbs,
+                'action' => $action,
+                'groups' => TaskGroup::withCount('tasks')->get(),
+                'tasks' => Task::get(),
+                'task' => $task,
+                'services' => Service::get(),
+                'employees' => Employee::get(),
+                'taskPriorities' => Task::allTaskPriorities()
+            ];
+
+            return view('admin.task.index', $viewParams);
+        }
     }
 
     public function edit(Task $task)

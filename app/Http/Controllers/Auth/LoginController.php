@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
@@ -78,7 +79,7 @@ class LoginController extends Controller
             $this->username() => $request->user_name,
             'password' => $request->password,
             'status' => [User::STATUS_ACTIVE],
-//            'role_id' => [RoleDim::DEALER_ROLE, RoleDim::EMPLOYEE_ROLE, RoleDim::MANAGER_ROLE], //Only dealers roles allowed.
+            'role_id' => [Role::CUSTOMER_ROLE], //Only Customer roles allowed.
         ];
     }
 }

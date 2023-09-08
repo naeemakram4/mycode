@@ -19,10 +19,12 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 //Customer panel
+Route::get('/', function(){ return redirect()->route('login'); });
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'customer', 'as' => 'customer.'], function () {
     Route::get('/dashboard', [CustomerDashboardController::class, 'index'])->name('dashboard');
 
     require __DIR__ . '/customer/profile.php';
+    require __DIR__ . '/customer/task.php';
 
 });
 

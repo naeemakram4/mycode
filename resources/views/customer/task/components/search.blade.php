@@ -37,7 +37,7 @@
                             {{ ($task->priority == \App\Models\Task::LOW_PRIORITY) ? 'bg-primary' :
                             (($task->priority == \App\Models\Task::MEDIUM_PRIORITY) ? 'bg-warning' : 'bg-danger')   }}"></span>
                             <div class="ms-4">
-                                <a href="{{ route('admin.task.show', $task->id) }}" class="fs-6 fw-bolder text-gray-900 text-hover-primary mb-2">{{ $task->subject }}</a>
+                                <a href="{{ route('customer.task.show', $task->id) }}" class="fs-6 fw-bolder text-gray-900 text-hover-primary mb-2">{{ $task->subject }}</a>
                                 <div class="fw-bold fs-7 text-muted">Due: {{ $task->due_date }}</div>
                                 <div>
                                     <span class="fs-8 fw-bolder badge

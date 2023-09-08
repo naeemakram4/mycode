@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Models\Employee;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,6 +21,7 @@ class EmployeeSeeder extends Seeder
         $totalTeamRecords = 10;
         for ($i = 1; $i <= $totalTeamRecords; $i++) {
             $user = User::create([
+                'role_id' => Role::EMPLOYEE_ROLE,
                 'user_name' => $faker->userName,
                 'email' => $faker->email,
                 'password' => Hash::make('admin123'),
