@@ -5,6 +5,9 @@ namespace App\Http;
 use App\Http\Middleware\AdminAuthenticate;
 use App\Http\Middleware\AdminRedirectIfAuthenticated;
 use App\Http\Middleware\CustomerRole;
+use App\Http\Middleware\EmployeeAuthenticate;
+use App\Http\Middleware\EmployeeRedirectIfAuthenticated;
+use App\Http\Middleware\EmployeeRole;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -58,8 +61,10 @@ class Kernel extends HttpKernel
     protected $middlewareAliases = [
         'auth' => \App\Http\Middleware\Authenticate::class,
         'admin.auth' => AdminAuthenticate::class,
+        'employee.auth' => EmployeeAuthenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'admin.guest' => AdminRedirectIfAuthenticated::class,
+        'employee.guest' => EmployeeRedirectIfAuthenticated::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
@@ -70,5 +75,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'customer.role' => CustomerRole::class,
+        'employee.role' => EmployeeRole::class
     ];
 }

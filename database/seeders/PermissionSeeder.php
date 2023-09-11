@@ -24,5 +24,18 @@ class PermissionSeeder extends Seeder
                 'role_id' => Role::CUSTOMER_ROLE
             ]);
         }
+
+        $permissions = config('houmanity.permissions.employee');
+        foreach ($permissions as $name => $label) {
+            $permission = Permission::create([
+                'name' => $name,
+                'label' => $label
+            ]);
+
+            PermissionRole::create([
+                'permission_id' => $permission->id,
+                'role_id' => Role::EMPLOYEE_ROLE
+            ]);
+        }
     }
 }

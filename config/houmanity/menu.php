@@ -141,5 +141,29 @@ return [
             'route' => 'test',
             'icon' => 'stars',
         ],
-    ]
+    ],
+    'employee' => [
+    [
+        'title' => 'Dashboard',
+        'route' => 'employee.dashboard',
+        'icon' => 'grid',
+    ],
+    [
+        'title' => 'Task Management',
+        'route' => 'employee.task.index',
+        'icon' => 'list-check',
+    ],
+    [
+        'title' => 'SEO',
+        'route' => 'test',
+        'icon' => 'activity',
+        'heading' => 'Statics',
+    ],
+
+    [
+        'title' => 'PPC',
+        'route' => 'test',
+        'icon' => 'stars',
+    ],
+]
 ];

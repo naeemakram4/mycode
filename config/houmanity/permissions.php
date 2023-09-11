@@ -10,5 +10,10 @@ return [
         'test' => 'Coming Soon',
     ],
 
-    'employee' => [],
+    'employee' => [
+        'employee.dashboard' => 'Dashboard',
+        'employee.task.index' => 'Task',
+
+        'test' => 'Coming Soon',
+    ],
 ];
