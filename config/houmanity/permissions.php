@@ -7,7 +7,8 @@ return [
         'customer.dashboard' => 'Dashboard',
         'customer.task.index' => 'Task',
 
-        'test' => 'Coming Soon',
+        'customer.statics.seo' => 'SEO view',
+        'customer.statics.ppc;' => 'PPC view',
     ],
 
     'employee' => [

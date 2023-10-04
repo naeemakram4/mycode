@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Customer\CustomerDashboardController;
+use App\Http\Controllers\Customer\StaticsController;
 use App\Http\Controllers\Employee\EmployeeDashboard;
 use App\Http\Controllers\Employee\EmployeeLoginController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,9 @@ Route::group(['middleware' => ['auth', 'verified', 'customer.role'], 'prefix' =>
 
     require __DIR__ . '/customer/profile.php';
     require __DIR__ . '/customer/task.php';
+
+    Route::get('seo', [StaticsController::class, 'seo'])->name('statics.seo');
+    Route::get('ppc', [StaticsController::class, 'ppc'])->name('statics.ppc');
 
 });
 

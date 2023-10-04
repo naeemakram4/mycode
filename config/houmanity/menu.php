@@ -136,14 +136,14 @@ return [
         ],
         [
             'title' => 'SEO',
-            'route' => 'test',
+            'route' => 'customer.statics.seo',
             'icon' => 'activity',
             'heading' => 'Statics',
         ],
 
         [
             'title' => 'PPC',
-            'route' => 'test',
+            'route' => 'customer.statics.ppc',
             'icon' => 'stars',
         ],
     ],
