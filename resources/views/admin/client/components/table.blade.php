@@ -5,19 +5,30 @@
         <th>Company</th>
         <th>Email</th>
         <th>Service</th>
-        <th>Date</th>
+        <th>Start Date</th>
         <th>Status</th>
         <th class="text-end">Actions</th>
     </tr>
     </thead>
     <tbody>
+    @foreach($clients as $client)
         <tr>
-            <td>Dummy data</td>
-            <td>Dummy data</td>
-            <td>dummy@mail.com</td>
-            <td>SEO , PPC , Web Design , Web Maintenance</td>
-            <td>12-08-2023</td>
-            <td><span class="badge badge-light-success">Active</span></td>
+            <td>{{ $client->user->first_name .' '. $client->user->last_name }}</td>
+            <td>{{ $client->company_name }}</td>
+            <td>{{ $client->user->email }}</td>
+            <td>
+                @foreach($client->services as $service)
+                    {{ $service->label }},
+                @endforeach
+            </td>
+            <td>{{ $client->start_date }}</td>
+            <td>
+                @if($client->user->status == \App\Models\User::STATUS_ACTIVE)
+                    <span class="badge badge-light-success">Active</span>
+                @else
+                    <span class="badge badge-light-danger">Inactive</span>
+                @endif
+            </td>
             <td>
                 <div class="d-flex justify-content-end flex-shrink-0">
                     <a href="javascript:void(0);" id="" data-id="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
@@ -33,5 +44,6 @@
                 </div>
             </td>
         </tr>
+    @endforeach
     </tbody>
 </table>

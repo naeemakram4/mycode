@@ -19,62 +19,67 @@ return [
             'route' => 'admin.dashboard',
             'icon' => 'grid',
         ],
-        [
-            'title' => 'Report',
-            'route' => 'admin.report.project',
-            'icon' => 'activity',
-        ],
-        [
-            'title' => 'Meeting',
-            'route' => 'admin.meeting.index',
-            'icon' => 'webcam',
-        ],
-        [
-            'title' => 'Company',
-            'route' => 'javascript:void(0);',
-            'icon' => 'building',
-            'heading' => 'Company',
-            'sub_routes' => ['admin.department.index', 'admin.designation.index', 'test'],
-            'sub' => [
-                [
-                    'title' => 'Departments',
-                    'route' => 'admin.department.index',
-                ],
-                [
-                    'title' => 'Designations',
-                    'route' => 'admin.designation.index',
-                ],
-                [
-                    'title' => 'Employee',
-                    'route' => 'admin.employee.index',
-                ]
-            ]
-        ],
+//        [
+//            'title' => 'Report',
+//            'route' => 'admin.report.project',
+//            'icon' => 'activity',
+//        ],
+//        [
+//            'title' => 'Meeting',
+//            'route' => 'admin.meeting.index',
+//            'icon' => 'webcam',
+//        ],
+//        [
+//            'title' => 'Company',
+//            'route' => 'javascript:void(0);',
+//            'icon' => 'building',
+//            'heading' => 'Company',
+//            'sub_routes' => ['admin.department.index', 'admin.designation.index', 'test'],
+//            'sub' => [
+//                [
+//                    'title' => 'Departments',
+//                    'route' => 'admin.department.index',
+//                ],
+//                [
+//                    'title' => 'Designations',
+//                    'route' => 'admin.designation.index',
+//                ],
+//                [
+//                    'title' => 'Employee',
+//                    'route' => 'admin.employee.index',
+//                ]
+//            ]
+//        ],
 
-        [
-            'title' => 'Leads',
-            'route' => 'javascript:void(0);',
-            'icon' => 'stars',
-            'sub_routes' => ['admin.department', 'admin.designation', 'admin.team'],
-            'sub' => [
-                [
-                    'title' => 'Referrals',
-                    'route' => 'admin.referral.index',
-                ],
-                [
-                    'title' => 'Referred Clients',
-                    'route' => 'admin.referred.client.index',
-                ],
-                [
-                    'title' => 'Website',
-                    'route' => 'admin.website.index',
-                ]
-            ]
-        ],
+//        [
+//            'title' => 'Leads',
+//            'route' => 'javascript:void(0);',
+//            'icon' => 'stars',
+//            'sub_routes' => ['admin.department', 'admin.designation', 'admin.team'],
+//            'sub' => [
+//                [
+//                    'title' => 'Referrals',
+//                    'route' => 'admin.referral.index',
+//                ],
+//                [
+//                    'title' => 'Referred Clients',
+//                    'route' => 'admin.referred.client.index',
+//                ],
+//                [
+//                    'title' => 'Website',
+//                    'route' => 'admin.website.index',
+//                ]
+//            ]
+//        ],
 
         [
             'title' => 'Clients',
             'route' => 'admin.client.index',
+            'icon' => 'people',
+        ],
+        [
+            'title' => 'Employees',
+            'route' => 'admin.employee.index',
             'icon' => 'people',
         ],
         [
@@ -83,27 +88,27 @@ return [
             'icon' => 'kanban',
         ],
 
-        [
-            'title' => 'Followups',
-            'route' => 'admin.followup.index',
-            'heading' => 'Sales Channel',
-            'icon' => 'arrow-clockwise',
-        ],
+//        [
+//            'title' => 'Followups',
+//            'route' => 'admin.followup.index',
+//            'heading' => 'Sales Channel',
+//            'icon' => 'arrow-clockwise',
+//        ],
         [
             'title' => 'Services',
             'route' => 'admin.service.index',
             'icon' => 'gear-wide-connected',
         ],
-        [
-            'title' => 'Proposals',
-            'route' => 'admin.proposal.index',
-            'icon' => 'card-text',
-        ],
-        [
-            'title' => 'Invoices',
-            'route' => 'admin.invoice.index',
-            'icon' => 'receipt',
-        ],
+//        [
+//            'title' => 'Proposals',
+//            'route' => 'admin.proposal.index',
+//            'icon' => 'card-text',
+//        ],
+//        [
+//            'title' => 'Invoices',
+//            'route' => 'admin.invoice.index',
+//            'icon' => 'receipt',
+//        ],
 
         [
             'title' => 'Task Management',
