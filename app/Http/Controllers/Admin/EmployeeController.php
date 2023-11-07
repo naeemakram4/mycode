@@ -66,7 +66,7 @@ class EmployeeController extends Controller
         $user->user_name = $validatedData['user_name'];
         $user->email = $validatedData['email'];
         $user->password = Hash::make($validatedData['password']);
-        $user->status = ($request->status == "on") ? 'Active' : 'Inactive';
+        $user->status = ($request->status == "on") ? User::STATUS_ACTIVE : User::STATUS_DISABLE;
         $user->save();
 
         $employee = new Employee();
@@ -123,7 +123,7 @@ class EmployeeController extends Controller
         if ($user && $employee) {
             $user->user_name = $validatedData['edit_user_name'];
             $user->email = $validatedData['edit_email'];
-            $user->status = ($request->edit_status == "on") ? 1 : 0;
+            $user->status = ($request->edit_status == "on") ? User::STATUS_ACTIVE : User::STATUS_DISABLE;
             if ($request->has('edit_password') && $request->edit_password != null) {
                 $user->password = Hash::make($request->edit_password);
             }
