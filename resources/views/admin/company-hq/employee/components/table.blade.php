@@ -2,11 +2,11 @@
     <thead>
     <tr class="fw-bold fs-6 text-muted">
         <th>ID</th>
-        <th>Photo</th>
+{{--        <th>Photo</th>--}}
         <th>FullName</th>
         <th>Email</th>
         <th>Phone</th>
-        <th>Department/ Designation</th>
+        <th>Total Clients</th>
         <th>Status</th>
         <th class="text-end">Actions</th>
     </tr>
@@ -18,10 +18,10 @@
                 <td>
                     <a href="{{ route('admin.employee.show', $employee->id) }}">{{ $employee->id }}</a>
                 </td>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="symbol symbol-45px">
-                            <img alt="image" src="{{URL::asset("settings/top-menu-cooco-logo.png")}}"/>
+{{--                <td>--}}
+{{--                    <div class="d-flex align-items-center">--}}
+{{--                        <div class="symbol symbol-45px">--}}
+{{--                            <img alt="image" src="{{URL::asset("settings/top-menu-cooco-logo.png")}}"/>--}}
 
 {{--                            @php $user = DB::table('users')->where('id',$employee->user_id)->first(); @endphp--}}
 {{--                            @if($user->image !== NULL)--}}
@@ -30,16 +30,13 @@
 {{--                            @else--}}
 {{--                                <img alt="image" src="{{URL::asset("settings/top-menu-cooco-logo.png")}}"/>--}}
 {{--                            @endif--}}
-                        </div>
-                    </div>
-                </td>
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </td>--}}
                 <td>{{ $employee->name }}</td>
                 <td>{{ $employee->email }}</td>
                 <td>{{ $employee->phone }}</td>
-                <td>
-                    <span class="badge badge-light-dark mb-2">{{ $employee->department->name}}</span> <br>
-                    <span class="badge badge-dark">{{ $employee->designation->name}}</span>
-                </td>
+                <td>{{ count($employee->clients) }}</td>
                 <td>
                     @if($employee->status==1)
                         <span class="badge badge-light-success">Active</span>
@@ -49,7 +46,7 @@
                 </td>
                 <td>
                     <div class="d-flex justify-content-end flex-shrink-0">
-                        <a href="javascript:void(0);" id="editEmployee" data-id="{{ $employee->id }}"
+                        <a href="{{ route('admin.employee.edit', $employee->id) }}" id="editEmployee" data-id="{{ $employee->id }}"
                            class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                             <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                             <span class="svg-icon svg-icon-3">
@@ -65,32 +62,6 @@
                             </span>
                             <!--end::Svg Icon-->
                         </a>
-{{--                        <a href="javascript:void(0);"--}}
-{{--                           onclick="if(confirm('Are you sure to delete?')){ event.preventDefault(); document.getElementById('delete-employee-{{ $employee->id }}').submit();}"--}}
-{{--                           class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">--}}
-{{--                            <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->--}}
-{{--                            <span class="svg-icon svg-icon-3">--}}
-{{--                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"--}}
-{{--                                     fill="none">--}}
-{{--                                    <path--}}
-{{--                                        d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z"--}}
-{{--                                        fill="black"></path>--}}
-{{--                                    <path opacity="0.5"--}}
-{{--                                          d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z"--}}
-{{--                                          fill="black"></path>--}}
-{{--                                    <path opacity="0.5"--}}
-{{--                                          d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z"--}}
-{{--                                          fill="black"></path>--}}
-{{--                                </svg>--}}
-{{--                            </span>--}}
-{{--                            <!--end::Svg Icon-->--}}
-{{--                        </a>--}}
-{{--                        <form id="delete-employee-{{ $employee->id }}"--}}
-{{--                              action="{{ route('delete.team', $employee->id) }}"--}}
-{{--                              method="POST" style="display: none">--}}
-{{--                            @csrf--}}
-{{--                            @method('DELETE')--}}
-{{--                        </form>--}}
                     </div>
                 </td>
             </tr>
@@ -98,38 +69,3 @@
     @endif
     </tbody>
 </table>
-
-@section('pageInnerModals')
-    @include('admin.company-hq.employee.components.add_new_team_modal')
-    @include('admin.company-hq.employee.components.edit-modal')
-@endsection
-
-
-@push('pageInnerScript')
-    <script>
-        // Edit record modal window script
-        $('body').on('click', '#editEmployee', function (event) {
-            event.preventDefault();
-
-            let id = $(this).data('id');
-
-            $.get('/admin/employee/' + id + '/edit', function (data) { console.log(data);
-                $('#editEmployeeForm').prop('action', '/admin/employee/'+data.id);
-
-                $('input[name="edit_name"]').val(data.name);
-                $('input[name="edit_email"]').val(data.email);
-                $('input[name="edit_phone"]').val(data.phone);
-                $('select[name="edit_department"]').val(data.department_id)
-                $('select[name="edit_designation"]').val(data.designation_id)
-                $('textarea[name="edit_remarks"]').val(data.remarks);
-
-                if (data.status === 1){
-                    $('input[name="edit_status"]').prop("checked", true)
-                } else {
-                    $('input[name="edit_status"]').prop("checked", false)
-                }
-                $('#editEmployeeModal').modal('show');
-            })
-        });
-    </script>
-@endpush

@@ -21,5 +21,10 @@ class Client extends Model
     {
         return $this->belongsToMany(Service::class, 'client_service');
     }
+
+    public function employees(): BelongsToMany
+    {
+        return $this->belongsToMany(Employee::class, 'client_employee');
+    }
 }
 
