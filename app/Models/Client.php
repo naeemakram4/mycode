@@ -26,5 +26,15 @@ class Client extends Model
     {
         return $this->belongsToMany(Employee::class, 'client_employee');
     }
+
+    public function clientType(): BelongsTo
+    {
+        return $this->belongsTo(ClientType::class);
+    }
+
+    public function hasService($service)
+    {
+        return $this->services->contains('id', $service);
+    }
 }
 

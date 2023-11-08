@@ -34,6 +34,17 @@
                    value="{{ old('email') }}"/>
         </div>
         <!--end::Col-->
+        <!--begin::Col-->
+        <div class="col-md-4 fv-row fv-plugins-icon-container">
+            <label for="clientType" class="required form-label">Client Type</label>
+            <select name="client_type"  id="clientType" class="form-select" data-control="select2" data-placeholder="Select Client Type">
+                <option value=""></option>
+                @foreach($clientTypes as $clientType)
+                    <option value="{{ $clientType->id }}">{{ $clientType->label }}</option>
+                @endforeach
+            </select>
+        </div>
+        <!--end::Col-->
     </div>
 
     <div class="row mb-5">

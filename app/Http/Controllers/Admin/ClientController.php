@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Client;
+use App\Models\ClientType;
 use App\Models\Role;
 use App\Models\Service;
 use App\Models\User;
@@ -44,6 +45,7 @@ class ClientController extends Controller
             'pageTitle' => $pageTitle,
             'breadcrumbs' => $breadcrumbs,
             'services' => Service::get(),
+            'clientTypes' => ClientType::get(),
         ];
 
         return view('admin.client.create', $viewParams);
@@ -57,12 +59,13 @@ class ClientController extends Controller
             'user_name' => 'required|string|unique:users',
             'phone' => 'required|string|max:10',
             'email' => 'required|email|unique:users',
+            'client_type' => 'required',
             'password' => 'required|min:8',
             'company_name' => 'required|string'
         ]);
 
         $user = new User();
-        $user->role_id = Role::CUSTOMER_ROLE;
+        $user->role_id = Role::CLIENT_ROLE;
         $user->first_name = $validatedData['first_name'];
         $user->last_name = $validatedData['last_name'];
         $user->user_name = $validatedData['user_name'];
@@ -75,6 +78,7 @@ class ClientController extends Controller
 
         $client = new Client();
         $client->user()->associate($user);
+        $client->clientType()->associate($validatedData['client_type']);
         $client->company_name = $validatedData['company_name'];
         $client->website = $request->website;
         $client->address = $request->address;
@@ -108,7 +112,8 @@ class ClientController extends Controller
                 'pageTitle' => $pageTitle,
                 'breadcrumbs' => $breadcrumbs,
                 'services' => Service::get(),
-                'client' => $client
+                'client' => $client,
+                'clientTypes' => ClientType::get(),
             ];
 
             return view('admin.client.edit', $viewParams);
@@ -117,7 +122,47 @@ class ClientController extends Controller
 
     public function update(Request $request, Client $client)
     {
-        //
+        $validatedData = $request->validate([
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'user_name' => 'required|string|unique:users,user_name,' . $client->user_id,
+            'phone' => 'required|string|max:10',
+            'email' => 'required|email|unique:users,email,' . $client->user_id,
+            'client_type' => 'required',
+            'new_password' => 'nullable|min:8',
+            'company_name' => 'required|string'
+        ]);
+
+        $user = User::where('id', $client->user_id)->first();
+        if ($user && $client) {
+            $user->first_name = $validatedData['first_name'];
+            $user->last_name = $validatedData['last_name'];
+            $user->user_name = $validatedData['user_name'];
+            $user->phone = $validatedData['phone'];
+            $user->email = $validatedData['email'];
+            if ($request->has('new_password') && $request->new_password != null) {
+                $user->password = Hash::make($request->new_password);
+            }
+            $user->status = ($request->status == "on") ? User::STATUS_ACTIVE : User::STATUS_DISABLE;
+            $user->save();
+
+            $client->clientType()->associate($validatedData['client_type']);
+            $client->company_name = $validatedData['company_name'];
+            $client->website = $request->website;
+            $client->address = $request->address;
+            $client->city = $request->city;
+            $client->state = $request->state;
+            $client->postal_code = $request->postal_code;
+            $client->start_date = $request->start_date;
+            if ($client->save()) {
+                $client->services()->sync($request->services);
+
+                Session::flash('successMessage', 'Client details has been update successfully!');
+                return redirect()->route('admin.client.index');
+            }
+        }
+        return redirect()->back()
+            ->withInput()->withErrors('Failed to update, Try again!');
     }
 
     public function destroy(Client $client)
