@@ -90,7 +90,16 @@ class EmployeeController extends Controller
 
     public function show(Employee $employee)
     {
-        //
+        $pageTitle = 'Employee Details';
+        $breadcrumbs = [['text' => 'Employees', 'url' => '\admin\employee'], ['text' => $pageTitle]];
+
+        $viewParams = [
+            'pageTitle' => $pageTitle,
+            'breadcrumbs' => $breadcrumbs,
+            'employee' => $employee
+        ];
+
+        return view('admin.company-hq.employee.view', $viewParams);
     }
 
     public function edit(Employee $employee)

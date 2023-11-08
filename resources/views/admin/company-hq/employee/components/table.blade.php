@@ -2,8 +2,8 @@
     <thead>
     <tr class="fw-bold fs-6 text-muted">
         <th>ID</th>
-{{--        <th>Photo</th>--}}
         <th>FullName</th>
+        <th>Username</th>
         <th>Email</th>
         <th>Phone</th>
         <th>Total Clients</th>
@@ -18,22 +18,8 @@
                 <td>
                     <a href="{{ route('admin.employee.show', $employee->id) }}">{{ $employee->id }}</a>
                 </td>
-{{--                <td>--}}
-{{--                    <div class="d-flex align-items-center">--}}
-{{--                        <div class="symbol symbol-45px">--}}
-{{--                            <img alt="image" src="{{URL::asset("settings/top-menu-cooco-logo.png")}}"/>--}}
-
-{{--                            @php $user = DB::table('users')->where('id',$employee->user_id)->first(); @endphp--}}
-{{--                            @if($user->image !== NULL)--}}
-{{--                                @php $image= URL::asset("settings/".$user->image); @endphp--}}
-{{--                                <img alt="image" src="{{ $image }}">--}}
-{{--                            @else--}}
-{{--                                <img alt="image" src="{{URL::asset("settings/top-menu-cooco-logo.png")}}"/>--}}
-{{--                            @endif--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </td>--}}
                 <td>{{ $employee->name }}</td>
+                <td>{{ $employee->user->user_name }}</td>
                 <td>{{ $employee->email }}</td>
                 <td>{{ $employee->phone }}</td>
                 <td>{{ count($employee->clients) }}</td>
