@@ -12,7 +12,7 @@
 
         <div class="col-md-6">
             <label class="form-label required">Contact Number</label>
-            <input type="text" name="edit_phone" class="form-control  form-control-solid" value="{{old('phone', $employee->phone)}}">
+            <input type="tel" name="edit_phone" maxlength="10" class="form-control  form-control-solid" value="{{old('phone', $employee->phone)}}">
         </div>
     </div>
     <!--end::Input group-->
