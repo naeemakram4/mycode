@@ -23,7 +23,7 @@
                 <a href="mailto:{{ $client->user->email }}">{{ $client->user->email }}</a></td>
             <td>
                 @foreach($client->services as $service)
-                    {{ $service->label }},
+                    <span class="badge badge-light-dark">{{ $service->label }}</span>
                 @endforeach
             </td>
             <td>{{ $client->start_date }}</td>
