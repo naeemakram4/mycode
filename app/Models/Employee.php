@@ -36,6 +36,11 @@ class Employee extends Model
         return $this->belongsToMany(Client::class, 'client_employee');
     }
 
+    public function projects(): BelongsToMany
+    {
+        return $this->belongsToMany(Project::class, 'employee_project');
+    }
+
     public function hasClient($client)
     {
         return $this->clients->contains('id', $client);

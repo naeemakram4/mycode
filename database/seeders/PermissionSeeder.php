@@ -21,7 +21,7 @@ class PermissionSeeder extends Seeder
 
             PermissionRole::create([
                 'permission_id' => $permission->id,
-                'role_id' => Role::CUSTOMER_ROLE
+                'role_id' => Role::CLIENT_ROLE
             ]);
         }
 

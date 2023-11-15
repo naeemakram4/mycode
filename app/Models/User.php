@@ -46,6 +46,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Client::class);
     }
 
+    public function getFullName()
+    {
+        return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+    }
+
+    public function getNameFirstLetter()
+    {
+        return ucfirst(substr($this->first_name, 0, 1));
+    }
+
     public function ability($permission): bool
     {
         $permissions = $this->getAllPermissionsFromRole();
