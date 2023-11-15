@@ -32,6 +32,14 @@ mix.styles([
         'resources/mix/template/plugins/custom/datatables/datatables-config.js'
     ], 'public/js/datatable.js')
 
+    //Css and Js for Calendar
+    .styles([
+        'resources/mix/template/plugins/custom/fullcalendar/fullcalendar.bundle.css',
+    ], 'public/css/calendar.css')
+    .scripts([
+        'resources/mix/template/plugins/custom/fullcalendar/fullcalendar.bundle.js',
+    ], 'public/js/calendar.js')
+
     //Template media files.
     .copy([
         'resources/mix/template/media'

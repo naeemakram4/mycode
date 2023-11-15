@@ -1,4 +1,6 @@
 @foreach(config('houmanity.menu.customer') as $menu)
+    @if(in_array($menu['route'], auth()->user()->getAllPermissionsFromRole()) ||
+    array_intersect($menu['sub_routes'] ?? [''] ,auth()->user()->getAllPermissionsFromRole()))
         @if(isset($menu['heading']))
             <div class="menu-item">
                 <div class="menu-content pt-8 pb-2">
@@ -46,4 +48,5 @@
             @endforeach
         @endif
         </div>
+    @endif
 @endforeach
