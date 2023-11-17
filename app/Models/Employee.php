@@ -25,4 +25,9 @@ class Employee extends Model
     {
         return $this->belongsToMany(Task::class, 'employee_tasks');
     }
+
+    public function clients(): BelongsToMany
+    {
+        return $this->belongsToMany(Client::class, 'client_employee');
+    }
 }

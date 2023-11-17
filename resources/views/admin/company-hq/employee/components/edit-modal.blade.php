@@ -35,49 +35,18 @@
                             <label class="form-label required">Name</label>
                             <input type="text" name="edit_name" class="form-control  form-control-solid" value="{{old('name')}}">
                         </div>
+
                         <div class="col-md-6">
-                            <label class="form-label required">Email</label>
-                            <input type="email" name="edit_email" class="form-control  form-control-solid" value="{{old('email')}}">
+                            <label class="form-label required">Contact Number</label>
+                            <input type="text" name="edit_phone" class="form-control  form-control-solid" value="{{old('phone')}}">
                         </div>
                     </div>
                     <!--end::Input group-->
 
-                    <!--begin::Input group-->
                     <div class="fv-row mb-7 fv-plugins-icon-container">
-                        <label class="form-label required">Contact Number</label>
-                        <input type="text" name="edit_phone" class="form-control  form-control-solid" value="{{old('phone')}}">
+                        <label class="form-label required">Email</label>
+                        <input type="email" name="edit_email" class="form-control  form-control-solid" value="{{old('email')}}">
                     </div>
-                    <!--end::Input group-->
-
-                    <!--begin::Input group-->
-                    <div class="row mb-7 fv-plugins-icon-container">
-                        <div class="col-md-6">
-                            <label class="form-label required">Department</label>
-                            <select id="Department" name="edit_department" class="form-select">
-                                <option value="0" selected="">Select Department</option>
-                                @foreach($departments as $department)
-                                    <option value="{{ $department->id }}">{{ $department->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label required">Designation</label>
-                            <select id="Designation" name="edit_designation" class="form-select">
-                                <option value="0" selected="">Select Designation</option>
-                                @foreach($designations as $designation)
-                                    <option value="{{ $designation->id }}">{{ $designation->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <!--end::Input group-->
-
-                    <!--begin::Input group-->
-                    <div class="fv-row mb-7 fv-plugins-icon-container">
-                        <label class="form-label required">Remarks</label>
-                        <textarea name="edit_remarks" class="form-control  form-control-solid" rows="1"></textarea>
-                    </div>
-                    <!--end::Input group-->
 
                     <!--begin::Input group-->
                     <div class="fv-row mb-7 fv-plugins-icon-container">
@@ -93,11 +62,29 @@
                     </div>
                     <!--end::Input group-->
 
+                    <div class="fv-row mb-7 fv-plugins-icon-container">
+                        <label for="edit_clients" class="required form-label">Assign Clients</label>
+                        <select name="edit_clients[]" id="edit_clients" class="form-select form-select-solid" multiple data-control="select2"
+                                data-placeholder="Assign Clients">
+                            <option value=""></option>
+                            @foreach($clients as $client)
+                                <option value="{{ $client->id }}" >
+                                    {{ $client->user->first_name .' '. $client->user->last_name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-7 fv-plugins-icon-container">
+                        <label class="form-label required">Remarks</label>
+                        <textarea name="edit_remarks" class="form-control  form-control-solid" rows="1"></textarea>
+                    </div>
+                    <!--end::Input group-->
+
                     <div class="mb-10">
                         <input class="form-check-input" name="edit_status" type="checkbox" />
-                        <label class="form-check-label" for="form_checkbox">
-                            Active
-                        </label>
+                        <label class="form-check-label" for="form_checkbox">Active</label>
                     </div>
 
                     <!--begin::Actions-->

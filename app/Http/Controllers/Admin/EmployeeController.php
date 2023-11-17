@@ -4,9 +4,11 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
 use App\Models\Department;
 use App\Models\Designation;
 use App\Models\Employee;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -28,9 +30,8 @@ class EmployeeController extends Controller
             'pageTitle' => $pageTitle,
             'breadcrumbs' => $breadcrumbs,
             'action' => $action,
+            'clients' => Client::all(),
             'employees' => Employee::with('department', 'designation')->latest()->get(),
-            'departments' => Department::whereStatus(1)->get(),
-            'designations' => Designation::whereStatus(1)->get()
         ];
 
         return view('admin.company-hq.employee.index', $viewParams);
@@ -45,15 +46,16 @@ class EmployeeController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required',
+            'user_name' => 'required|unique:users,user_name',
             'email' => 'required|unique:users,email',
-            'department' => 'required|not_in:0',
-            'designation' => 'required',
             'phone' => 'nullable',
+            'clients' => 'required|array',
             'password' => 'required'
         ]);
 
         $user = new User;
-        $user->user_name = $validatedData['name'].'-emp';
+        $user->role_id = Role::EMPLOYEE_ROLE;
+        $user->user_name = $validatedData['user_name'];
         $user->email = $validatedData['email'];
         $user->password = Hash::make($validatedData['password']);
         $user->status = ($request->status == "on") ? 'Active' : 'Inactive';
@@ -64,12 +66,12 @@ class EmployeeController extends Controller
         $employee->name = $validatedData['name'];
         $employee->email = $validatedData['email'];
         $employee->phone = $validatedData['phone'];
-        $employee->department()->associate($validatedData['department']);
-        $employee->designation()->associate($validatedData['designation']);
         $employee->remarks = $request->remarks;
         $employee->status = ($request->status == "on") ? 1 : 0;
 
         if ($employee->save()) {
+            $employee->clients()->sync($validatedData['clients']);
+
             Session::flash('successMessage', 'A new employee has been created successfully!');
             return redirect()->back();
         }
@@ -93,8 +95,6 @@ class EmployeeController extends Controller
         $validatedData = $request->validate([
             'edit_name' => 'required',
             'edit_email' => 'required|unique:employees,email,' . $employee->id,
-            'edit_department' => 'required|not_in:0',
-            'edit_designation' => 'required',
             'edit_phone' => 'nullable',
         ]);
 

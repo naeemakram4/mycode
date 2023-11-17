@@ -6,7 +6,6 @@
         <th>FullName</th>
         <th>Email</th>
         <th>Phone</th>
-        <th>Department/ Designation</th>
         <th>Status</th>
         <th class="text-end">Actions</th>
     </tr>
@@ -37,10 +36,6 @@
                 <td>{{ $employee->email }}</td>
                 <td>{{ $employee->phone }}</td>
                 <td>
-                    <span class="badge badge-light-dark mb-2">{{ $employee->department->name}}</span> <br>
-                    <span class="badge badge-dark">{{ $employee->designation->name}}</span>
-                </td>
-                <td>
                     @if($employee->status==1)
                         <span class="badge badge-light-success">Active</span>
                     @else
@@ -65,32 +60,6 @@
                             </span>
                             <!--end::Svg Icon-->
                         </a>
-{{--                        <a href="javascript:void(0);"--}}
-{{--                           onclick="if(confirm('Are you sure to delete?')){ event.preventDefault(); document.getElementById('delete-employee-{{ $employee->id }}').submit();}"--}}
-{{--                           class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">--}}
-{{--                            <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->--}}
-{{--                            <span class="svg-icon svg-icon-3">--}}
-{{--                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"--}}
-{{--                                     fill="none">--}}
-{{--                                    <path--}}
-{{--                                        d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z"--}}
-{{--                                        fill="black"></path>--}}
-{{--                                    <path opacity="0.5"--}}
-{{--                                          d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z"--}}
-{{--                                          fill="black"></path>--}}
-{{--                                    <path opacity="0.5"--}}
-{{--                                          d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z"--}}
-{{--                                          fill="black"></path>--}}
-{{--                                </svg>--}}
-{{--                            </span>--}}
-{{--                            <!--end::Svg Icon-->--}}
-{{--                        </a>--}}
-{{--                        <form id="delete-employee-{{ $employee->id }}"--}}
-{{--                              action="{{ route('delete.team', $employee->id) }}"--}}
-{{--                              method="POST" style="display: none">--}}
-{{--                            @csrf--}}
-{{--                            @method('DELETE')--}}
-{{--                        </form>--}}
                     </div>
                 </td>
             </tr>
@@ -119,8 +88,6 @@
                 $('input[name="edit_name"]').val(data.name);
                 $('input[name="edit_email"]').val(data.email);
                 $('input[name="edit_phone"]').val(data.phone);
-                $('select[name="edit_department"]').val(data.department_id)
-                $('select[name="edit_designation"]').val(data.designation_id)
                 $('textarea[name="edit_remarks"]').val(data.remarks);
 
                 if (data.status === 1){

@@ -100,7 +100,19 @@ class ClientController extends Controller
 
     public function edit(Client $client)
     {
-        //
+        $pageTitle = 'Update Client';
+        $breadcrumbs = [['text' => 'clients', 'url' => '/admin/client'], ['text' => $pageTitle]];
+
+        if ($client) {
+            $viewParams = [
+                'pageTitle' => $pageTitle,
+                'breadcrumbs' => $breadcrumbs,
+                'services' => Service::get(),
+                'client' => $client
+            ];
+
+            return view('admin.client.edit', $viewParams);
+        }
     }
 
     public function update(Request $request, Client $client)
