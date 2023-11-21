@@ -12,7 +12,7 @@ class Role extends Model
     use HasFactory;
 
     const ADMIN_ROLE = 1;
-    const CUSTOMER_ROLE = 2;
+    const CLIENT_ROLE = 2;
     const EMPLOYEE_ROLE = 3;
 
     public function permissions(): BelongsToMany

@@ -2,10 +2,14 @@
     <thead>
     <tr class="fw-bold fs-6 text-muted">
         <th>ID</th>
-        <th>Photo</th>
         <th>FullName</th>
+        <th>Username</th>
         <th>Email</th>
         <th>Phone</th>
+<<<<<<< HEAD
+=======
+        <th>Total Clients</th>
+>>>>>>> 438c8c3ff7d0871f059063edfae055c88cba80ea
         <th>Status</th>
         <th class="text-end">Actions</th>
     </tr>
@@ -17,24 +21,14 @@
                 <td>
                     <a href="{{ route('admin.employee.show', $employee->id) }}">{{ $employee->id }}</a>
                 </td>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="symbol symbol-45px">
-                            <img alt="image" src="{{URL::asset("settings/top-menu-cooco-logo.png")}}"/>
-
-{{--                            @php $user = DB::table('users')->where('id',$employee->user_id)->first(); @endphp--}}
-{{--                            @if($user->image !== NULL)--}}
-{{--                                @php $image= URL::asset("settings/".$user->image); @endphp--}}
-{{--                                <img alt="image" src="{{ $image }}">--}}
-{{--                            @else--}}
-{{--                                <img alt="image" src="{{URL::asset("settings/top-menu-cooco-logo.png")}}"/>--}}
-{{--                            @endif--}}
-                        </div>
-                    </div>
-                </td>
                 <td>{{ $employee->name }}</td>
+                <td>{{ $employee->user->user_name }}</td>
                 <td>{{ $employee->email }}</td>
                 <td>{{ $employee->phone }}</td>
+<<<<<<< HEAD
+=======
+                <td>{{ count($employee->clients) }}</td>
+>>>>>>> 438c8c3ff7d0871f059063edfae055c88cba80ea
                 <td>
                     @if($employee->status==1)
                         <span class="badge badge-light-success">Active</span>
@@ -44,7 +38,7 @@
                 </td>
                 <td>
                     <div class="d-flex justify-content-end flex-shrink-0">
-                        <a href="javascript:void(0);" id="editEmployee" data-id="{{ $employee->id }}"
+                        <a href="{{ route('admin.employee.edit', $employee->id) }}" id="editEmployee" data-id="{{ $employee->id }}"
                            class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                             <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                             <span class="svg-icon svg-icon-3">
@@ -67,6 +61,7 @@
     @endif
     </tbody>
 </table>
+<<<<<<< HEAD
 
 @section('pageInnerModals')
     @include('admin.company-hq.employee.components.add_new_team_modal')
@@ -100,3 +95,5 @@
         });
     </script>
 @endpush
+=======
+>>>>>>> 438c8c3ff7d0871f059063edfae055c88cba80ea

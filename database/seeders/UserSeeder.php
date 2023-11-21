@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'role_id' => Role::CUSTOMER_ROLE,
+            'role_id' => Role::CLIENT_ROLE,
             'user_name' => 'customer',
             'password' => Hash::make('admin'),
             'status' => User::STATUS_ACTIVE,

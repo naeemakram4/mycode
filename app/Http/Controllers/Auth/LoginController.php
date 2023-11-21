@@ -79,7 +79,7 @@ class LoginController extends Controller
             $this->username() => $request->user_name,
             'password' => $request->password,
             'status' => [User::STATUS_ACTIVE],
-            'role_id' => [Role::CUSTOMER_ROLE], //Only Customer roles allowed.
+            'role_id' => [Role::CLIENT_ROLE], //Only Client roles allowed.
         ];
     }
 }

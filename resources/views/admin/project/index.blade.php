@@ -7,6 +7,12 @@
     @include('admin.project.components.list')
     @include('admin.project.components.pagination')
 @endsection
+
+@section('pageInnerModals')
+    @include('admin.project.components.display_all_clients_model')
+@endsection
+
+
 @push('pageInnerScript')
     <script>
         var KTProjectList = {

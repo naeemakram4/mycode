@@ -11,6 +11,11 @@ class Employee extends Model
 {
     use HasFactory;
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
@@ -30,4 +35,17 @@ class Employee extends Model
     {
         return $this->belongsToMany(Client::class, 'client_employee');
     }
+<<<<<<< HEAD
+=======
+
+    public function projects(): BelongsToMany
+    {
+        return $this->belongsToMany(Project::class, 'employee_project');
+    }
+
+    public function hasClient($client)
+    {
+        return $this->clients->contains('id', $client);
+    }
+>>>>>>> 438c8c3ff7d0871f059063edfae055c88cba80ea
 }

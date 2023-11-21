@@ -22,8 +22,7 @@ class EmployeeController extends Controller
         $breadcrumbs = [['text' => $pageTitle]];
         $action = [
             'text' => 'Add New Employee',
-            'route' => 'javascript:void(0);',
-            'data' => 'data-bs-toggle=modal data-bs-target=#addNewTeam'
+            'route' => route('admin.employee.create'),
         ];
 
         $viewParams = [
@@ -39,7 +38,16 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        //
+        $pageTitle = 'Create Employee';
+        $breadcrumbs = [['text' => 'Employees', 'url' => '\admin\employee'], ['text' => $pageTitle]];
+
+        $viewParams = [
+            'pageTitle' => $pageTitle,
+            'breadcrumbs' => $breadcrumbs,
+            'clients' => Client::all(),
+        ];
+
+        return view('admin.company-hq.employee.create', $viewParams);
     }
 
     public function store(Request $request)
@@ -58,7 +66,7 @@ class EmployeeController extends Controller
         $user->user_name = $validatedData['user_name'];
         $user->email = $validatedData['email'];
         $user->password = Hash::make($validatedData['password']);
-        $user->status = ($request->status == "on") ? 'Active' : 'Inactive';
+        $user->status = ($request->status == "on") ? User::STATUS_ACTIVE : User::STATUS_DISABLE;
         $user->save();
 
         $employee = new Employee();
@@ -73,7 +81,7 @@ class EmployeeController extends Controller
             $employee->clients()->sync($validatedData['clients']);
 
             Session::flash('successMessage', 'A new employee has been created successfully!');
-            return redirect()->back();
+            return redirect()->route('admin.employee.index');
         }
 
         return redirect()->back()
@@ -82,27 +90,49 @@ class EmployeeController extends Controller
 
     public function show(Employee $employee)
     {
-        //
+        $pageTitle = 'Employee Details';
+        $breadcrumbs = [['text' => 'Employees', 'url' => '\admin\employee'], ['text' => $pageTitle]];
+
+        $viewParams = [
+            'pageTitle' => $pageTitle,
+            'breadcrumbs' => $breadcrumbs,
+            'employee' => $employee
+        ];
+
+        return view('admin.company-hq.employee.view', $viewParams);
     }
 
     public function edit(Employee $employee)
     {
-        return response()->json($employee);
+        $pageTitle = 'Update Employee';
+        $breadcrumbs = [['text' => 'Employees', 'url' => '\admin\employee'], ['text' => $pageTitle]];
+
+        $viewParams = [
+            'pageTitle' => $pageTitle,
+            'breadcrumbs' => $breadcrumbs,
+            'clients' => Client::all(),
+            'employee' => $employee
+        ];
+
+        return view('admin.company-hq.employee.edit', $viewParams);
     }
 
     public function update(Request $request, Employee $employee)
     {
         $validatedData = $request->validate([
             'edit_name' => 'required',
+            'edit_user_name' => 'required|unique:users,user_name,'.$employee->user_id,
             'edit_email' => 'required|unique:employees,email,' . $employee->id,
             'edit_phone' => 'nullable',
+            'edit_clients' => 'required|array',
         ]);
 
         $user = User::where('id', $employee->user_id)->first();
 
         if ($user && $employee) {
+            $user->user_name = $validatedData['edit_user_name'];
             $user->email = $validatedData['edit_email'];
-            $user->status = ($request->edit_status == "on") ? 1 : 0;
+            $user->status = ($request->edit_status == "on") ? User::STATUS_ACTIVE : User::STATUS_DISABLE;
             if ($request->has('edit_password') && $request->edit_password != null) {
                 $user->password = Hash::make($request->edit_password);
             }
@@ -111,14 +141,14 @@ class EmployeeController extends Controller
             $employee->name = $validatedData['edit_name'];
             $employee->email = $validatedData['edit_email'];
             $employee->phone = $validatedData['edit_phone'];
-            $employee->department()->associate($validatedData['edit_department']);
-            $employee->designation()->associate($validatedData['edit_designation']);
             $employee->remarks = $request->edit_remarks;
             $employee->status = ($request->edit_status == "on") ? 1 : 0;
 
             if ($employee->save()) {
+                $employee->clients()->sync($validatedData['edit_clients']);
+
                 Session::flash('successMessage', 'Employee has been updated successfully!');
-                return redirect()->back();
+                return redirect()->route('admin.employee.index');
             }
         }
 

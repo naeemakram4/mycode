@@ -36,9 +36,24 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Role::class, 'role_id', 'id');
     }
 
+    public function employee(): HasOne
+    {
+        return $this->hasOne(Employee::class);
+    }
+
     public function client(): HasOne
     {
         return $this->hasOne(Client::class);
+    }
+
+    public function getFullName()
+    {
+        return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+    }
+
+    public function getNameFirstLetter()
+    {
+        return ucfirst(substr($this->first_name, 0, 1));
     }
 
     public function ability($permission): bool

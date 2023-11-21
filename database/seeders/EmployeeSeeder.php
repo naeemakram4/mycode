@@ -22,13 +22,15 @@ class EmployeeSeeder extends Seeder
         for ($i = 1; $i <= $totalTeamRecords; $i++) {
             $user = User::create([
                 'role_id' => Role::EMPLOYEE_ROLE,
+                'first_name' => $faker->firstName,
+                'last_name' => $faker->lastName,
                 'user_name' => $faker->userName,
                 'email' => $faker->email,
                 'password' => Hash::make('admin123'),
                 'status' => 'Active',
             ]);
 
-            Employee::create([
+            $employee = Employee::create([
                 'user_id' => $user->id,
                 'department_id' => rand(1,5),
                 'designation_id' => rand(1,5),
@@ -37,6 +39,11 @@ class EmployeeSeeder extends Seeder
                 'phone' => $faker->e164PhoneNumber,
                 'remarks' => 'This is dummy team records!',
                 'status' => rand(0,1)
+            ]);
+
+            DB::table('client_employee')->insert([
+                ['client_id' => rand(1,5), 'employee_id' => $employee->id],
+                ['client_id' => rand(6,10), 'employee_id' => $employee->id],
             ]);
         }
     }
