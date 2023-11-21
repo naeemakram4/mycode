@@ -27,8 +27,6 @@ class Client extends Model
     {
         return $this->belongsToMany(Employee::class, 'client_employee');
     }
-<<<<<<< HEAD
-=======
 
     public function clientType(): BelongsTo
     {
@@ -44,6 +42,5 @@ class Client extends Model
     {
         return $this->services->contains('id', $service);
     }
->>>>>>> 438c8c3ff7d0871f059063edfae055c88cba80ea
 }
 

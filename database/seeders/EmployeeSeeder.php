@@ -32,11 +32,9 @@ class EmployeeSeeder extends Seeder
 
             $employee = Employee::create([
                 'user_id' => $user->id,
-                'department_id' => rand(1,5),
-                'designation_id' => rand(1,5),
                 'name' => $faker->name,
                 'email' => $faker->email,
-                'phone' => $faker->e164PhoneNumber,
+                'phone' => $faker->PhoneNumber,
                 'remarks' => 'This is dummy team records!',
                 'status' => rand(0,1)
             ]);

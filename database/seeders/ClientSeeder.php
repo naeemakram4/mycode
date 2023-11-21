@@ -39,10 +39,6 @@ class ClientSeeder extends Seeder
             'start_date' => Carbon::now()->format('Y-m-d'),
         ]);
 
-        DB::table('client_employee')->insert([
-            ['client_id' => $client->id, 'employee_id' => rand(1,10)],
-        ]);
-
         // Creating some fake clients
         $faker = \Faker\Factory::create();
 

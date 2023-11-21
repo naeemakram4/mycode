@@ -112,12 +112,8 @@ class ClientController extends Controller
                 'pageTitle' => $pageTitle,
                 'breadcrumbs' => $breadcrumbs,
                 'services' => Service::get(),
-<<<<<<< HEAD
-                'client' => $client
-=======
                 'client' => $client,
                 'clientTypes' => ClientType::get(),
->>>>>>> 438c8c3ff7d0871f059063edfae055c88cba80ea
             ];
 
             return view('admin.client.edit', $viewParams);

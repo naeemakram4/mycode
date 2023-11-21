@@ -12,10 +12,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RoleSeeder::class,
-<<<<<<< HEAD
-=======
             PermissionSeeder::class,
->>>>>>> 438c8c3ff7d0871f059063edfae055c88cba80ea
             AdminSeeder::class,
             UserSeeder::class,
             ServiceSeeder::class,
@@ -24,18 +21,11 @@ class DatabaseSeeder extends Seeder
             EmployeeSeeder::class,
             ProjectSeeder::class,
 
-            DepartmentSeeder::class,
-            DesignationSeeder::class,
-<<<<<<< HEAD
-            EmployeeSeeder::class,
-            ServiceSeeder::class,
+//            DepartmentSeeder::class,
+//            DesignationSeeder::class,
+
             TaskGroupSeeder::class,
             TaskSeeder::class,
-            PermissionSeeder::class
-=======
-            TaskSeeder::class,
-            TaskGroupSeeder::class,
->>>>>>> 438c8c3ff7d0871f059063edfae055c88cba80ea
         ]);
     }
 }

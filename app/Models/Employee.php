@@ -35,8 +35,6 @@ class Employee extends Model
     {
         return $this->belongsToMany(Client::class, 'client_employee');
     }
-<<<<<<< HEAD
-=======
 
     public function projects(): BelongsToMany
     {
@@ -47,5 +45,4 @@ class Employee extends Model
     {
         return $this->clients->contains('id', $client);
     }
->>>>>>> 438c8c3ff7d0871f059063edfae055c88cba80ea
 }

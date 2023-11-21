@@ -6,10 +6,7 @@
         <th>Username</th>
         <th>Email</th>
         <th>Phone</th>
-<<<<<<< HEAD
-=======
         <th>Total Clients</th>
->>>>>>> 438c8c3ff7d0871f059063edfae055c88cba80ea
         <th>Status</th>
         <th class="text-end">Actions</th>
     </tr>
@@ -25,10 +22,7 @@
                 <td>{{ $employee->user->user_name }}</td>
                 <td>{{ $employee->email }}</td>
                 <td>{{ $employee->phone }}</td>
-<<<<<<< HEAD
-=======
                 <td>{{ count($employee->clients) }}</td>
->>>>>>> 438c8c3ff7d0871f059063edfae055c88cba80ea
                 <td>
                     @if($employee->status==1)
                         <span class="badge badge-light-success">Active</span>
@@ -61,7 +55,6 @@
     @endif
     </tbody>
 </table>
-<<<<<<< HEAD
 
 @section('pageInnerModals')
     @include('admin.company-hq.employee.components.add_new_team_modal')
@@ -95,5 +88,3 @@
         });
     </script>
 @endpush
-=======
->>>>>>> 438c8c3ff7d0871f059063edfae055c88cba80ea
