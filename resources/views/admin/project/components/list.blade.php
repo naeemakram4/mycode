@@ -18,7 +18,17 @@
                     <!--end::Car Title-->
                     <!--begin::Card toolbar-->
                     <div class="card-toolbar">
-                        <span class="badge badge-light-primary fw-bolder me-auto px-4 py-3">Open</span>
+                        @if($project->status == \App\Models\Project::COMPLETED_STATUS)
+                            <span class="badge badge-light-success fw-bolder me-auto px-4 py-3">{{ ucfirst($project->status) }}</span>
+                        @elseif($project->status == \App\Models\Project::ACTIVE_STATUS)
+                            <span class="badge badge-light-primary fw-bolder me-auto px-4 py-3">{{ ucfirst($project->status) }}</span>
+                        @elseif($project->status == \App\Models\Project::INACTIVE_STATUS)
+                            <span class="badge badge-light-danger fw-bolder me-auto px-4 py-3">{{ ucfirst($project->status) }}</span>
+                        @elseif($project->status == \App\Models\Project::PENDING_STATUS)
+                            <span class="badge badge-light-warning fw-bolder me-auto px-4 py-3">{{ ucfirst($project->status) }}</span>
+                        @elseif($project->status == \App\Models\Project::TO_DO_STATUS)
+                            <span class="badge badge-light-info fw-bolder me-auto px-4 py-3">{{ ucfirst($project->status) }}</span>
+                        @endif
                     </div>
                     <!--end::Card toolbar-->
                 </div>

@@ -23,7 +23,8 @@ class ProjectSeeder extends Seeder
                 'name' => $faker->domainWord,
                 'description' => $faker->text(25),
                 'start_date' => Carbon::now()->subWeek(1),
-                'due_date' => Carbon::now()->addYear()
+                'due_date' => Carbon::now()->addYear(),
+                'status' => ($i % 2) ? Project::ACTIVE_STATUS : Project::COMPLETED_STATUS
             ]);
 
             DB::table('employee_project')->insert([

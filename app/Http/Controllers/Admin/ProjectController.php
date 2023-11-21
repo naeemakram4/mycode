@@ -19,10 +19,20 @@ class ProjectController extends Controller
             'route' => 'javascript:void(0);',
         ];
 
+        $projectsCount = new Project();
+        $chartData = [];
+        $labels = [ucfirst(Project::ACTIVE_STATUS), ucfirst(Project::COMPLETED_STATUS), ucfirst(Project::TO_DO_STATUS)];
+        foreach ($labels as $label) {
+            $chartData[] = $projectsCount->whereStatus(strtolower($label))->count();
+        }
+
         $viewParams = [
             'pageTitle' => $pageTitle,
             'breadcrumbs' => $breadcrumbs,
             'action' => $action,
+            'labels' => json_encode($labels),
+            'chartData' => json_encode($chartData),
+            'chartLabelAndData' => array_combine($labels, $chartData),
             'projects' => Project::get(),
             'clients' => Client::get(),
         ];

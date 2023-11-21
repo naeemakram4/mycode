@@ -7,7 +7,7 @@
             <!--begin::Card body-->
             <div class="card-body p-9">
                 <!--begin::Heading-->
-                <div class="fs-2hx fw-bolder">237</div>
+                <div class="fs-2hx fw-bolder">{{ count($projects) }}</div>
                 <div class="fs-4 fw-bold text-gray-400 mb-7">Current Projects</div>
                 <!--end::Heading-->
                 <!--begin::Wrapper-->
@@ -19,27 +19,21 @@
                     <!--end::Chart-->
                     <!--begin::Labels-->
                     <div class="d-flex flex-column justify-content-center flex-row-fluid pe-11 mb-5">
+                        @foreach($chartLabelAndData as $key => $value)
                         <!--begin::Label-->
                         <div class="d-flex fs-6 fw-bold align-items-center mb-3">
-                            <div class="bullet bg-primary me-3"></div>
-                            <div class="text-gray-400">Active</div>
-                            <div class="ms-auto fw-bolder text-gray-700">30</div>
+                            @if($key == \App\Models\Project::ACTIVE_STATUS)
+                                <div class="bullet bg-primary me-3"></div>
+                            @elseif($key == \App\Models\Project::COMPLETED_STATUS)
+                                <div class="bullet bg-success me-3"></div>
+                            @elseif($key == \App\Models\Project::TO_DO_STATUS)
+                                <div class="bullet bg-info me-3"></div>
+                            @endif
+                            <div class="text-gray-400">{{ $key }}</div>
+                            <div class="ms-auto fw-bolder text-gray-700">{{ $value }}</div>
                         </div>
                         <!--end::Label-->
-                        <!--begin::Label-->
-                        <div class="d-flex fs-6 fw-bold align-items-center mb-3">
-                            <div class="bullet bg-success me-3"></div>
-                            <div class="text-gray-400">Completed</div>
-                            <div class="ms-auto fw-bolder text-gray-700">45</div>
-                        </div>
-                        <!--end::Label-->
-                        <!--begin::Label-->
-                        <div class="d-flex fs-6 fw-bold align-items-center">
-                            <div class="bullet bg-gray-300 me-3"></div>
-                            <div class="text-gray-400">Yet to start</div>
-                            <div class="ms-auto fw-bolder text-gray-700">25</div>
-                        </div>
-                        <!--end::Label-->
+                        @endforeach
                     </div>
                     <!--end::Labels-->
                 </div>
@@ -105,7 +99,7 @@
                 <!--begin::Actions-->
                 <div class="d-flex">
                     <a href="#" class="btn btn-primary btn-sm me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_view_clients">All Clients</a>
-                    <a href="#" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_users_search">Invite New</a>
+                    <a href="{{ route('admin.client.create') }}" class="btn btn-light btn-sm">Invite New</a>
                 </div>
                 <!--end::Actions-->
             </div>
