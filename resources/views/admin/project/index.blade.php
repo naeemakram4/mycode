@@ -1,17 +1,29 @@
 @extends('layouts.admin')
 @section('pageTitle', $pageTitle)
 
+@section('pageInnerStyle')
+    <link rel="stylesheet" href="{{ asset('css/datatable.css') }}">
+@endsection
+
 @section('content')
     @include('admin.project.components.stats')
-    @include('admin.project.components.toolbar')
-    @include('admin.project.components.list')
-    @include('admin.project.components.pagination')
+
+    <!--begin::Card-->
+    <div class="card mt-10">
+        <div class="card-body pt-6">
+            @include('admin.project.components.index.filter')
+            @include('admin.project.components.index.table')
+        </div>
+    </div>
 @endsection
 
 @section('pageInnerModals')
     @include('admin.project.components.display_all_clients_model')
 @endsection
 
+@section('pageScriptFiles')
+    <script src="{{ asset('js/datatable.js') }}"></script>
+@endsection
 
 @push('pageInnerScript')
     <script>
