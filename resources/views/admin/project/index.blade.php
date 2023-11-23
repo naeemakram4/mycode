@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    @include('admin.project.components.stats')
+    @include('admin.project.components.index.stats')
 
     <!--begin::Card-->
     <div class="card mt-10">

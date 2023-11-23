@@ -39,8 +39,8 @@ class ProjectController extends Controller
                 })
                 ->editColumn('created_at', function ($data) {
                     return Carbon::parse($data->created_at)->format('m-d-Y');
-                })->addColumn('start_due_date', function ($data){
-                    return Carbon::parse($data->start_date)->format('m-d-Y') .'/ '.Carbon::parse($data->due_date)->format('m-d-Y') ;
+                })->addColumn('start_due_date', function ($data) {
+                    return Carbon::parse($data->start_date)->format('m-d-Y') . '/ ' . Carbon::parse($data->due_date)->format('m-d-Y');
                 })
                 ->editColumn('status', function ($data) {
                     if ($data->status == \App\Models\Project::COMPLETED_STATUS) {
@@ -217,5 +217,19 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         //
+    }
+
+    public function target(Project $project, $id)
+    {
+        $pageTitle = 'Project Details';
+        $breadcrumbs = [['text' => 'Projects', 'url' => '/admin/project'], ['text' => $pageTitle]];
+
+        $viewParams = [
+            'pageTitle' => $pageTitle,
+            'breadcrumbs' => $breadcrumbs,
+            'project' => Project::whereId($id)->first()
+        ];
+
+        return view('admin.project.view', $viewParams);
     }
 }
