@@ -130,6 +130,11 @@ return [
             'icon' => 'grid',
         ],
         [
+            'title' => 'Projects',
+            'route' => 'customer.project.index',
+            'icon' => 'kanban',
+        ],
+        [
             'title' => 'Task Management',
             'route' => 'customer.task.index',
             'icon' => 'list-check',
@@ -152,6 +157,16 @@ return [
         'title' => 'Dashboard',
         'route' => 'employee.dashboard',
         'icon' => 'grid',
+    ],
+    [
+        'title' => 'Clients',
+        'route' => 'admin.client.index',
+        'icon' => 'people',
+    ],
+    [
+        'title' => 'Projects',
+        'route' => 'employee.project.index',
+        'icon' => 'kanban',
     ],
     [
         'title' => 'Task Management',

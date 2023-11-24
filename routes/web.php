@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth', 'verified', 'customer.role'], 'prefix' =>
     Route::get('/dashboard', [CustomerDashboardController::class, 'index'])->name('dashboard');
 
     require __DIR__ . '/customer/profile.php';
+    require __DIR__ . '/customer/project.php';
     require __DIR__ . '/customer/task.php';
 
     Route::get('seo', [StaticsController::class, 'seo'])->name('statics.seo');
@@ -41,7 +42,8 @@ Route::group(['prefix' => 'employee', 'as' => 'employee.'], function () {
     Route::group(['middleware' => ['employee.auth', 'employee.role']], function () {
         Route::get('/dashboard', [EmployeeDashboard::class, 'index'])->name('dashboard');
         require __DIR__ . '/employee/task.php';
-
+        require __DIR__ . '/employee/client.php';
+        require __DIR__ . '/employee/project.php';
 
         Route::post('logout', [EmployeeLoginController::class, 'logout'])->name('logout');
     });
