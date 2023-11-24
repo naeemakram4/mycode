@@ -17,6 +17,9 @@ return [
 
         'customer.statics.seo' => 'SEO view',
         'customer.statics.ppc' => 'PPC view',
+
+        'customer.invoice.index' => 'Invoice List',
+        'customer.invoice.show' => 'Invoice View',
     ],
 
     'employee' => [

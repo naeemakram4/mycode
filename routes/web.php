@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth', 'verified', 'customer.role'], 'prefix' =>
     require __DIR__ . '/customer/profile.php';
     require __DIR__ . '/customer/project.php';
     require __DIR__ . '/customer/task.php';
+    require __DIR__ . '/customer/invoice.php';
 
     Route::get('seo', [StaticsController::class, 'seo'])->name('statics.seo');
     Route::get('ppc', [StaticsController::class, 'ppc'])->name('statics.ppc');

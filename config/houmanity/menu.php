@@ -113,7 +113,7 @@ return [
         ],
         [
             'title' => 'Invoices',
-            'route' => 'admin.invoice.index',
+            'route' => 'javascript:void(0);',
             'icon' => 'receipt',
             'heading' => 'System Management',
             'sub_routes' => ['admin.invoice.index', 'admin.invoice.create'],
@@ -163,6 +163,12 @@ return [
             'title' => 'PPC',
             'route' => 'customer.statics.ppc',
             'icon' => 'stars',
+        ],
+        [
+            'title' => 'Invoices',
+            'route' => 'customer.invoice.index',
+            'icon' => 'receipt',
+            'heading' => 'Billing',
         ],
     ],
     'employee' => [
