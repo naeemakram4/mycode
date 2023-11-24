@@ -31,6 +31,8 @@ return [
         'employee.project.show' => 'Project View',
         'employee.project.target' => 'Projects Target View',
 
+        'employee.client.index' => 'Client List',
+
         'test' => 'Coming Soon',
     ],
 ];

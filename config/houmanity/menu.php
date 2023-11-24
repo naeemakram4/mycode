@@ -160,7 +160,7 @@ return [
     ],
     [
         'title' => 'Clients',
-        'route' => 'admin.client.index',
+        'route' => 'employee.client.index',
         'icon' => 'people',
     ],
     [

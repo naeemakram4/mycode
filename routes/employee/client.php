@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Employee\ClientController;
 
 Route::group([], function () {
     //
