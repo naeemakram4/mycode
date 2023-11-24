@@ -76,6 +76,7 @@ return [
             'title' => 'Clients',
             'route' => 'admin.client.index',
             'icon' => 'people',
+            'heading' => 'Users'
         ],
         [
             'title' => 'Employees',
@@ -86,6 +87,7 @@ return [
             'title' => 'Projects',
             'route' => 'admin.project.index',
             'icon' => 'kanban',
+            'heading' => 'Services'
         ],
 
 //        [
@@ -104,17 +106,27 @@ return [
 //            'route' => 'admin.proposal.index',
 //            'icon' => 'card-text',
 //        ],
-//        [
-//            'title' => 'Invoices',
-//            'route' => 'admin.invoice.index',
-//            'icon' => 'receipt',
-//        ],
-
         [
-            'title' => 'Task Management',
+            'title' => 'Task',
             'route' => 'admin.task.index',
-            'heading' => 'System Management',
             'icon' => 'list-check',
+        ],
+        [
+            'title' => 'Invoices',
+            'route' => 'admin.invoice.index',
+            'icon' => 'receipt',
+            'heading' => 'System Management',
+            'sub_routes' => ['admin.invoice.index', 'admin.invoice.create'],
+            'sub' => [
+                [
+                    'title' => 'Invoices List',
+                    'route' => 'admin.invoice.index'
+                ],
+                [
+                    'title' => 'Create Invoice',
+                    'route' => 'admin.invoice.create'
+                ]
+            ]
         ],
         [
             'title' => 'Access Management',
@@ -133,9 +145,10 @@ return [
             'title' => 'Projects',
             'route' => 'customer.project.index',
             'icon' => 'kanban',
+            'heading' => 'Services'
         ],
         [
-            'title' => 'Task Management',
+            'title' => 'Task',
             'route' => 'customer.task.index',
             'icon' => 'list-check',
         ],

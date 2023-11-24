@@ -13,9 +13,8 @@ class InvoiceController extends Controller
         $pageTitle = 'Invoice';
         $breadcrumbs = [['text' => $pageTitle]];
         $action = [
-            'text' => 'Add Invoice',
-            'route' => 'javascript:void(0);',
-            'data' => ''
+            'text' => 'Create Invoice',
+            'route' => route('admin.invoice.create'),
         ];
 
         $viewParams = [
@@ -32,7 +31,15 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        //
+        $pageTitle = 'Create Invoice';
+        $breadcrumbs = [['text' => 'Invoices', 'url' => '/admin/invoice'], ['text' => $pageTitle]];
+
+        $viewParams = [
+            'pageTitle' => $pageTitle,
+            'breadcrumbs' => $breadcrumbs
+        ];
+
+        return view('admin.invoice.create', $viewParams);
     }
 
     /**
@@ -46,9 +53,17 @@ class InvoiceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Invoice $invoice)
+    public function show()
     {
-        //
+        $pageTitle = 'Invoice 34782';
+        $breadcrumbs = [['text' => 'Invoices', 'url' => '/admin/invoice'], ['text' => $pageTitle]];
+
+        $viewParams = [
+            'pageTitle' => $pageTitle,
+            'breadcrumbs' => $breadcrumbs
+        ];
+
+        return view('admin.invoice.view', $viewParams);
     }
 
     /**

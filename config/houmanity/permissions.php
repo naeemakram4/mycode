@@ -16,7 +16,7 @@ return [
         'customer.project.target' => 'Projects Target View',
 
         'customer.statics.seo' => 'SEO view',
-        'customer.statics.ppc;' => 'PPC view',
+        'customer.statics.ppc' => 'PPC view',
     ],
 
     'employee' => [
