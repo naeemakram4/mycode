@@ -181,14 +181,16 @@ return [
         'title' => 'Clients',
         'route' => 'employee.client.index',
         'icon' => 'people',
+        'heading' => 'users'
     ],
     [
         'title' => 'Projects',
         'route' => 'employee.project.index',
         'icon' => 'kanban',
+        'heading' => 'Services'
     ],
     [
-        'title' => 'Task Management',
+        'title' => 'Task',
         'route' => 'employee.task.index',
         'icon' => 'list-check',
     ],
