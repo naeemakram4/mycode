@@ -32,7 +32,7 @@
                 </td>
                 <td>
                     <div class="d-flex justify-content-end flex-shrink-0">
-                        <a href="{{ route('admin.employee.edit', $employee->id) }}" id="editEmployee" data-id="{{ $employee->id }}"
+                        <a href="{{ route('admin.employee.edit', $employee->id) }}"
                            class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                             <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                             <span class="svg-icon svg-icon-3">
@@ -55,36 +55,3 @@
     @endif
     </tbody>
 </table>
-
-@section('pageInnerModals')
-    @include('admin.company-hq.employee.components.add_new_team_modal')
-    @include('admin.company-hq.employee.components.edit-modal')
-@endsection
-
-
-@push('pageInnerScript')
-    <script>
-        // Edit record modal window script
-        $('body').on('click', '#editEmployee', function (event) {
-            event.preventDefault();
-
-            let id = $(this).data('id');
-
-            $.get('/admin/employee/' + id + '/edit', function (data) { console.log(data);
-                $('#editEmployeeForm').prop('action', '/admin/employee/'+data.id);
-
-                $('input[name="edit_name"]').val(data.name);
-                $('input[name="edit_email"]').val(data.email);
-                $('input[name="edit_phone"]').val(data.phone);
-                $('textarea[name="edit_remarks"]').val(data.remarks);
-
-                if (data.status === 1){
-                    $('input[name="edit_status"]').prop("checked", true)
-                } else {
-                    $('input[name="edit_status"]').prop("checked", false)
-                }
-                $('#editEmployeeModal').modal('show');
-            })
-        });
-    </script>
-@endpush

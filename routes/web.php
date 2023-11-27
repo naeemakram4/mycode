@@ -46,8 +46,8 @@ Route::group(['prefix' => 'employee', 'as' => 'employee.'], function () {
         require __DIR__ . '/employee/client.php';
         require __DIR__ . '/employee/project.php';
 
-        Route::post('logout', [EmployeeLoginController::class, 'logout'])->name('logout');
     });
+    Route::post('logout', [EmployeeLoginController::class, 'logout'])->name('logout');
 });
 
 //Admin panel
