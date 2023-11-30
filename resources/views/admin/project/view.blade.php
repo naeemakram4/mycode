@@ -20,4 +20,5 @@
 
 @section('pageInnerModals')
     @include('admin.project.components.view.target.create-target-model')
+    @include('admin.project.components.view.target.edit-target-model')
 @endsection

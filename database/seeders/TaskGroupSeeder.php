@@ -10,13 +10,13 @@ class TaskGroupSeeder extends Seeder
 {
     public function run(): void
     {
-        for($i = 1; $i < 6; $i++) {
-            TaskGroup::create([
-                'user_id' => 1,
-//                'task_group_order' => $i,
-                'name' => 'Task Group-'.$i,
-                'description' => 'This is dummy group',
-            ]);
-        }
+//        for($i = 1; $i < 6; $i++) {
+//            TaskGroup::create([
+//                'user_id' => 1,
+////                'task_group_order' => $i,
+//                'name' => 'Task Group-'.$i,
+//                'description' => 'This is dummy group',
+//            ]);
+//        }
     }
 }

@@ -12,15 +12,15 @@ class Task extends Model
     use HasFactory;
 
     // Task Priorities
-    const LOW_PRIORITY = 'low';
-    const MEDIUM_PRIORITY = 'medium';
-    const High_PRIORITY = 'high';
-    const URGENT_PRIORITY = 'urgent';
+    const LOW_PRIORITY = 'Low';
+    const MEDIUM_PRIORITY = 'Medium';
+    const High_PRIORITY = 'High';
+    const URGENT_PRIORITY = 'Urgent';
 
     // Task Status
-    const NOT_STARTED_STATUS = 'not_started';
-    const IN_PROGRESS_STATUS = 'in_progress';
-    const COMPLETED_STATUS = 'completed';
+    const YET_TO_STATUS = 'Yet_To_Start';
+    const IN_PROGRESS_STATUS = 'In_Progress';
+    const COMPLETED_STATUS = 'Completed';
 
     public static function allTaskPriorities(): array
     {
@@ -35,15 +35,15 @@ class Task extends Model
     public static function allTaskStatus(): array
     {
         return [
-            self::NOT_STARTED_STATUS,
+            self::YET_TO_STATUS,
             self::IN_PROGRESS_STATUS,
             self::COMPLETED_STATUS,
         ];
     }
 
-    public function taskGroup(): BelongsTo
+    public function project(): BelongsTo
     {
-        return $this->belongsTo(TaskGroup::class);
+        return $this->belongsTo(Project::class);
     }
 
     public function service(): BelongsTo

@@ -27,7 +27,6 @@ class TaskController extends Controller
             'pageTitle' => $pageTitle,
             'breadcrumbs' => $breadcrumbs,
             'action' => $action,
-            'groups' => TaskGroup::withCount('tasks')->get(),
             'tasks' => Task::get(),
             'services' => Service::get(),
             'employees' => Employee::get(),
@@ -45,28 +44,28 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'project_id' => 'required',
             'subject' => 'required|string',
-            'due_date' => 'required',
-            'task_group' => 'required',
-            'service' => 'required',
             'task_assignees' => 'required|array',
+            'due_date' => 'required',
             'task_priority' => 'required',
+            'service' => 'required',
+            'status' => 'required',
         ]);
 
         $task = new Task();
+        $task->project()->associate($validatedData['project_id']);
         $task->subject = $validatedData['subject'];
-        $task->start_date = $request->start_date;
         $task->due_date = $validatedData['due_date'];
-        $task->service()->associate($validatedData['service']);
-        $task->taskGroup()->associate($validatedData['task_group']);
         $task->priority = $validatedData['task_priority'];
+        $task->service()->associate($validatedData['service']);
         $task->description = $request->description;
-
+        $task->status = $validatedData['status'];
         if ($task->save()) {
             $task->employees()->attach($validatedData['task_assignees']);
 
             Session::flash('successMessage', 'A new task has been created successfully!');
-            return redirect()->route('admin.task.index');
+            return redirect()->back();
         }
 
         return redirect()->back()
@@ -102,7 +101,7 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        //
+        return response()->json($task);
     }
 
     public function update(Request $request, Task $task)

@@ -20,12 +20,11 @@ class DatabaseSeeder extends Seeder
             ClientSeeder::class,
             EmployeeSeeder::class,
             ProjectSeeder::class,
+            TaskSeeder::class,
 
 //            DepartmentSeeder::class,
 //            DesignationSeeder::class,
-
-            TaskGroupSeeder::class,
-            TaskSeeder::class,
+//            TaskGroupSeeder::class,
         ]);
     }
 }
