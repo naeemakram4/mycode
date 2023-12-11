@@ -81,7 +81,6 @@ class ClientController extends Controller
         $client->city = $request->city;
         $client->state = $request->state;
         $client->postal_code = $request->postal_code;
-        $client->start_date = $request->start_date;
         if ($client->save()) {
             $client->services()->sync($request->services);
 
@@ -146,7 +145,6 @@ class ClientController extends Controller
             $client->city = $request->city;
             $client->state = $request->state;
             $client->postal_code = $request->postal_code;
-            $client->start_date = $request->start_date;
             if ($client->save()) {
                 $client->services()->sync($request->services);
 

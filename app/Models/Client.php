@@ -33,6 +33,11 @@ class Client extends Model
         return $this->hasMany(Project::class);
     }
 
+    public function requests(): HasMany
+    {
+        return $this->hasMany(Request::class);
+    }
+
     public function hasService($service)
     {
         return $this->services->contains('id', $service);

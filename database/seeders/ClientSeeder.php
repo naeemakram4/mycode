@@ -29,7 +29,6 @@ class ClientSeeder extends Seeder
 
         $client = Client::create([
             'user_id' => $user->id,
-            'client_type_id' => 1,
             'company_name' => 'Houmanity',
             'website' => 'https://houmanitycrm.com/',
             'address' => '123 house, st 12',

@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth', 'verified', 'customer.role'], 'prefix' =>
     require __DIR__ . '/customer/project.php';
     require __DIR__ . '/customer/task.php';
     require __DIR__ . '/customer/invoice.php';
+    require __DIR__ . '/customer/request.php';
 
     Route::get('seo', [StaticsController::class, 'seo'])->name('statics.seo');
     Route::get('ppc', [StaticsController::class, 'ppc'])->name('statics.ppc');
@@ -68,6 +69,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         require __DIR__ . '/admin/referred_client.php';
         require __DIR__ . '/admin/website.php';
         require __DIR__ . '/admin/client.php';
+        require __DIR__ . '/admin/request.php';
         require __DIR__ . '/admin/project.php';
 
         // Sales Channel

@@ -20,6 +20,10 @@ return [
 
         'customer.invoice.index' => 'Invoice List',
         'customer.invoice.show' => 'Invoice View',
+
+        'customer.request.index' => 'Requests List',
+        'customer.request.store' => 'Request Create',
+        'customer.request.show' => 'Request View',
     ],
 
     'employee' => [

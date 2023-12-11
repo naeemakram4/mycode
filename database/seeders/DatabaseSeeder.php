@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Client;
 use App\Models\ClientType;
+use App\Models\Request;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,11 +17,11 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             UserSeeder::class,
             ServiceSeeder::class,
-            ClientTypeSeeder::class,
             ClientSeeder::class,
             EmployeeSeeder::class,
             ProjectSeeder::class,
             TaskSeeder::class,
+            RequestSeeder::class,
 
 //            DepartmentSeeder::class,
 //            DesignationSeeder::class,

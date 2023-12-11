@@ -84,10 +84,15 @@ return [
             'icon' => 'people',
         ],
         [
+            'title' => 'Requests',
+            'route' => 'admin.request.index',
+            'icon' => 'send',
+            'heading' => 'Services'
+        ],
+        [
             'title' => 'Projects',
             'route' => 'admin.project.index',
             'icon' => 'kanban',
-            'heading' => 'Services'
         ],
 
 //        [
@@ -142,10 +147,15 @@ return [
             'icon' => 'grid',
         ],
         [
+            'title' => 'Requests',
+            'route' => 'customer.request.index',
+            'icon' => 'send',
+            'heading' => 'Services'
+        ],
+        [
             'title' => 'Projects',
             'route' => 'customer.project.index',
             'icon' => 'kanban',
-            'heading' => 'Services'
         ],
         [
             'title' => 'Task',
