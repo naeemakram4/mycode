@@ -1,6 +1,7 @@
 {
     "/css/template.css": "/css/template.css",
     "/js/template.js": "/js/template.js",
+    "/js/form_repeater.js": "/js/form_repeater.js",
     "/css/datatable.css": "/css/datatable.css",
     "/js/datatable.js": "/js/datatable.js",
     "/css/calendar.css": "/css/calendar.css",

@@ -36,7 +36,6 @@ class ClientSeeder extends Seeder
             'city' => 'city',
             'state' => 'state',
             'postal_code' => '13245',
-            'start_date' => Carbon::now()->format('Y-m-d'),
         ]);
 
         // Creating some fake clients
@@ -65,7 +64,6 @@ class ClientSeeder extends Seeder
                 'city' => 'city',
                 'state' => 'state',
                 'postal_code' => '13245',
-                'start_date' => Carbon::now()->format('Y-m-d'),
             ]);
         }
     }

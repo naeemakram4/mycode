@@ -22,7 +22,10 @@ mix.styles([
         'resources/mix/template/plugins/global/plugins.bundle.js',
         'resources/mix/template/js/scripts.bundle.js',
     ], 'public/js/template.js')
-
+    .scripts([
+        // Form repeater js
+        'resources/mix/template/plugins/custom/formrepeater/formrepeater.bundle.js'
+    ], 'public/js/form_repeater.js')
     //Css and Js for datatable
     .styles([
         'resources/mix/template/plugins/custom/datatables/datatables.bundle.css'

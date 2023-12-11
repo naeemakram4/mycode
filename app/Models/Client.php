@@ -20,7 +20,7 @@ class Client extends Model
 
     public function services(): BelongsToMany
     {
-        return $this->belongsToMany(Service::class, 'client_service');
+        return $this->belongsToMany(Service::class, 'client_service')->withPivot('start_date');
     }
 
     public function employees(): BelongsToMany

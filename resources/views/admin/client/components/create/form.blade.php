@@ -99,20 +99,48 @@
     </div>
 
     <div class="row mb-5">
-        <div class="col-md-6 fv-row">
-            <label for="service" class="required form-label">Select Services</label>
-            <select name="services[]" id="service" class="form-select" multiple data-control="select2" data-placeholder="Select Services">
-                <option value=""></option>
-                @foreach($services as $service)
-                    <option value="{{ $service->id }}">{{ $service->label }}</option>
-                @endforeach
-            </select>
-        </div>
+        <div id="service">
+            <!--begin::Form group-->
+            <div class="form-group">
+                <div data-repeater-list="client_services">
+                    <div data-repeater-item>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label for="service" class="required form-label">Select Services</label>
+                                <select name="service" id="service" class="form-select" data-control="select2" data-placeholder="Select Services">
+                                    <option value=""></option>
+                                    @foreach($services as $service)
+                                        <option value="{{ $service->id }}">{{ $service->label }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
-        <div class="col-md-6 fv-row">
-            <label for="startDate" class="required form-label">Start Date</label>
-            <input id="startDate" class="form-control" type="date" name="start_date"
-                   value="{{ old('start_date') }}"/>
+                            <div class="col-md-6">
+                                <label for="startDate" class="required form-label">Start Date</label>
+                                <input id="startDate" class="form-control" type="date" name="start_date"
+                                       value="{{ old('start_date') }}"/>
+                            </div>
+                        </div>
+                        <!--end::Input group-->
+                        <div class="col-md-3">
+                            <a href="javascript:void(0);" data-repeater-delete class="btn btn-light-danger mt-3 mt-md-8">
+                                <i class="la la-trash-o"></i>Delete
+                            </a>
+                        </div>
+                        <div class="separator separator-dashed border-secondary my-10 mx-20"></div>
+
+                    </div>
+                </div>
+            </div>
+            <!--end::Form group-->
+            <!--begin::Form group-->
+            <div class="form-group mt-5">
+                <a href="javascript:void(0);" data-repeater-create class="btn btn-light-primary">
+                    <i class="la la-plus"></i>
+                    Add Service
+                </a>
+            </div>
+            <!--end::Form group-->
         </div>
     </div>
 
@@ -128,3 +156,26 @@
         Create Client
     </button>
 </form>
+
+@section('pageScriptFiles')
+    <script src="{{ asset('js/form_repeater.js') }}"></script>
+@endsection
+
+@push('pageInnerScript')
+    <script>
+        $('#service').repeater({
+            initEmpty: true,
+            show: function () {
+                $('.form-select').select2({placeholder: 'Select an option'})
+                $(this).slideDown();
+            },
+            hide: function (deleteElement) {
+                if (confirm('Are you sure you want to delete this Service?')) {
+                    $(this).slideUp(deleteElement);
+                }
+            },
+
+            isFirstItemUndeletable: false
+        });
+    </script>
+@endpush

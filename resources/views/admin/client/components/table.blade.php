@@ -4,8 +4,6 @@
         <th>Name</th>
         <th>Company/ Website</th>
         <th>Phone/ Email</th>
-        <th>Service</th>
-        <th>Start Date</th>
         <th>Type</th>
         <th>Status</th>
         <th class="text-end">Actions</th>
@@ -21,12 +19,6 @@
             <td>
                 <a href="tel:{{ $client->user->phone }}">{{ $client->user->phone }}</a> <br>
                 <a href="mailto:{{ $client->user->email }}">{{ $client->user->email }}</a></td>
-            <td>
-                @foreach($client->services as $service)
-                    <span class="badge badge-light-dark">{{ $service->label }}</span>
-                @endforeach
-            </td>
-            <td>{{ $client->start_date }}</td>
             <td>
                 <span class="badge badge-light-primary">{{ $client->clientType->label }}</span>
             </td>
