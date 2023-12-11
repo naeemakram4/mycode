@@ -57,7 +57,6 @@ class ClientSeeder extends Seeder
 
             $fakeClient = Client::create([
                 'user_id' => $fakeUser->id,
-                'client_type_id' => rand(1,4),
                 'company_name' => $faker->company,
                 'website' => $faker->url,
                 'address' => '123 house, st 12',

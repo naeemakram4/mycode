@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Client;
-use App\Models\ClientType;
 use App\Models\Role;
 use App\Models\Service;
 use App\Models\User;
@@ -45,7 +44,6 @@ class ClientController extends Controller
             'pageTitle' => $pageTitle,
             'breadcrumbs' => $breadcrumbs,
             'services' => Service::get(),
-            'clientTypes' => ClientType::get(),
         ];
 
         return view('admin.client.create', $viewParams);
@@ -59,7 +57,6 @@ class ClientController extends Controller
             'user_name' => 'required|string|unique:users',
             'phone' => 'required|string|max:10',
             'email' => 'required|email|unique:users',
-            'client_type' => 'required',
             'password' => 'required|min:8',
             'company_name' => 'required|string'
         ]);
@@ -78,7 +75,6 @@ class ClientController extends Controller
 
         $client = new Client();
         $client->user()->associate($user);
-        $client->clientType()->associate($validatedData['client_type']);
         $client->company_name = $validatedData['company_name'];
         $client->website = $request->website;
         $client->address = $request->address;
@@ -113,7 +109,6 @@ class ClientController extends Controller
                 'breadcrumbs' => $breadcrumbs,
                 'services' => Service::get(),
                 'client' => $client,
-                'clientTypes' => ClientType::get(),
             ];
 
             return view('admin.client.edit', $viewParams);
@@ -128,7 +123,6 @@ class ClientController extends Controller
             'user_name' => 'required|string|unique:users,user_name,' . $client->user_id,
             'phone' => 'required|string|max:10',
             'email' => 'required|email|unique:users,email,' . $client->user_id,
-            'client_type' => 'required',
             'new_password' => 'nullable|min:8',
             'company_name' => 'required|string'
         ]);
@@ -146,7 +140,6 @@ class ClientController extends Controller
             $user->status = ($request->status == "on") ? User::STATUS_ACTIVE : User::STATUS_DISABLE;
             $user->save();
 
-            $client->clientType()->associate($validatedData['client_type']);
             $client->company_name = $validatedData['company_name'];
             $client->website = $request->website;
             $client->address = $request->address;

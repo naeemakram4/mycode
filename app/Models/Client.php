@@ -28,11 +28,6 @@ class Client extends Model
         return $this->belongsToMany(Employee::class, 'client_employee');
     }
 
-    public function clientType(): BelongsTo
-    {
-        return $this->belongsTo(ClientType::class);
-    }
-
     public function projects(): HasMany
     {
         return $this->hasMany(Project::class);

@@ -1,10 +1,8 @@
 <table id="kt_datatable_example_1" class="table table-row-bordered gy-5">
     <thead>
     <tr class="fw-bold fs-6 text-muted">
-        <th>Name</th>
-        <th>Company/ Website</th>
-        <th>Phone/ Email</th>
-        <th>Type</th>
+        <th>Company</th>
+        <th>Services</th>
         <th>Status</th>
         <th class="text-end">Actions</th>
     </tr>
@@ -12,15 +10,14 @@
     <tbody>
     @foreach($clients as $client)
         <tr>
-            <td>{{ $client->user->first_name .' '. $client->user->last_name }}</td>
-            <td>{{ $client->company_name }} <br>
-                <a href="{{ $client->website }}" target="_blank">{{ $client->website }}</a>
+            <td>
+                <div class="symbol symbol-50px w-50px bg-light">
+                    <img src="{{ asset('/assets/media/logos/favicon.png') }}" alt="image" class="p-3">
+                </div>
+                {{ $client->company_name }}
             </td>
             <td>
-                <a href="tel:{{ $client->user->phone }}">{{ $client->user->phone }}</a> <br>
-                <a href="mailto:{{ $client->user->email }}">{{ $client->user->email }}</a></td>
-            <td>
-                <span class="badge badge-light-primary">{{ $client->clientType->label }}</span>
+                <span class="badge badge-light-dark">Service-1</span>
             </td>
             <td>
                 @if($client->user->status == \App\Models\User::STATUS_ACTIVE)
