@@ -20,6 +20,7 @@
 
 @section('pageInnerModals')
     @include('customer.request.components.create_request_model')
+    @include('customer.request.components.view-request-drawer')
 @endsection
 
 @section('pageScriptFiles')

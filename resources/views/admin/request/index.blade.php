@@ -18,6 +18,10 @@
     <!--end::Card-->
 @endsection
 
+@section('pageInnerModals')
+    @include('admin.request.components.view-request-drawer')
+@endsection
+
 @section('pageScriptFiles')
     <script src="{{ asset('js/datatable.js') }}"></script>
 @endsection

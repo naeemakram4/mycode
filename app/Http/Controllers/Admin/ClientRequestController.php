@@ -20,7 +20,7 @@ class ClientRequestController extends Controller
 
             return Datatables::eloquent($data)
                 ->editColumn('id', function ($data) {
-                    return '<a href="#" >' . $data->id . '</a>';
+                    return '<a href="javascript:void(0);" id="kt_drawer_example_dismiss_button">' . $data->id . '</a>';
                 })
                 ->addColumn('client', function ($data) {
                     return $data->client->user->getFullName();
