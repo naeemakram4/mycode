@@ -55,3 +55,9 @@ mix.styles([
 
 
 //---------Admin Panel mix files----------
+
+//---------Customer Panel mix files----------
+mix.scripts([
+        //Template scripts files to mix.
+        'resources/mix/template/js/custom/utilities/modals/create-account.js',
+    ], 'public/js/customer-create-request-form.js')

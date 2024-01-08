@@ -18,8 +18,8 @@ class RequestController extends Controller
         $breadcrumbs = [['text' => $pageTitle]];
         $action = [
             'text' => 'Generate New Request',
-            'route' => 'javascript:void(0);',
-            'data' => 'data-bs-toggle=modal data-bs-target=#generateNewRequest'
+            'route' => route('customer.request.create'),
+//            'data' => 'data-bs-toggle=modal data-bs-target=#generateNewRequest'
         ];
 
         if ($request->ajax()) {
@@ -76,7 +76,15 @@ class RequestController extends Controller
 
     public function create()
     {
-        //
+        $pageTitle = 'Generate New Request';
+        $breadcrumbs = [['text' => 'Requests', 'url' => '/customer/request'],['text' => $pageTitle]];
+
+        $viewParams = [
+            'pageTitle' => $pageTitle,
+            'breadcrumbs' => $breadcrumbs
+        ];
+
+        return view('customer.request.create', $viewParams);
     }
 
     public function store(Request $request)
