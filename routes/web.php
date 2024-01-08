@@ -23,7 +23,7 @@ Auth::routes();
 
 //Customer panel
 Route::get('/', function(){ return redirect()->route('login'); });
-Route::group(['middleware' => ['auth', 'verified'/*, 'customer.role'*/], 'prefix' => 'customer', 'as' => 'customer.'], function () {
+Route::group(['middleware' => ['auth', 'verified', 'customer.role'], 'prefix' => 'customer', 'as' => 'customer.'], function () {
     Route::get('/dashboard', [CustomerDashboardController::class, 'index'])->name('dashboard');
 
     require __DIR__ . '/customer/profile.php';
@@ -46,6 +46,7 @@ Route::group(['prefix' => 'employee', 'as' => 'employee.'], function () {
         require __DIR__ . '/employee/task.php';
         require __DIR__ . '/employee/client.php';
         require __DIR__ . '/employee/project.php';
+        require __DIR__ . '/employee/request.php';
 
     });
     Route::post('logout', [EmployeeLoginController::class, 'logout'])->name('logout');

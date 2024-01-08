@@ -194,10 +194,15 @@ return [
         'heading' => 'users'
     ],
     [
+        'title' => 'Requests',
+        'route' => 'employee.request.index',
+        'icon' => 'send',
+        'heading' => 'Services'
+    ],
+    [
         'title' => 'Projects',
         'route' => 'employee.project.index',
         'icon' => 'kanban',
-        'heading' => 'Services'
     ],
     [
         'title' => 'Task',

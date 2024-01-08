@@ -61,3 +61,9 @@ mix.scripts([
         //Template scripts files to mix.
         'resources/mix/template/js/custom/utilities/modals/create-account.js',
     ], 'public/js/customer-create-request-form.js')
+
+//---------Employee Panel mix files----------
+mix.scripts([
+    //Template scripts files to mix.
+    'resources/mix/template/js/custom/utilities/modals/create-account.js',
+], 'public/js/employee-create-request-form.js')

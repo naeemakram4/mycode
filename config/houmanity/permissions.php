@@ -22,6 +22,7 @@ return [
         'customer.invoice.show' => 'Invoice View',
 
         'customer.request.index' => 'Requests List',
+        'customer.request.create' => 'Request Create Form',
         'customer.request.store' => 'Request Create',
         'customer.request.show' => 'Request View',
     ],
@@ -37,6 +38,11 @@ return [
         'employee.project.update' => 'Projects Update',
         'employee.project.show' => 'Project View',
         'employee.project.target' => 'Projects Target View',
+
+        'employee.request.index' => 'Requests List',
+        'employee.request.create' => 'Request Create Form',
+        'employee.request.store' => 'Request Create',
+        'employee.request.show' => 'Request View',
 
         'employee.client.index' => 'Client List',
 
