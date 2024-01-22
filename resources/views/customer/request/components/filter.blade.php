@@ -34,6 +34,17 @@
                     </div>
 
                     <div class="col-md-3">
+                        <label class="form-label">Select Request Type:</label>
+                        <select id='requestType' class="form-select form-select-sm form-select-solid"
+                                data-control="select2" data-hide-search="true">
+                            <option value="">All Request Types</option>
+                            @foreach($requestTypes as $requestType)
+                                <option value="{{ $requestType->id }}">{{ $requestType->label }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
                         <label class="form-label">Date Range:</label>
                         <input id="kt_daterangepicker_1" name="daterange" class="form-control form-control-sm form-control-solid" placeholder="Pick date rage"/>
                     </div>

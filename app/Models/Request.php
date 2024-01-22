@@ -28,4 +28,9 @@ class Request extends Model
     {
         return $this->belongsTo(Client::class);
     }
+
+    public function requestType(): BelongsTo
+    {
+        return $this->belongsTo(RequestType::class);
+    }
 }

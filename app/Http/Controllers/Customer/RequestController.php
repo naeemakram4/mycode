@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Customer;
 
+use App\Events\RequestGeneratedEvent;
 use App\Http\Controllers\Controller;
+use App\Models\RequestType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +21,6 @@ class RequestController extends Controller
         $action = [
             'text' => 'Generate New Request',
             'route' => route('customer.request.create'),
-//            'data' => 'data-bs-toggle=modal data-bs-target=#generateNewRequest'
         ];
 
         if ($request->ajax()) {
@@ -34,6 +35,9 @@ class RequestController extends Controller
                 })
                 ->editColumn('created_at', function ($data) {
                     return Carbon::parse($data->created_at)->format('m-d-Y');
+                })
+                ->addColumn('request_type', function ($data) {
+                    return '<span class="badge badge-light-dark fw-bolder me-auto px-4 py-3">' . $data->requestType->label . '</span>';
                 })
                 ->editColumn('status', function ($data) {
                     if ($data->status == \App\Models\Request::REQUEST_APPROVED_STATUS) {
@@ -53,14 +57,16 @@ class RequestController extends Controller
                         $dateEnd = date('Y-m-d', strtotime($dates[1]));
                         $instance->whereBetween('created_at', [$dateStart . " 00:00:00", $dateEnd . " 23:59:59"]);
                     }
-
+                    if ($request->get('request_type') != '') {
+                        $instance->where('request_type_id', $request->get('request_type'));
+                    }
                     if ($request->get('status') == \App\Models\Request::REQUEST_APPROVED_STATUS
                         || $request->get('status') == \App\Models\Request::REQUEST_REJECTED_STATUS
                         || $request->get('status') == \App\Models\Request::REQUEST_PENDING_STATUS) {
                         $instance->where('status', $request->get('status'));
                     }
                 })
-                ->rawColumns(['id', 'client', 'subject', 'status', 'created_at'])
+                ->rawColumns(['id', 'client', 'subject', 'request_type', 'status', 'created_at'])
                 ->make(true);
         }
 
@@ -68,6 +74,7 @@ class RequestController extends Controller
             'pageTitle' => $pageTitle,
             'breadcrumbs' => $breadcrumbs,
             'action' => $action,
+            'requestTypes' => RequestType::get(),
             'status' => \App\Models\Request::getAllRequestStatus()
         ];
 
@@ -77,11 +84,12 @@ class RequestController extends Controller
     public function create()
     {
         $pageTitle = 'Generate New Request';
-        $breadcrumbs = [['text' => 'Requests', 'url' => '/customer/request'],['text' => $pageTitle]];
+        $breadcrumbs = [['text' => 'Requests', 'url' => '/customer/request'], ['text' => $pageTitle]];
 
         $viewParams = [
             'pageTitle' => $pageTitle,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
+            'requestTypes' => RequestType::get()
         ];
 
         return view('customer.request.create', $viewParams);
@@ -90,18 +98,22 @@ class RequestController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'subject' => 'required|string',
-            'description' => 'nullable'
+            'request_type' => 'required',
+            'request_subject' => 'required',
+            'request_description' => 'nullable'
         ]);
 
         $clientRequest = new \App\Models\Request();
         $clientRequest->client()->associate(Auth::user()->client->id);
-        $clientRequest->subject = $validatedData['subject'];
-        $clientRequest->description = $validatedData['description'];
+        $clientRequest->requestType()->associate($validatedData['request_type']);
+        $clientRequest->subject = $validatedData['request_subject'];
+        $clientRequest->description = $validatedData['request_description'];
 
         if ($clientRequest->save()) {
+            event(new RequestGeneratedEvent());
+
             Session::flash('successMessage', 'A new request has been generated!');
-            return redirect()->back();
+            return redirect()->route('customer.request.index');
         }
 
         return redirect()->back()

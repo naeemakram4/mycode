@@ -4,6 +4,7 @@
         <th>ID</th>
         <th>Client</th>
         <th>Subject</th>
+        <th>Request Type</th>
         <th>Status</th>
         <th>Created At</th>
     </tr>
@@ -23,18 +24,20 @@
                     data: function (d) {
                         d.status = $('#status').val()
                         d.date_range = $('#kt_daterangepicker_1').val()
+                        d.request_type = $('#requestType').val()
                     }
                 },
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'client',name: 'client'},
                     {data: 'subject',name: 'subject'},
+                    {data: 'request_type',name: 'request_type'},
                     {data: 'status',name: 'status'},
                     {data: 'created_at', name: 'created_at'},
                 ],
             });
 
-            $('#status, #kt_daterangepicker_1').change(function () {
+            $('#status, #kt_daterangepicker_1, #requestType').change(function () {
                 table.draw();
             });
 

@@ -18,6 +18,7 @@ class RequestSeeder extends Seeder
         for ($i = 1; $i <= $totalRequestRecords; $i++) {
             $request = Request::create([
                 'client_id' => rand(1,10),
+                'request_type_id' => rand(1,4),
                 'subject' => $faker->jobTitle,
                 'description' => $faker->text(100),
             ]);

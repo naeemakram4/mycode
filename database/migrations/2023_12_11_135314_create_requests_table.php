@@ -12,6 +12,7 @@ return new class extends Migration
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id')->constrained();
+            $table->foreignId('request_type_id')->constrained();
             $table->string('subject');
             $table->string('file')->nullable();
             $table->text('description')->nullable();
