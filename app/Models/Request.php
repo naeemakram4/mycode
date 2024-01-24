@@ -33,4 +33,9 @@ class Request extends Model
     {
         return $this->belongsTo(RequestType::class);
     }
+
+    public function employee(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }

@@ -50,9 +50,24 @@
                         </div>
 
                         <div class="d-flex flex-column gap-1">
+                            <div class="fw-bolder text-muted">Ticket ID</div>
+                            <div class="fw-bold fs-6" id="drawerRequestTicketID"></div>
+                        </div>
+
+                        <div class="d-flex flex-column gap-1">
                             <div class="fw-bolder text-muted">Created At</div>
                             <div class="fw-bold fs-6" id="drawerRequestDate"></div>
                         </div>
+
+                        <div class="d-flex flex-column gap-1">
+                            <div class="fw-bolder text-muted">Employee</div>
+                            <div class="fw-bold fs-6">
+                                <span id="drawerRequestEmployeeName"></span> <br>
+                                <span id="drawerRequestEmployeeEmail"></span>
+                            </div>
+                        </div>
+                        <div class="separator my-5"></div>
+
 
                         <div class="d-flex flex-column gap-1">
                             <div class="fw-bolder text-muted">Subject</div>

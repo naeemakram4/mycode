@@ -2,7 +2,8 @@
     <thead>
     <tr>
         <th>ID</th>
-        <th>Client</th>
+        <th>Ticket ID</th>
+        <th>Employee</th>
         <th>Subject</th>
         <th>Request Type</th>
         <th>Status</th>
@@ -34,7 +35,8 @@
                             $(nTd).html('<a href="javascript:void(0);" id="kt_drawer_example_dismiss_button" data-id="'+ oData.id +'">' + oData.id + '</a>');
                         }
                     },
-                    {data: 'client',name: 'client'},
+                    {data: 'ticket_id',name: 'ticket_id'},
+                    {data: 'employee',name: 'employee'},
                     {data: 'subject',name: 'subject'},
                     {data: 'request_type',name: 'request_type'},
                     {data: 'status',name: 'status'},
@@ -60,6 +62,9 @@
                 $.get('/customer/request/' + id, function (data) {
                     $('#drawerRequestType').text(data.request_type.label);
                     $('#drawerRequestStatus').text(data.status);
+                    $('#drawerRequestTicketID').text(data.ticket_id);
+                    $('#drawerRequestEmployeeName').text((data.employee != null) ? data.employee.user.first_name + ' ' + data.employee.user.last_name : 'Admin');
+                    $('#drawerRequestEmployeeEmail').text((data.employee != null) ? data.employee.user.email : '');
                     $('#drawerRequestDate').text(data.created_at);
                     $('#drawerRequestSubject').text(data.subject);
                     $('#drawerRequestDescription').text(data.description);

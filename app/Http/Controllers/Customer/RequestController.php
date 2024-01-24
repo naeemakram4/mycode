@@ -27,8 +27,8 @@ class RequestController extends Controller
             $data = \App\Models\Request::whereClientId(Auth::user()->client->id)->latest();
 
             return Datatables::eloquent($data)
-                ->addColumn('client', function ($data) {
-                    return $data->client->user->getFullName();
+                ->addColumn('employee', function ($data) {
+                    return ($data->employee != null) ? $data->employee->user->getFullName() .'</br>'. $data->employee->user->email : 'Admin';
                 })
                 ->editColumn('created_at', function ($data) {
                     return Carbon::parse($data->created_at)->format('m-d-Y');
@@ -63,7 +63,7 @@ class RequestController extends Controller
                         $instance->where('status', $request->get('status'));
                     }
                 })
-                ->rawColumns(['id', 'client', 'subject', 'request_type', 'status', 'created_at'])
+                ->rawColumns(['id', 'ticket_id', 'employee', 'subject', 'request_type', 'status', 'created_at'])
                 ->make(true);
         }
 
@@ -100,7 +100,14 @@ class RequestController extends Controller
             'request_description' => 'nullable'
         ]);
 
+        //Generating Ticket ID
+        $totalRequests = \App\Models\Request::get()->count();
+        $totalRequests = $totalRequests + 1;
+        $generateTicketId = date('ymds')."-".str_pad(strval($totalRequests),5,'0', STR_PAD_LEFT);
+
+        // Creating new record
         $clientRequest = new \App\Models\Request();
+        $clientRequest->ticket_id = $generateTicketId;
         $clientRequest->client()->associate(Auth::user()->client->id);
         $clientRequest->requestType()->associate($validatedData['request_type']);
         $clientRequest->subject = $validatedData['request_subject'];
@@ -119,7 +126,7 @@ class RequestController extends Controller
 
     public function show(string $id)
     {
-        $request = \App\Models\Request::with('requestType')
+        $request = \App\Models\Request::with('requestType', 'employee.user')
             ->whereId($id)
             ->first();
 

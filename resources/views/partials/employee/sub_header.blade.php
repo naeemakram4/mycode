@@ -7,6 +7,7 @@
         </div>
         <!--end::Page title-->
         <div class="d-flex">
+            @include('partials.employee.components.sub_header.date-range-filter')
             @include('partials.employee.components.sub_header.action_btn')
         </div>
     </div>
