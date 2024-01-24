@@ -28,7 +28,12 @@
                     }
                 },
                 columns: [
-                    {data: 'id', name: 'id'},
+                    {
+                        data: 'id',
+                        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                            $(nTd).html('<a href="javascript:void(0);" id="kt_drawer_example_dismiss_button" data-id="'+ oData.id +'">' + oData.id + '</a>');
+                        }
+                    },
                     {data: 'client',name: 'client'},
                     {data: 'subject',name: 'subject'},
                     {data: 'request_type',name: 'request_type'},
@@ -44,6 +49,21 @@
             $("#kt_daterangepicker_1").daterangepicker({
                 startDate: moment().subtract('days', 29),
                 endDate: moment(),
+            });
+
+            // Right drawer content updating
+            $('body').on('click', '#kt_drawer_example_dismiss_button', function (event) {
+                event.preventDefault();
+
+                let id = $(this).data('id');
+
+                $.get('/customer/request/' + id, function (data) {
+                    $('#drawerRequestType').text(data.request_type.label);
+                    $('#drawerRequestStatus').text(data.status);
+                    $('#drawerRequestDate').text(data.created_at);
+                    $('#drawerRequestSubject').text(data.subject);
+                    $('#drawerRequestDescription').text(data.description);
+                });
             });
         });
     </script>

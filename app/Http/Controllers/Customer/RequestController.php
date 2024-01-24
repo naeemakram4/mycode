@@ -27,9 +27,6 @@ class RequestController extends Controller
             $data = \App\Models\Request::whereClientId(Auth::user()->client->id)->latest();
 
             return Datatables::eloquent($data)
-                ->editColumn('id', function ($data) {
-                    return '<a href="javascript:void(0);" id="kt_drawer_example_dismiss_button">' . $data->id . '</a>';
-                })
                 ->addColumn('client', function ($data) {
                     return $data->client->user->getFullName();
                 })
@@ -122,7 +119,16 @@ class RequestController extends Controller
 
     public function show(string $id)
     {
-        //
+        $request = \App\Models\Request::with('requestType')
+            ->whereId($id)
+            ->first();
+
+        if ($request) {
+            return response()->json($request);
+        }
+        return response()->json([
+            'error' => 'Invalid request'
+        ], 404);
     }
 
     public function edit(string $id)
