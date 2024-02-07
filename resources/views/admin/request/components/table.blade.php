@@ -30,7 +30,12 @@
                     }
                 },
                 columns: [
-                    {data: 'id', name: 'id'},
+                    {
+                        data: 'id',
+                        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                            $(nTd).html('<a href="javascript:void(0);" id="kt_drawer_example_dismiss_button" data-id="'+ oData.id +'">' + oData.id + '</a>');
+                        }
+                    },
                     {data: 'ticket_id',name: 'ticket_id'},
                     {data: 'client',name: 'client'},
                     {data: 'employee',name: 'employee'},
