@@ -28,77 +28,64 @@
 
         <!--begin::Card body-->
         <div class="card-body">
-            <!--begin:::Tabs-->
-            <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x fs-6 fw-bold mb-8">
-                <!--begin:::Tab item-->
-                <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_contact_view_general">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen001.svg-->
-                        <span class="svg-icon svg-icon-4 me-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M11 2.375L2 9.575V20.575C2 21.175 2.4 21.575 3 21.575H9C9.6 21.575 10 21.175 10 20.575V14.575C10 13.975 10.4 13.575 11 13.575H13C13.6 13.575 14 13.975 14 14.575V20.575C14 21.175 14.4 21.575 15 21.575H21C21.6 21.575 22 21.175 22 20.575V9.575L13 2.375C12.4 1.875 11.6 1.875 11 2.375Z" fill="black"></path>
-                                </svg>
-                            </span>
-                        <!--end::Svg Icon-->General
-                    </a>
-                </li>
-                <!--end:::Tab item-->
-
-            </ul>
-            <!--end:::Tabs-->
             <!--begin::Tab content-->
             <div class="tab-content" id="">
                 <!--begin:::Tab pane-->
                 <div class="tab-pane fade active show" id="kt_contact_view_general" role="tabpanel">
                     <!--begin::Additional details-->
-                    <div class="d-flex flex-column gap-5 mt-7">
-                        <div class="d-flex flex-column gap-1">
-                            <div class="fw-bolder text-muted">Subject</div>
-                            <div class="fw-bolder fs-5">This is a testing request!</div>
+                    <div class="d-flex flex-column gap-5 mt-3">
+                        <div class="d-flex flex-stack gap-1">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bolder text-muted">Request Type</div>
+                                <div class="fw-bolder fs-5">
+                                    <span class="badge badge-light-dark" id="drawerRequestType"></span>
+                                </div>
+                            </div>
+                            <div class="ms-5">
+                                <div class="fw-bolder text-muted">Status</div>
+                                <div class="fw-bolder fs-5">
+                                    <span class="badge badge-light-primary" id="drawerRequestStatus"></span>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="d-flex flex-column gap-1">
-                            <div class="fw-bolder text-muted">Description</div>
-                            <p>This is a dummy project's target description. This is a dummy project's target description. This is a dummy project's target description.</p>
+                            <div class="fw-bolder text-muted">Ticket ID</div>
+                            <div class="fw-bold fs-6" id="drawerRequestTicketID"></div>
                         </div>
 
                         <div class="d-flex flex-column gap-1">
                             <div class="fw-bolder text-muted">Created At</div>
-                            <div class="fw-bolder fs-5">23-12-2023</div>
-                        </div>
-                        <!--end::Notes-->
-                        <div class="d-flex flex-column gap-1">
-                            <div class="fw-bolder text-muted">Attachments</div>
-                            <p class="text-danger">No attachment found!</p>
+                            <div class="fw-bold fs-6" id="drawerRequestDate"></div>
                         </div>
 
+                        <div class="d-flex flex-column gap-1">
+                            <div class="fw-bolder text-muted">Client</div>
+                            <div class="fw-bold fs-6">
+                                <span id="drawerRequestClientName"></span> <br>
+                                <span id="drawerRequestClientEmail"></span>
+                            </div>
+                        </div>
+                        <div class="separator my-5"></div>
+
+
+                        <div class="d-flex flex-column gap-1">
+                            <div class="fw-bolder text-muted">Subject</div>
+                            <div class="fw-bolder fs-5" id="drawerRequestSubject"></div>
+                        </div>
+
+                        <div class="d-flex flex-column gap-1">
+                            <div class="fw-bolder text-muted">Description</div>
+                            <p id="drawerRequestDescription"></p>
+                        </div>
                     </div>
                     <!--end::Additional details-->
                 </div>
                 <!--end:::Tab pane-->
                 <div class="separator my-10"></div>
-
-                <div class="d-flex flex-row justify-content-between gap-7 align-items-center">
-                    <div class="d-flex flex-row gap-2">
-                        <div class="ms-5">
-                            <div class="fw-bolder text-muted">Status</div>
-                            <div class="fw-bolder fs-5">
-                                <span class="badge badge-light-warning">Pending</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex flex-column gap-2">
-                        <div class="">
-                            <label class="form-label" for="">Update Status</label>
-                            <select class="form-select form-select-solid" data-control="select2" data-placeholder="Update Status" data-hide-search="true">>
-                                <option></option>
-                                @foreach($status as $value)
-                                    <option value="{{ $value }}">{{ $value }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
+                <div class="d-flex flex-column gap-1">
+                    <div class="fw-bolder text-muted">Attachments</div>
+                    <p class="text-danger">No attachment found!</p>
                 </div>
             </div>
             <!--end::Tab content-->

@@ -19,7 +19,6 @@
 @endsection
 
 @section('pageInnerModals')
-    @include('employee.request.components.create_request_model')
     @include('employee.request.components.view-request-drawer')
 @endsection
 

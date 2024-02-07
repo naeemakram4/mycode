@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Employee;
 
+use App\Events\RequestGeneratedEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
+use App\Models\RequestType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,14 +30,14 @@ class RequestController extends Controller
             })->latest();
 
             return Datatables::eloquent($data)
-                ->editColumn('id', function ($data) {
-                    return '<a href="javascript:void(0);" id="kt_drawer_example_dismiss_button">' . $data->id . '</a>';
-                })
                 ->addColumn('client', function ($data) {
                     return $data->client->user->getFullName();
                 })
                 ->editColumn('created_at', function ($data) {
                     return Carbon::parse($data->created_at)->format('m-d-Y');
+                })
+                ->addColumn('request_type', function ($data) {
+                    return '<span class="badge badge-light-dark fw-bolder me-auto px-4 py-3">' . $data->requestType->label . '</span>';
                 })
                 ->editColumn('status', function ($data) {
                     if ($data->status == \App\Models\Request::REQUEST_APPROVED_STATUS) {
@@ -55,14 +57,16 @@ class RequestController extends Controller
                         $dateEnd = date('Y-m-d', strtotime($dates[1]));
                         $instance->whereBetween('created_at', [$dateStart . " 00:00:00", $dateEnd . " 23:59:59"]);
                     }
-
+                    if ($request->get('request_type') != '') {
+                        $instance->where('request_type_id', $request->get('request_type'));
+                    }
                     if ($request->get('status') == \App\Models\Request::REQUEST_APPROVED_STATUS
                         || $request->get('status') == \App\Models\Request::REQUEST_REJECTED_STATUS
                         || $request->get('status') == \App\Models\Request::REQUEST_PENDING_STATUS) {
                         $instance->where('status', $request->get('status'));
                     }
                 })
-                ->rawColumns(['id', 'client', 'subject', 'status', 'created_at'])
+                ->rawColumns(['id', 'ticket_id', 'client', 'subject', 'request_type', 'status', 'created_at'])
                 ->make(true);
         }
 
@@ -70,6 +74,7 @@ class RequestController extends Controller
             'pageTitle' => $pageTitle,
             'breadcrumbs' => $breadcrumbs,
             'action' => $action,
+            'requestTypes' => RequestType::get(),
             'status' => \App\Models\Request::getAllRequestStatus()
         ];
 
@@ -84,6 +89,7 @@ class RequestController extends Controller
         $viewParams = [
             'pageTitle' => $pageTitle,
             'breadcrumbs' => $breadcrumbs,
+            'requestTypes' => RequestType::get(),
             'clients' => Client::whereHas('employees', function($builder) { return $builder->where('id', Auth::user()->employee->id);})->get(),
         ];
 
@@ -93,18 +99,30 @@ class RequestController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'subject' => 'required|string',
-            'description' => 'nullable'
+            'request_client' => 'required',
+            'request_type' => 'required',
+            'request_subject' => 'required',
+            'request_description' => 'nullable'
         ]);
 
+        //Generating Ticket ID
+        $totalRequests = \App\Models\Request::get()->count();
+        $totalRequests = $totalRequests + 1;
+        $generateTicketId = date('ymds')."-".str_pad(strval($totalRequests),5,'0', STR_PAD_LEFT);
+
+        // Creating new record
         $clientRequest = new \App\Models\Request();
-        $clientRequest->client()->associate(Auth::user()->client->id);
-        $clientRequest->subject = $validatedData['subject'];
-        $clientRequest->description = $validatedData['description'];
+        $clientRequest->ticket_id = $generateTicketId;
+        $clientRequest->client()->associate($validatedData['request_client']);
+        $clientRequest->requestType()->associate($validatedData['request_type']);
+        $clientRequest->subject = $validatedData['request_subject'];
+        $clientRequest->description = $validatedData['request_description'];
 
         if ($clientRequest->save()) {
+            event(new RequestGeneratedEvent());
+
             Session::flash('successMessage', 'A new request has been generated!');
-            return redirect()->back();
+            return redirect()->route('employee.request.index');
         }
 
         return redirect()->back()
@@ -113,7 +131,16 @@ class RequestController extends Controller
 
     public function show(string $id)
     {
-        //
+        $request = \App\Models\Request::with('requestType', 'client.user')
+            ->whereId($id)
+            ->first();
+
+        if ($request) {
+            return response()->json($request);
+        }
+        return response()->json([
+            'error' => 'Invalid request'
+        ], 404);
     }
 
     public function edit(string $id)

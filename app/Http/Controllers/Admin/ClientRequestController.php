@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\RequestType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -25,8 +26,14 @@ class ClientRequestController extends Controller
                 ->addColumn('client', function ($data) {
                     return $data->client->user->getFullName();
                 })
+                ->addColumn('employee', function ($data) {
+                    return ($data->employee != null) ? $data->employee->user->getFullName() .'</br>'. $data->employee->user->email : 'Admin';
+                })
                 ->editColumn('created_at', function ($data) {
                     return Carbon::parse($data->created_at)->format('m-d-Y');
+                })
+                ->addColumn('request_type', function ($data) {
+                    return '<span class="badge badge-light-dark fw-bolder me-auto px-4 py-3">' . $data->requestType->label . '</span>';
                 })
                 ->editColumn('status', function ($data) {
                     if ($data->status == \App\Models\Request::REQUEST_APPROVED_STATUS) {
@@ -47,19 +54,24 @@ class ClientRequestController extends Controller
                         $instance->whereBetween('created_at', [$dateStart . " 00:00:00", $dateEnd . " 23:59:59"]);
                     }
 
+                    if ($request->get('request_type') != '') {
+                        $instance->where('request_type_id', $request->get('request_type'));
+                    }
+
                     if ($request->get('status') == \App\Models\Request::REQUEST_APPROVED_STATUS
                         || $request->get('status') == \App\Models\Request::REQUEST_REJECTED_STATUS
                         || $request->get('status') == \App\Models\Request::REQUEST_PENDING_STATUS) {
                         $instance->where('status', $request->get('status'));
                     }
                 })
-                ->rawColumns(['id', 'client', 'subject', 'status', 'created_at'])
+                ->rawColumns(['id', 'ticket_id', 'client', 'employee', 'subject', 'request_type', 'status', 'created_at'])
                 ->make(true);
         }
 
         $viewParams = [
             'pageTitle' => $pageTitle,
             'breadcrumbs' => $breadcrumbs,
+            'requestTypes' => RequestType::get(),
             'status' => \App\Models\Request::getAllRequestStatus()
         ];
 
