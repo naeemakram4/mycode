@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Client;
+use App\Models\Employee;
 use App\Models\Project;
+use App\Models\SalesRepresentativeDim;
 use App\Models\Service;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -232,5 +234,15 @@ class ProjectController extends Controller
         ];
 
         return view('admin.project.view', $viewParams);
+    }
+
+    public function getEmployees($id)
+    {
+        $employees = Employee::with('user')
+            ->whereHas('clients', function ($builder) use($id) {
+            return $builder->where('id', $id);
+        })->get();
+
+        return response()->json($employees->toArray(), 200);
     }
 }

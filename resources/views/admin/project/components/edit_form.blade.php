@@ -55,7 +55,7 @@
         </div>
         <div class="col-md-6">
             <label for="employee" class="required form-label">Assign Employee</label>
-            <select name="employees[]"  class="form-select" multiple data-control="select2"
+            <select name="employees"  class="form-select" data-control="select2"
                     data-placeholder="Assign Employee">
                 <option value=""></option>
             </select>
@@ -80,3 +80,35 @@
     <!--end::Actions-->
 </form>
 <!--end::Form-->
+
+@push('pageInnerScript')
+    <script>
+        $(document).ready(function () {
+            $("select[name=client_id]").change(function () {
+                let id = $(this).val();
+
+                $.get('/admin/project/get-employees/' + id, function (data) {
+                    let emp = data;
+
+                    $("select[name=employees]").empty();
+                    $.each(emp, function (value, emp) {
+                        $('<option value="' + emp.id + '"> ' + emp.user.first_name + ' ' + emp.user.last_name + ' </option>').appendTo("select[name=employees]");
+                    });
+                });
+            });
+
+            // Select the sales representative
+            let client = {{ $project->client_id }};
+            let employee = {{ $project->employees[0]->id }};
+            $.get('/admin/project/get-employees/' + client, function (data) {
+                let emp = data;
+                $("select[name=employees]").empty();
+                $.each(emp, function (value, emp) {
+                    $('<option value="' + emp.id + '" ' +
+                        (emp.id === employee ? 'selected' : '')
+                        +'> ' + emp.user.first_name + ' ' + emp.user.last_name + ' </option>').appendTo("select[name=employees]");
+                });
+            });
+        });
+    </script>
+@endpush

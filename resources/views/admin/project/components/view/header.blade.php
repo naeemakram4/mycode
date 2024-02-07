@@ -35,7 +35,7 @@
             <!--end::Details-->
             <!--begin::Actions-->
             <div class="d-flex mb-4">
-                <a href="#" class="btn btn-sm btn-bg-light btn-active-color-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_users_search">Add User</a>
+                <a href="{{ route('admin.project.edit', $project->id) }}" class="btn btn-sm btn-bg-light btn-active-color-primary me-3">Edit</a>
                 <a href="#" class="btn btn-sm btn-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_target">Add Target</a>
                 <!--begin::Menu-->
                 <div class="me-0">
