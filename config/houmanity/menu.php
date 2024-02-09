@@ -157,11 +157,11 @@ return [
             'route' => 'customer.project.index',
             'icon' => 'kanban',
         ],
-        [
-            'title' => 'Task',
-            'route' => 'customer.task.index',
-            'icon' => 'list-check',
-        ],
+//        [
+//            'title' => 'Task',
+//            'route' => 'customer.task.index',
+//            'icon' => 'list-check',
+//        ],
 //        [
 //            'title' => 'SEO',
 //            'route' => 'customer.statics.seo',
@@ -204,11 +204,11 @@ return [
         'route' => 'employee.project.index',
         'icon' => 'kanban',
     ],
-    [
-        'title' => 'Task',
-        'route' => 'employee.task.index',
-        'icon' => 'list-check',
-    ],
+//    [
+//        'title' => 'Task',
+//        'route' => 'employee.task.index',
+//        'icon' => 'list-check',
+//    ],
 //    [
 //        'title' => 'SEO',
 //        'route' => 'test',
