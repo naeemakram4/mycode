@@ -162,18 +162,18 @@ return [
             'route' => 'customer.task.index',
             'icon' => 'list-check',
         ],
-        [
-            'title' => 'SEO',
-            'route' => 'customer.statics.seo',
-            'icon' => 'activity',
-            'heading' => 'Statics',
-        ],
-
-        [
-            'title' => 'PPC',
-            'route' => 'customer.statics.ppc',
-            'icon' => 'stars',
-        ],
+//        [
+//            'title' => 'SEO',
+//            'route' => 'customer.statics.seo',
+//            'icon' => 'activity',
+//            'heading' => 'Statics',
+//        ],
+//
+//        [
+//            'title' => 'PPC',
+//            'route' => 'customer.statics.ppc',
+//            'icon' => 'stars',
+//        ],
         [
             'title' => 'Invoices',
             'route' => 'customer.invoice.index',
@@ -209,17 +209,17 @@ return [
         'route' => 'employee.task.index',
         'icon' => 'list-check',
     ],
-    [
-        'title' => 'SEO',
-        'route' => 'test',
-        'icon' => 'activity',
-        'heading' => 'Statics',
-    ],
+//    [
+//        'title' => 'SEO',
+//        'route' => 'test',
+//        'icon' => 'activity',
+//        'heading' => 'Statics',
+//    ],
 
-    [
-        'title' => 'PPC',
-        'route' => 'test',
-        'icon' => 'stars',
-    ],
+//    [
+//        'title' => 'PPC',
+//        'route' => 'test',
+//        'icon' => 'stars',
+//    ],
 ]
 ];
