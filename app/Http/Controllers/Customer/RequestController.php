@@ -114,7 +114,7 @@ class RequestController extends Controller
         $clientRequest->description = $validatedData['request_description'];
 
         if ($clientRequest->save()) {
-            event(new RequestGeneratedEvent());
+//            event(new RequestGeneratedEvent());
 
             Session::flash('successMessage', 'A new request has been generated!');
             return redirect()->route('customer.request.index');
