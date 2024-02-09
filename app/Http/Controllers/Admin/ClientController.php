@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Client;
+use App\Models\ClientService;
 use App\Models\Role;
 use App\Models\Service;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -23,7 +25,7 @@ class ClientController extends Controller
             'route' => route('admin.client.create')
         ];
 
-        $clients = Client::with('user')->get();
+        $clients = Client::with('user')->latest()->get();
 
         $viewParams = [
             'pageTitle' => $pageTitle,
@@ -82,7 +84,15 @@ class ClientController extends Controller
         $client->state = $request->state;
         $client->postal_code = $request->postal_code;
         if ($client->save()) {
-            $client->services()->sync($request->services);
+            if ($request->client_services !== null) {
+                foreach ($request->client_services as $key => $client_service) {
+                    ClientService::create([
+                        'client_id' => $client->id,
+                        'service_id' => $client_service['service_id'],
+                        'start_date' => $client_service['start_date']
+                    ]);
+                }
+            }
 
             Session::flash('successMessage', 'A new client has been create successfully!');
             return redirect()->route('admin.client.index');
@@ -112,6 +122,9 @@ class ClientController extends Controller
 
             return view('admin.client.edit', $viewParams);
         }
+
+        return redirect()->back()
+            ->withErrors('Invalid Data!');
     }
 
     public function update(Request $request, Client $client)
@@ -146,7 +159,41 @@ class ClientController extends Controller
             $client->state = $request->state;
             $client->postal_code = $request->postal_code;
             if ($client->save()) {
-                $client->services()->sync($request->services);
+                if ($request->client_services !== null) {
+                    $existingServices = [];
+                    foreach ($client->services as $value) {
+                        $existingServices[] = $value->pivot->id;
+                    }
+
+                    $comingServices = [];
+                    foreach ($request->client_services as $value) {
+                        $comingServices [] = $value['client_service_table_id'];
+                    }
+
+                    $ServicesToBeRemoved = array_diff($existingServices, $comingServices);
+
+                    // If there are Spare parts to removed from product.
+                    if (!empty($ServicesToBeRemoved)) {
+                        ClientService::whereIn('id', $ServicesToBeRemoved)->delete();
+                    }
+
+                    foreach ($request->client_services as $key => $service) {
+                        if ($service['client_service_table_id'] == null) {
+                            ClientService::create([
+                                'client_id' => $client->id,
+                                'service_id' => $service['service_id'],
+                                'start_date' => $service['start_date']
+                            ]);
+                        }
+
+                        if (count($client->services) > 0) {
+                            ClientService::where('id', $service['client_service_table_id'])->update([
+                                'service_id' => $service['service_id'],
+                                'start_date' => $service['start_date']
+                            ]);
+                        }
+                    }
+                }
 
                 Session::flash('successMessage', 'Client details has been update successfully!');
                 return redirect()->route('admin.client.index');

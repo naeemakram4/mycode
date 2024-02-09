@@ -96,8 +96,8 @@
                     <div data-repeater-item>
                         <div class="form-group row">
                             <div class="col-md-6">
-                                <label for="service" class="required form-label">Select Services</label>
-                                <select name="service" id="service" class="form-select" data-control="select2" data-placeholder="Select Services">
+                                <label for="service_id" class="required form-label">Select Services</label>
+                                <select name="service_id" id="service" class="form-select" data-control="select2" data-placeholder="Select Services">
                                     <option value=""></option>
                                     @foreach($services as $service)
                                         <option value="{{ $service->id }}">{{ $service->label }}</option>
