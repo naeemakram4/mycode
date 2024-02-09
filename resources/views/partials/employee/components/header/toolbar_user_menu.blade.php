@@ -16,8 +16,9 @@
                 <!--end::Avatar-->
                 <!--begin::Username-->
                 <div class="d-flex flex-column">
-                    <div class="fw-bolder d-flex align-items-center fs-5">{{ auth()->user()->name }}
-                        <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Customer</span></div>
+                    <div class="fw-bolder d-flex align-items-center fs-6">{{ auth()->user()->getFullName() }}
+                        <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">{{ auth()->user()->role->label }}</span>
+                    </div>
                     <a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{ auth()->user()->email }}</a>
                 </div>
                 <!--end::Username-->
