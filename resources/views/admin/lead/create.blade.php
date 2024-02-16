@@ -6,7 +6,7 @@
     <div class="card">
         <!--begin::Card body-->
         <div class="card-body pt-6">
-            @include('admin.lead.referral.components.table')
+            @include('admin.lead.components.create_form')
         </div>
         <!--end::Card body-->
     </div>

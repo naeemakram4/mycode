@@ -51,26 +51,11 @@ return [
 //            ]
 //        ],
 
-//        [
-//            'title' => 'Leads',
-//            'route' => 'javascript:void(0);',
-//            'icon' => 'stars',
-//            'sub_routes' => ['admin.department', 'admin.designation', 'admin.team'],
-//            'sub' => [
-//                [
-//                    'title' => 'Referrals',
-//                    'route' => 'admin.referral.index',
-//                ],
-//                [
-//                    'title' => 'Referred Clients',
-//                    'route' => 'admin.referred.client.index',
-//                ],
-//                [
-//                    'title' => 'Website',
-//                    'route' => 'admin.website.index',
-//                ]
-//            ]
-//        ],
+        [
+            'title' => 'Leads',
+            'route' => 'admin.lead-management.index',
+            'icon' => 'stars',
+        ],
 
         [
             'title' => 'Clients',

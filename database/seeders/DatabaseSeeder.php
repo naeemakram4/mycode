@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             TaskSeeder::class,
             RequestTypeSeeder::class,
             RequestSeeder::class,
+            LeadManagementTypeSeeder::class,
 
 //            DepartmentSeeder::class,
 //            DesignationSeeder::class,

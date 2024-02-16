@@ -66,9 +66,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         require __DIR__ . '/admin/designation.php';
         require __DIR__ . '/admin/employee.php';
 
-        require __DIR__ . '/admin/referral.php';
-        require __DIR__ . '/admin/referred_client.php';
-        require __DIR__ . '/admin/website.php';
+        // Lead Management
+        require __DIR__ . '/admin/lead_management.php';
+
         require __DIR__ . '/admin/client.php';
         require __DIR__ . '/admin/request.php';
         require __DIR__ . '/admin/project.php';

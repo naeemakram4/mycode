@@ -47,6 +47,11 @@ class Employee extends Model
         return $this->hasMany(Request::class);
     }
 
+    public function leadManagements(): BelongsToMany
+    {
+        return $this->belongsToMany(LeadManagement::class);
+    }
+
     public function hasClient($client)
     {
         return $this->clients->contains('id', $client);

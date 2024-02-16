@@ -38,9 +38,15 @@ class Client extends Model
         return $this->hasMany(Request::class);
     }
 
+    public function leadManagements(): HasMany
+    {
+        return $this->hasMany(LeadManagement::class);
+    }
+
     public function hasService($service)
     {
         return $this->services->contains('id', $service);
     }
+
 }
 
