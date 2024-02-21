@@ -18,16 +18,16 @@
                 <td>
                     <a href="{{ route('admin.employee.show', $employee->id) }}">{{ $employee->id }}</a>
                 </td>
-                <td>{{ $employee->name }}</td>
+                <td>{{ $employee->user->getFullName() }}</td>
                 <td>{{ $employee->user->user_name }}</td>
-                <td>{{ $employee->email }}</td>
-                <td>{{ $employee->phone }}</td>
+                <td>{{ $employee->user->email }}</td>
+                <td>{{ $employee->user->phone }}</td>
                 <td>{{ count($employee->clients) }}</td>
                 <td>
-                    @if($employee->status==1)
-                        <span class="badge badge-light-success">Active</span>
+                    @if($employee->user->status == \App\Models\User::STATUS_ACTIVE)
+                        <span class="badge badge-light-success">{{ \App\Models\User::STATUS_ACTIVE }}</span>
                     @else
-                        <span class="badge badge-light-danger">Inactive</span>
+                        <span class="badge badge-light-danger">{{ \App\Models\User::STATUS_DISABLE}}</span>
                     @endif
                 </td>
                 <td>

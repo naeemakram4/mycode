@@ -13,11 +13,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained();
             $table->foreignId('department_id')->nullable()->constrained();
             $table->foreignId('designation_id')->nullable()->constrained();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('phone')->nullable();
             $table->text('remarks')->nullable();
-            $table->boolean('status')->nullable();
             $table->timestamps();
         });
     }
