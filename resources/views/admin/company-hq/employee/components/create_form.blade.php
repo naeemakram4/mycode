@@ -4,13 +4,18 @@
     @csrf
     <!--begin::Input group-->
     <div class="row mb-7 fv-plugins-icon-container">
-        <div class="col-md-6">
-            <label class="form-label required">Name</label>
-            <input type="text" name="name" class="form-control  form-control-solid"
-                   value="{{old('name')}}">
+        <div class="col-md-4">
+            <label class="form-label required">First Name</label>
+            <input type="text" name="first_name" class="form-control  form-control-solid"
+                   value="{{old('first_name')}}">
+        </div>
+        <div class="col-md-4">
+            <label class="form-label required">Last Name</label>
+            <input type="text" name="last_name" class="form-control  form-control-solid"
+                   value="{{old('last_name')}}">
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label class="form-label required">Contact Number</label>
             <input type="tel" name="phone" maxlength="10" class="form-control  form-control-solid"
                    value="{{old('phone')}}">

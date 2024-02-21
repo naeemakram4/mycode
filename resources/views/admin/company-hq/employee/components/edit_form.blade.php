@@ -5,14 +5,20 @@
 
     <!--begin::Input group-->
     <div class="row mb-7 fv-plugins-icon-container">
-        <div class="col-md-6">
-            <label class="form-label required">Name</label>
-            <input type="text" name="edit_name" class="form-control  form-control-solid" value="{{old('name', $employee->name)}}">
+        <div class="col-md-4">
+            <label class="form-label required">First Name</label>
+            <input type="text" name="first_name" class="form-control  form-control-solid"
+                   value="{{old('first_name', $employee->user->first_name)}}">
+        </div>
+        <div class="col-md-4">
+            <label class="form-label required">Last Name</label>
+            <input type="text" name="last_name" class="form-control  form-control-solid"
+                   value="{{old('last_name', $employee->user->last_name)}}">
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label class="form-label required">Contact Number</label>
-            <input type="tel" name="edit_phone" maxlength="10" class="form-control  form-control-solid" value="{{old('phone', $employee->phone)}}">
+            <input type="tel" name="edit_phone" maxlength="10" class="form-control  form-control-solid" value="{{old('phone', $employee->user->phone)}}">
         </div>
     </div>
     <!--end::Input group-->
@@ -23,7 +29,7 @@
         </div>
         <div class="col-md-6">
             <label class="form-label required">Email</label>
-            <input type="email" name="edit_email" class="form-control  form-control-solid" value="{{old('email', $employee->email)}}">
+            <input type="email" name="edit_email" class="form-control  form-control-solid" value="{{old('email', $employee->user->email)}}">
         </div>
     </div>
 
@@ -58,9 +64,7 @@
     <!--begin::Input group-->
     <div class="fv-row mb-7 fv-plugins-icon-container">
         <label class="form-label required">Remarks</label>
-        <textarea name="edit_remarks" class="form-control  form-control-solid" rows="1">
-            {{ $employee->remarks }}
-        </textarea>
+        <textarea name="edit_remarks" class="form-control  form-control-solid" rows="1">{{ $employee->remarks }}</textarea>
     </div>
     <!--end::Input group-->
 
