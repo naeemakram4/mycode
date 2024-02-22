@@ -53,7 +53,8 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
             'user_name' => 'required|unique:users,user_name',
             'email' => 'required|unique:users,email',
             'phone' => 'nullable',
@@ -63,19 +64,18 @@ class EmployeeController extends Controller
 
         $user = new User;
         $user->role_id = Role::EMPLOYEE_ROLE;
+        $user->first_name = $validatedData['first_name'];
+        $user->last_name = $validatedData['last_name'];
         $user->user_name = $validatedData['user_name'];
         $user->email = $validatedData['email'];
+        $user->phone = $validatedData['phone'];
         $user->password = Hash::make($validatedData['password']);
         $user->status = ($request->status == "on") ? User::STATUS_ACTIVE : User::STATUS_DISABLE;
         $user->save();
 
         $employee = new Employee();
         $employee->user_id = $user->id;
-        $employee->name = $validatedData['name'];
-        $employee->email = $validatedData['email'];
-        $employee->phone = $validatedData['phone'];
         $employee->remarks = $request->remarks;
-        $employee->status = ($request->status == "on") ? 1 : 0;
 
         if ($employee->save()) {
             $employee->clients()->sync($validatedData['clients']);
@@ -120,32 +120,32 @@ class EmployeeController extends Controller
     public function update(Request $request, Employee $employee)
     {
         $validatedData = $request->validate([
-            'edit_name' => 'required',
-            'edit_user_name' => 'required|unique:users,user_name,'.$employee->user_id,
-            'edit_email' => 'required|unique:employees,email,' . $employee->id,
-            'edit_phone' => 'nullable',
-            'edit_clients' => 'required|array',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'user_name' => 'required|unique:users,user_name,'.$employee->user_id,
+            'email' => 'required|email|unique:users,email,' . $employee->user_id,
+            'phone' => 'nullable',
+            'clients' => 'required|array',
         ]);
 
         $user = User::where('id', $employee->user_id)->first();
 
         if ($user && $employee) {
-            $user->user_name = $validatedData['edit_user_name'];
-            $user->email = $validatedData['edit_email'];
-            $user->status = ($request->edit_status == "on") ? User::STATUS_ACTIVE : User::STATUS_DISABLE;
-            if ($request->has('edit_password') && $request->edit_password != null) {
-                $user->password = Hash::make($request->edit_password);
+            $user->first_name = $validatedData['first_name'];
+            $user->last_name = $validatedData['last_name'];
+            $user->user_name = $validatedData['user_name'];
+            $user->email = $validatedData['email'];
+            $user->phone = $validatedData['phone'];
+            $user->status = ($request->status == "on") ? User::STATUS_ACTIVE : User::STATUS_DISABLE;
+
+            if ($request->has('new_password') && $request->new_password != null) {
+                $user->password = Hash::make($request->new_password);
             }
             $user->save();
-
-            $employee->name = $validatedData['edit_name'];
-            $employee->email = $validatedData['edit_email'];
-            $employee->phone = $validatedData['edit_phone'];
-            $employee->remarks = $request->edit_remarks;
-            $employee->status = ($request->edit_status == "on") ? 1 : 0;
+            $employee->remarks = $request->remarks;
 
             if ($employee->save()) {
-                $employee->clients()->sync($validatedData['edit_clients']);
+                $employee->clients()->sync($validatedData['clients']);
 
                 Session::flash('successMessage', 'Employee has been updated successfully!');
                 return redirect()->route('admin.employee.index');

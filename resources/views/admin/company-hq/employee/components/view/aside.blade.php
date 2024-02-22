@@ -12,7 +12,7 @@
                 </div>
                 <!--end::Avatar-->
                 <!--begin::Name-->
-                <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-3">{{ $employee->name }}</a>
+                <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-3">{{ $employee->user->getFullName() }}</a>
                 <!--end::Name-->
                 <!--begin::Position-->
                 <div class="mb-9">
@@ -107,8 +107,8 @@
             <div id="kt_customer_view_details" class="collapse show">
                 <div class="py-5 fs-6">
                     <!--begin::Badge-->
-                    <div class="badge badge-light-{{ $employee->status == 1 ? 'success' : 'danger' }} d-inline">
-                       {{ $employee->status == 1 ? 'Active' : 'Inactive' }}
+                    <div class="badge badge-light-{{ $employee->user->status == \App\Models\User::STATUS_ACTIVE ? 'success' : 'danger' }} d-inline">
+                       {{ $employee->user->status == \App\Models\User::STATUS_ACTIVE  ? \App\Models\User::STATUS_ACTIVE : \App\Models\User::STATUS_DISABLE }}
                     </div>
                     <!--begin::Badge-->
                     <!--begin::Details item-->
@@ -118,20 +118,20 @@
                     <!--begin::Details item-->
                     <div class="fw-bolder mt-5">Email</div>
                     <div class="text-gray-600">
-                        <a href="mailto:{{$employee->email}}" class="text-gray-600 text-hover-primary">{{$employee->email}}</a>
+                        <a href="mailto:{{$employee->user->email}}" class="text-gray-600 text-hover-primary">{{$employee->user->email}}</a>
                     </div>
                     <!--begin::Details item-->
                     <!--begin::Details item-->
                     <div class="fw-bolder mt-5">Phone</div>
-                    <div class="text-gray-600">{{ $employee->phone }}</div>
+                    <div class="text-gray-600">{{ $employee->user->phone }}</div>
                     <!--begin::Details item-->
                     <!--begin::Details item-->
                     <div class="fw-bolder mt-5">Created At</div>
-                    <div class="text-gray-600">{{ $employee->created_at->format('m-d-Y') }}</div>
+                    <div class="text-gray-600">{{ $employee->user->created_at->format('m-d-Y H:i:s') }}</div>
                     <!--begin::Details item-->
                     <!--begin::Details item-->
                     <div class="fw-bolder mt-5">Last Login</div>
-                    <div class="text-gray-600">{{ ($employee->user->last_login_at) ? $employee->user->last_login_at->format('m-d-Y') : '---' }}</div>
+                    <div class="text-gray-600">{{ ($employee->user->last_login) ? \Carbon\Carbon::parse($employee->user->last_login)->format('m-d-Y H:i:s') : '---' }}</div>
                     <!--begin::Details item-->
                     <!--begin::Details item-->
                     <div class="fw-bolder mt-5">Remarks</div>

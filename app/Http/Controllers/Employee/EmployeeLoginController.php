@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -34,6 +35,10 @@ class EmployeeLoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
+        $user->update([
+            'last_login' => Carbon::now()
+        ]);
+
         return redirect()->route('employee.dashboard');
     }
 

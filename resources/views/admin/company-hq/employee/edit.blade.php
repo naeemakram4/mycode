@@ -16,7 +16,7 @@
 @push('pageInnerScript')
     <script>
         function showPassword() {
-            var x = document.getElementById("password");
+            var x = document.getElementById("new_password");
             if (x.type === "password") {
                 x.type = "text";
             } else {
