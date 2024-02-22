@@ -58,11 +58,7 @@
                    value="{{old('company')}}">
         </div>
 
-        <div class="col-md-6">
-            <label class="form-label">Position</label>
-            <input type="text" name="position" class="form-control"
-                   value="{{old('position')}}">
-        </div>
+
     </div>
 
     <div class="row mb-7 fv-plugins-icon-container">
@@ -78,21 +74,26 @@
 
     <!--begin::Input group-->
     <div class="row mb-7 fv-plugins-icon-container">
-        <div class="col-md-6">
-            <label class="form-label">Name</label>
+        <div class="col-md-4">
+            <label class="form-label">Contact Name</label>
             <input type="text" name="name" class="form-control" value="{{old('name')}}" >
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label class="form-label">Contact Number</label>
             <input type="tel" name="phone" maxlength="10" class="form-control"
                    value="{{old('phone')}}">
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Contact Position</label>
+            <input type="text" name="position" class="form-control"
+                   value="{{old('position')}}">
         </div>
     </div>
     <!--end::Input group-->
 
     <div class="row mb-7 fv-plugins-icon-container">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label class="form-label required">Email</label>
             <input type="email" name="email" class="form-control"
                    value="{{old('email')}}">
@@ -126,7 +127,7 @@
     <!--end::Input group-->
 
     <div class="row mb-7 fv-plugins-icon-container">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label for="status" class="form-label required">Status</label>
             <select name="status" id="status" class="form-select" data-control="select2"
                     data-placeholder="Status">
