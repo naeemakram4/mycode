@@ -5,4 +5,5 @@
     @include('employee.dashboard.components.row1')
     @include('employee.dashboard.components.row2')
     @include('employee.dashboard.components.row3')
+    @include('employee.dashboard.components.row4')
 @endsection
