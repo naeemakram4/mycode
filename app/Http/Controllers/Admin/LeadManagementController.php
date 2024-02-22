@@ -104,12 +104,68 @@ class LeadManagementController extends Controller
 
     public function edit(LeadManagement $leadManagement)
     {
-        //
+        $pageTitle = 'Update Lead Management';
+        $breadcrumbs = [['text' => 'Lead Management', 'url' => '/admin/lead-management'], ['text' => $pageTitle]];
+
+        $viewParams = [
+            'pageTitle' => $pageTitle,
+            'breadcrumbs' => $breadcrumbs,
+            'lead' => $leadManagement,
+            'leadStatus' => LeadManagement::getAllStatus(),
+            'seoAuditStatus' => LeadManagement::getAllSeoStatus(),
+            'services' => Service::get(),
+            'leadManagementTypes' => LeadManagementType::get(),
+            'clients' => Client::get(),
+            'employees' => Employee::get()
+        ];
+        return view('admin.lead.edit', $viewParams);
     }
 
     public function update(Request $request, LeadManagement $leadManagement)
     {
-        //
+        $validatedData = $request->validate([
+            'service' => 'required',
+            'lead_type' => 'required',
+            'name' => 'required',
+            'status' => 'required',
+        ]);
+
+        if ($leadManagement) {
+            $leadManagement->service()->associate($validatedData['service']);
+            $leadManagement->leadManagementType()->associate($validatedData['lead_type']);
+            $leadManagement->lead_value = $request->lead_value;
+            $leadManagement->company = $request->company;
+            $leadManagement->position = $request->position;
+            $leadManagement->website = $request->website;
+            $leadManagement->name = $request->name;
+            $leadManagement->email = $request->email;
+            $leadManagement->contact = $request->phone;
+            $leadManagement->address = $request->address;
+            $leadManagement->city = $request->city;
+            $leadManagement->state = $request->state;
+            $leadManagement->postal_code = $request->postal_code;
+            $leadManagement->status = $validatedData['status'];
+            $leadManagement->note = $request->note;
+
+            $leadManagement->is_seo_audit = ($request->is_seo_audit == 'on') ? 1 : 0;
+            if ($request->is_seo_audit == 'on') {
+                $leadManagement->seo_audit_date = $request->seo_audit_date;
+                $leadManagement->seo_audit_status = $request->seo_audit_status;
+            } else {
+                $leadManagement->seo_audit_date = null;
+                $leadManagement->seo_audit_status = null;
+            }
+
+            if ($leadManagement->save()) {
+                $leadManagement->employees()->sync($request->employees);
+
+                Session::flash('successMessage', 'A new client has been create successfully!');
+                return redirect()->route('admin.lead-management.index');
+            }
+        }
+
+        return redirect()->back()
+            ->withInput()->withErrors('Failed to create new lead, Try again!');
     }
 
     public function destroy(LeadManagement $leadManagement)

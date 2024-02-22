@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->text('note')->nullable();
             $table->boolean('is_seo_audit')->nullable();
-            $table->timestamp('seo_audit_date')->nullable();
+            $table->date('seo_audit_date')->nullable();
             $table->string('seo_audit_status')->nullable();
             $table->timestamps();
         });
