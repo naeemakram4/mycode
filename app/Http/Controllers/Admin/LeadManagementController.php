@@ -43,6 +43,8 @@ class LeadManagementController extends Controller
         $viewParams = [
             'pageTitle' => $pageTitle,
             'breadcrumbs' => $breadcrumbs,
+            'leadStatus' => LeadManagement::getAllStatus(),
+            'seoAuditStatus' => LeadManagement::getAllSeoStatus(),
             'services' => Service::get(),
             'leadManagementTypes' => LeadManagementType::get(),
             'clients' => Client::get(),
@@ -77,6 +79,12 @@ class LeadManagementController extends Controller
         $lead->postal_code = $request->postal_code;
         $lead->status = $validatedData['status'];
         $lead->note = $request->note;
+
+        $lead->is_seo_audit = ($request->is_seo_audit == 'on') ? 1 : 0;
+        if ($request->is_seo_audit == 'on') {
+            $lead->seo_audit_date = $request->seo_audit_date;
+            $lead->seo_audit_status = $request->seo_audit_status;
+        }
 
         if ($lead->save()) {
             $lead->employees()->sync($request->employees);

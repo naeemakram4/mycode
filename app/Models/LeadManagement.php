@@ -13,6 +13,35 @@ class LeadManagement extends Model
     use HasFactory;
 
     protected $table = 'lead_managements';
+
+    // Lead Status
+    const IN_PROGRESS_STATUS = 'in_progress';
+    const ON_HOLD_STATUS = 'on_hold';
+    const FINISHED_STATUS = 'finished';
+
+    // SEO Audit Status
+    const REQUESTED_SEO_STATUS = 'requested';
+    const IN_PROGRESS_SEO_STATUS = 'in_progress';
+    const COMPLETED_SEO_STATUS = 'completed';
+
+    public static function getAllStatus(): array
+    {
+        return [
+            self::IN_PROGRESS_STATUS,
+            self::ON_HOLD_STATUS,
+            self::FINISHED_STATUS,
+        ];
+    }
+
+    public static function getAllSeoStatus(): array
+    {
+        return [
+            self::REQUESTED_SEO_STATUS,
+            self::IN_PROGRESS_SEO_STATUS,
+            self::COMPLETED_SEO_STATUS,
+        ];
+    }
+
     public function employees(): BelongsToMany
     {
         return $this->belongsToMany(Employee::class);

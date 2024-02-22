@@ -27,7 +27,9 @@ return new class extends Migration
             $table->string('postal_code')->nullable();
             $table->string('status')->nullable();
             $table->text('note')->nullable();
-            $table->boolean('seo_audit')->nullable();
+            $table->boolean('is_seo_audit')->nullable();
+            $table->timestamp('seo_audit_date')->nullable();
+            $table->string('seo_audit_status')->nullable();
             $table->timestamps();
         });
     }

@@ -80,7 +80,7 @@
         </div>
 
         <div class="col-md-4">
-            <label class="form-label">Contact Number</label>
+            <label class="form-label required">Contact Number</label>
             <input type="tel" name="phone" maxlength="10" class="form-control"
                    value="{{old('phone')}}">
         </div>
@@ -132,10 +132,9 @@
             <select name="status" id="status" class="form-select" data-control="select2"
                     data-placeholder="Status">
                 <option value=""></option>
-                <option value="in_progress">In Progress</option>
-                <option value="on_hold">On Hold</option>
-                <option value="finished">Finished</option>
-
+                @foreach($leadStatus as $status)
+                    <option value="{{ $status }}">{{ ucfirst(str_replace('_', ' ', $status)) }}</option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -143,11 +142,37 @@
 
     <!--begin::Input group-->
     <div class="fv-row mb-7 fv-plugins-icon-container">
-        <label class="form-label required">Note</label>
+        <label class="form-label">Note</label>
         <textarea name="note" class="form-control  form-control-solid" rows="2"></textarea>
     </div>
     <!--end::Input group-->
 
+    <div class="separator separator-dashed border-secondary my-10 mx-20"></div>
+
+        <div class="mb-10">
+            <input class="form-check-input" name="is_seo_audit" type="checkbox"/>
+            <label class="form-check-label" for="form_checkbox">
+                Is SEO Audit
+            </label>
+        </div>
+
+    <div class="row mb-7" id="isSeoAuditEnabled">
+        <div class="col-md-4">
+            <label class="form-label" for="form_checkbox">SEO Audit Date</label>
+            <input class="form-control" name="seo_audit_date" type="date"/>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label" for="form_checkbox">SEO Audit Status</label>
+            <select name="seo_audit_status" id="seo_audit_status" class="form-select" data-control="select2"
+                    data-placeholder="Status">
+                <option value=""></option>
+                @foreach($seoAuditStatus as $seoStatus)
+                    <option value="{{ $seoStatus }}">{{ ucfirst(str_replace('_', ' ', $seoStatus)) }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
     <!--begin::Actions-->
     <div class="text-end">
         <button type="submit" class="btn btn-primary">Create Lead</button>
@@ -155,3 +180,16 @@
     <!--end::Actions-->
 </form>
 <!--end::Form-->
+
+@push('pageInnerScript')
+    <script type="text/javascript">
+        $(function () {
+            $('#isSeoAuditEnabled').hide();
+
+            // Right drawer content updating
+            $('body').on('change', 'input[name="is_seo_audit"]', function () {
+                $('#isSeoAuditEnabled').toggle();
+            });
+        });
+    </script>
+@endpush
