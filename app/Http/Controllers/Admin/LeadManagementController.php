@@ -99,7 +99,16 @@ class LeadManagementController extends Controller
 
     public function show(LeadManagement $leadManagement)
     {
-        //
+        $pageTitle = 'Lead Management Details';
+        $breadcrumbs = [['text' => 'Lead Management', 'url' => '/admin/lead-management'], ['text' => $pageTitle]];
+
+        $viewParams = [
+            'pageTitle' => $pageTitle,
+            'breadcrumbs' => $breadcrumbs,
+            'lead' => $leadManagement,
+        ];
+
+        return view('admin.lead.view', $viewParams);
     }
 
     public function edit(LeadManagement $leadManagement)
@@ -118,6 +127,7 @@ class LeadManagementController extends Controller
             'clients' => Client::get(),
             'employees' => Employee::get()
         ];
+
         return view('admin.lead.edit', $viewParams);
     }
 

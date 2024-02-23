@@ -1,6 +1,7 @@
 <table id="kt_datatable_example_1" class="table table-row-bordered gy-5">
     <thead>
     <tr class="fw-bold fs-6 text-muted">
+        <th>ID</th>
         <th>Name</th>
         <th>Lead Type</th>
         <th>Company</th>
@@ -14,6 +15,7 @@
     <tbody>
     @foreach($leads as $lead)
         <tr>
+            <td><a href="{{ route('admin.lead-management.show', $lead->id) }}">{{ $lead->id }}</a></td>
             <td>{{ $lead->name }}</td>
             <td><span class="badge badge-light-dark">{{ $lead->leadManagementType->label }}</span></td>
             <td>{{ $lead->company }}</td>
