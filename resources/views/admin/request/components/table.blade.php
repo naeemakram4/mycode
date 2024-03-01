@@ -4,7 +4,6 @@
         <th>ID</th>
         <th>Ticket ID</th>
         <th>Client</th>
-        <th>Employee</th>
         <th>Subject</th>
         <th>Request Type</th>
         <th>Status</th>
@@ -38,7 +37,6 @@
                     },
                     {data: 'ticket_id',name: 'ticket_id'},
                     {data: 'client',name: 'client'},
-                    {data: 'employee',name: 'employee'},
                     {data: 'subject',name: 'subject'},
                     {data: 'request_type',name: 'request_type'},
                     {data: 'status',name: 'status'},
