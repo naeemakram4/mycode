@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\RequestType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
 
 class ClientRequestController extends Controller
@@ -24,7 +25,7 @@ class ClientRequestController extends Controller
                     return $data->client->user->getFullName();
                 })
                 ->addColumn('employee', function ($data) {
-                    return ($data->employee != null) ? $data->employee->user->getFullName() .'</br>'. $data->employee->user->email : 'Admin';
+                    return ($data->employee != null) ? $data->employee->user->getFullName() . '</br>' . $data->employee->user->email : 'Admin';
                 })
                 ->editColumn('created_at', function ($data) {
                     return Carbon::parse($data->created_at)->format('m-d-Y');
@@ -87,5 +88,26 @@ class ClientRequestController extends Controller
         return response()->json([
             'error' => 'Invalid request'
         ], 404);
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'request_status' => 'required'
+        ]);
+
+        $clientRequest = \App\Models\Request::whereId($id)->first();
+
+        if ($clientRequest) {
+            $clientRequest->update([
+                'status' => $request->request_status
+            ]);
+
+            Session::flash('successMessage', 'Request status has been updated successfully!');
+            return redirect()->back();
+        }
+
+        return redirect()->back()
+            ->withErrors('Invalid data!');
     }
 }

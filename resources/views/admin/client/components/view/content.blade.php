@@ -79,7 +79,7 @@
                             <div class="separator border-gray-200"></div>
                             <!--end::Menu separator-->
                             <!--begin::Form-->
-                            <form action="" class="form px-7 py-5 fv-plugins-bootstrap5 fv-plugins-framework" data-kt-menu-id="kt-users-tasks-form">
+                            <form action="{{ route('admin.request.update.status', $request->id) }}" method="POST" class="form px-7 py-5 fv-plugins-bootstrap5 fv-plugins-framework" data-kt-menu-id="kt-users-tasks-form">
                                 @csrf
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-10 fv-plugins-icon-container">

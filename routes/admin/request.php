@@ -6,5 +6,6 @@ Route::group([], function () {
     Route::prefix('request')->name('request.')->group(function (){
         Route::get('/', [ClientRequestController::class, 'index'])->name('index');
         Route::get('/{id}', [ClientRequestController::class, 'show'])->name('show');
+        Route::post('/updated-status/{id}', [ClientRequestController::class, 'updateStatus'])->name('update.status');
     });
 });

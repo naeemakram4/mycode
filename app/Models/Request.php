@@ -11,6 +11,8 @@ class Request extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['status'];
+
     const REQUEST_APPROVED_STATUS = 'Approved';
     const REQUEST_PENDING_STATUS = 'Pending';
     const REQUEST_REJECTED_STATUS = 'Rejected';
