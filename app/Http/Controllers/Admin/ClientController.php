@@ -13,10 +13,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Yajra\DataTables\Facades\DataTables;
 
 class ClientController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $pageTitle = 'Clients';
         $breadcrumbs = [['text' => $pageTitle]];
@@ -25,13 +26,60 @@ class ClientController extends Controller
             'route' => route('admin.client.create')
         ];
 
-        $clients = Client::with('user')->latest()->get();
+        if ($request->ajax()) {
+            $data = Client::latest();
+
+            return Datatables::eloquent($data)
+                ->addColumn('company', function ($data) {
+                    return '<div class="symbol symbol-50px w-50px bg-light">
+                                <img src="/assets/media/logos/favicon.png" alt="image" class="p-3">
+                            </div>
+                            <a href="' . route('admin.client.show', $data->id) . '">' . $data->company_name . '</a>';
+                })
+                ->addColumn('client', function ($data) {
+                    return $data->user->getFullName() . '<br>' . $data->user->email;
+                })
+                ->addColumn('status', function ($data) {
+                    if ($data->user->status == \App\Models\User::STATUS_ACTIVE) {
+                        return '<span class="badge badge-light-success fw-bolder me-auto px-4 py-3">' . ucfirst($data->user->status) . '</span>';
+                    } elseif ($data->user->status == \App\Models\User::STATUS_DISABLE) {
+                        return '<span class="badge badge-light-danger fw-bolder me-auto px-4 py-3">' . ucfirst($data->user->status) . '</span>';
+                    } else {
+                        return '';
+                    }
+                })
+                ->editColumn('website', function ($data) {
+                    return '<a href="//' . $data->website . '" target="_blank">' . $data->website . '</a>';
+                })
+                ->filter(function ($instance) use ($request) {
+                    if ($request->get('date_range') != '') {
+                        $dates = explode("-", $request->get('date_range'));
+                        $dateStart = date('Y-m-d', strtotime($dates[0]));
+                        $dateEnd = date('Y-m-d', strtotime($dates[1]));
+                        $instance->whereBetween('created_at', [$dateStart . " 00:00:00", $dateEnd . " 23:59:59"]);
+                    }
+
+                    if ($request->get('status') == \App\Models\User::STATUS_ACTIVE
+                        || $request->get('status') == \App\Models\User::STATUS_DISABLE) {
+                        $instance->whereHas('user', function ($builder) use ($request) {
+                            return $builder->where('status', $request->get('status'));
+                        });
+                    }
+
+                    if (!empty($request->get('search_company'))) {
+                        $companyName = $request->get('search_company');
+                        $instance->where('company_name', 'like', '%'. $companyName . '%');
+                    }
+                })
+                ->rawColumns(['id', 'company', 'client', 'website', 'status'])
+                ->make(true);
+        }
 
         $viewParams = [
             'pageTitle' => $pageTitle,
             'breadcrumbs' => $breadcrumbs,
             'action' => $action,
-            'clients' => $clients
+            'status' => User::allStatus()
         ];
 
         return view('admin.client.index', $viewParams);
@@ -104,7 +152,21 @@ class ClientController extends Controller
 
     public function show(Client $client)
     {
-        //
+        $pageTitle = 'Client Details';
+        $breadcrumbs = [['text' => 'clients', 'url' => '/admin/client'], ['text' => $pageTitle]];
+
+        if ($client) {
+            $viewParams = [
+                'pageTitle' => $pageTitle,
+                'breadcrumbs' => $breadcrumbs,
+                'client' => $client,
+            ];
+
+            return view('admin.client.view', $viewParams);
+        }
+
+        return redirect()->back()
+            ->withErrors('Invalid Data!');
     }
 
     public function edit(Client $client)
