@@ -40,10 +40,8 @@ class ProjectController extends Controller
                 ->addColumn('client', function ($data) {
                     return $data->client->user->getFullName();
                 })
-                ->editColumn('created_at', function ($data) {
-                    return Carbon::parse($data->created_at)->format('m-d-Y');
-                })->addColumn('start_due_date', function ($data) {
-                    return Carbon::parse($data->start_date)->format('m-d-Y') . '/ ' . Carbon::parse($data->due_date)->format('m-d-Y');
+                ->addColumn('start_date', function ($data) {
+                    return Carbon::parse($data->start_date)->format('m-d-Y');
                 })
                 ->editColumn('status', function ($data) {
                     if ($data->status == \App\Models\Project::COMPLETED_STATUS) {
@@ -80,7 +78,7 @@ class ProjectController extends Controller
                         $instance->where('client_id', $request->get('client'));
                     }
                 })
-                ->rawColumns(['id', 'logo', 'name', 'description', 'start_date', 'due_date', 'client', 'status'])
+                ->rawColumns(['id', 'logo', 'name', 'description', 'start_date', 'client', 'status'])
                 ->make(true);
         }
 

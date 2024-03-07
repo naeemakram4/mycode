@@ -6,8 +6,7 @@
         <th>Client</th>
         <th>Name</th>
         <th>Description</th>
-        <th>Start/ Due Date</th>
-        <th>Created At</th>
+        <th>Start Date</th>
         <th>Status</th>
     </tr>
     </thead>
@@ -35,8 +34,7 @@
                     {data: 'client',name: 'client'},
                     {data: 'name', name: 'name'},
                     {data: 'description', name: 'description'},
-                    {data: 'start_due_date', name: 'start_due_date'},
-                    {data: 'created_at', name: 'created_at'},
+                    {data: 'start_date', name: 'start_date'},
                     {data: 'status',name: 'status'},
                 ],
             });
