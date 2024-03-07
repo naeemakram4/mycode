@@ -210,7 +210,7 @@
         </div>
         <!--end::Card-->
     @endforeach
-    <a href="javascript:void(0);" class="btn btn-primary er w-100 fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_new_target">Create New Target</a>
+    <a href="javascript:void(0);" class="btn btn-primary er w-100 fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_new_target">Create New Task</a>
 </div>
 <!--end::Col-->
 
