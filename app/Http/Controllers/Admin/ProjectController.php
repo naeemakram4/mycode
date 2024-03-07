@@ -127,7 +127,7 @@ class ProjectController extends Controller
             'project_name' => 'required|string',
             'description' => 'required|string',
             'start_date' => 'required',
-            'due_date' => 'required',
+            'due_date' => 'nullable',
             'client_id' => 'required',
             'status' => 'required'
         ]);
@@ -189,7 +189,7 @@ class ProjectController extends Controller
             'project_name' => 'required|string',
             'description' => 'required|string',
             'start_date' => 'required',
-            'due_date' => 'required',
+            'due_date' => 'nullable',
             'client_id' => 'required',
             'status' => 'required'
         ]);

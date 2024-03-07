@@ -33,7 +33,7 @@
                    value="{{old('start_date', $project->start_date)}}">
         </div>
         <div class="col-md-6">
-            <label class="form-label required">Due Date</label>
+            <label class="form-label">Due Date</label>
             <input type="date" name="due_date" class="form-control  form-control-solid"
                    value="{{old('due_date', $project->due_date)}}">
         </div>
