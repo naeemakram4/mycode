@@ -22,7 +22,7 @@
             <!--begin::Form group-->
             <div class="form-group">
                 <div class="form-group row mb-5">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label class="form-label">Select Status:</label>
                         <select id='status' class="form-select form-select-sm form-select-solid"
                                 data-control="select2" data-hide-search="true">
@@ -35,7 +35,7 @@
                     <div class="col-md-3">
                         <label class="form-label">Select Client:</label>
                         <select id='client' class="form-select form-select-sm form-select-solid"
-                                data-control="select2" data-hide-search="true">
+                                data-control="select2" data-hide-search="false">
                             <option value="">All Clients</option>
                             @foreach($clients as $client)
                                 <option value="{{ $client->id }}">{{ $client->user->getFullName() }}</option>
@@ -43,6 +43,10 @@
                         </select>
                     </div>
                     <div class="col-md-3">
+                        <label class="form-label">Search by project name:</label>
+                        <input type="text" id="search_project" name="search_project" class="form-control form-control-sm" placeholder="Search by project name"/>
+                    </div>
+                    <div class="col-md-2">
                         <label class="form-label">Date Range:</label>
                         <input id="kt_daterangepicker_1" name="daterange" class="form-control form-control-sm form-control-solid" placeholder="Pick date rage"/>
                     </div>

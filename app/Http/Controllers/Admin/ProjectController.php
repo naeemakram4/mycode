@@ -77,6 +77,11 @@ class ProjectController extends Controller
                     if ($request->get('client') != '') {
                         $instance->where('client_id', $request->get('client'));
                     }
+
+                    if (!empty($request->get('search_project'))) {
+                        $projectName = $request->get('search_project');
+                        $instance->where('name', 'like', '%'. $projectName . '%');
+                    }
                 })
                 ->rawColumns(['id', 'logo', 'name', 'description', 'start_date', 'client', 'status'])
                 ->make(true);

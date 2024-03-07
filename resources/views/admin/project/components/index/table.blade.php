@@ -25,6 +25,7 @@
                     data: function (d) {
                         d.status = $('#status').val()
                         d.client = $('#client').val()
+                        d.search_project = $('#search_project').val()
                         d.date_range = $('#kt_daterangepicker_1').val()
                     }
                 },
@@ -40,6 +41,10 @@
             });
 
             $('#status, #client, #kt_daterangepicker_1').change(function () {
+                table.draw();
+            });
+
+            $('#search_project').keyup(function () {
                 table.draw();
             });
 
