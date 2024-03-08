@@ -7,6 +7,7 @@
         <th>Request Type</th>
         <th>Status</th>
         <th>Created At</th>
+        <th>Action</th>
     </tr>
     </thead>
 </table>
@@ -39,6 +40,7 @@
                     {data: 'request_type',name: 'request_type'},
                     {data: 'status',name: 'status'},
                     {data: 'created_at', name: 'created_at'},
+                    {data: 'action', name: 'action'},
                 ],
             });
 

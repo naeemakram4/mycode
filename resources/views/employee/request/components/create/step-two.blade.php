@@ -22,7 +22,8 @@
             <!--begin::Input-->
             <input name="request_subject" class="form-control form-control-lg form-control-solid" value="{{ old('request_subject') }}">
             <!--end::Input-->
-            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+            <div class="fv-plugins-message-container invalid-feedback"></div>
+        </div>
         <!--end::Input group-->
         <!--begin::Input group-->
         <div class="fv-row mb-10 fv-plugins-icon-container">
@@ -32,7 +33,8 @@
             <!--begin::Input-->
             <textarea name="request_description" class="form-control form-control-lg form-control-solid" rows="3"></textarea>
             <!--end::Input-->
-            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+            <div class="fv-plugins-message-container invalid-feedback"></div>
+        </div>
         <!--end::Input group-->
     </div>
     <!--end::Wrapper-->

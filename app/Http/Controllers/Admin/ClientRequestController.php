@@ -51,6 +51,9 @@ class ClientRequestController extends Controller
                         return '';
                     }
                 })
+                ->addColumn('action', function ($data) {
+                    return '<a href="' . route('admin.request.edit', $data->id) . '" class="btn btn-sm btn-primary me-3">Update</a>';
+                })
                 ->filter(function ($instance) use ($request) {
                     if ($request->get('date_range') != '') {
                         $dates = explode("-", $request->get('date_range'));
@@ -69,7 +72,7 @@ class ClientRequestController extends Controller
                         $instance->where('status', $request->get('status'));
                     }
                 })
-                ->rawColumns(['id', 'ticket_id', 'client', 'employee', 'subject', 'request_type', 'status', 'created_at'])
+                ->rawColumns(['id', 'ticket_id', 'client', 'employee', 'subject', 'request_type', 'status', 'created_at', 'action'])
                 ->make(true);
         }
 
@@ -113,7 +116,7 @@ class ClientRequestController extends Controller
         //Generating Ticket ID
         $totalRequests = \App\Models\Request::get()->count();
         $totalRequests = $totalRequests + 1;
-        $generateTicketId = date('ymds')."-".str_pad(strval($totalRequests),5,'0', STR_PAD_LEFT);
+        $generateTicketId = date('ymds') . "-" . str_pad(strval($totalRequests), 5, '0', STR_PAD_LEFT);
 
         // Creating new record
         $clientRequest = new \App\Models\Request();
@@ -133,6 +136,51 @@ class ClientRequestController extends Controller
 
         return redirect()->back()
             ->withErrors('Try again, Failed to generate new request!');
+    }
+
+    public function edit($id)
+    {
+        $pageTitle = 'Update Request';
+        $breadcrumbs = [['text' => 'Requests', 'url' => '/admin/request'], ['text' => $pageTitle]];
+
+        $request = \App\Models\Request::whereId($id)->first();
+
+        if ($request) {
+            $viewParams = [
+                'pageTitle' => $pageTitle,
+                'breadcrumbs' => $breadcrumbs,
+                'request' => $request,
+                'employees' => Employee::get()
+            ];
+
+            return view('admin.request.edit', $viewParams);
+        }
+
+        return redirect()->back()
+            ->withErrors('Invalid data provided, Try again!');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'request_subject' => 'required',
+        ]);
+
+        $clientRequest = \App\Models\Request::whereId($id)->first();
+        if ($clientRequest) {
+            $clientRequest->subject = $validatedData['request_subject'];
+            $clientRequest->description = $request->request_description;
+            $clientRequest->status = $request->status;
+            $clientRequest->employee()->associate($request->update_employee);
+
+            if ($clientRequest->save()) {
+                Session::flash('successMessage', 'Request has been updated successsfully!');
+                return redirect()->back();
+            }
+        }
+
+        return redirect()->back()
+            ->withErrors('Invalid data, Try again!');
     }
 
     public function show(string $id)
