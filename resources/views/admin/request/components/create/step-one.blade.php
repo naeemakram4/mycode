@@ -22,10 +22,26 @@
                 <!--begin::Input group-->
                 <div class="fv-row mb-10 fv-plugins-icon-container">
                     <!--begin::Label-->
+                    <label class="form-label required">Request Type</label>
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                    <select name="request_type" class="form-select form-select-lg form-select-solid select2-hidden-accessible" data-control="select2" data-placeholder="Select Request Type" data-allow-clear="true" data-hide-search="true" tabindex="-1" aria-hidden="true">
+                        <option></option>
+                        @foreach($requestTypes as $requestType)
+                            <option value="{{ $requestType->id }}"> {{ $requestType->label }}</option>
+                        @endforeach
+                    </select>
+                    <!--end::Input-->
+                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="fv-row mb-10 fv-plugins-icon-container">
+                    <!--begin::Label-->
                     <label class="form-label required">Select Client</label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <select name="request_client" class="form-select form-select-lg form-select-solid select2-hidden-accessible" data-control="select2" data-placeholder="Select Request Type" data-allow-clear="true" data-hide-search="true" tabindex="-1" aria-hidden="true">
+                    <select name="request_client" class="form-select form-select-lg form-select-solid select2-hidden-accessible" data-control="select2" data-placeholder="Select Client" data-allow-clear="true" data-hide-search="false" tabindex="-1" aria-hidden="true">
                         <option></option>
                         @foreach($clients as $client)
                             <option value="{{ $client->id }}">{{ $client->user->getFullName() }}</option>
@@ -38,17 +54,18 @@
                 <!--begin::Input group-->
                 <div class="fv-row mb-10 fv-plugins-icon-container">
                     <!--begin::Label-->
-                    <label class="form-label required">Request Type</label>
+                    <label class="form-label required">Select Employee</label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <select name="request_type" class="form-select form-select-lg form-select-solid select2-hidden-accessible" data-control="select2" data-placeholder="Select Request Type" data-allow-clear="true" data-hide-search="true" tabindex="-1" aria-hidden="true">
+                    <select name="assignee_employee" class="form-select form-select-lg form-select-solid select2-hidden-accessible" data-control="select2" data-placeholder="Select Employee" data-allow-clear="true" data-hide-search="false" tabindex="-1" aria-hidden="true">
                         <option></option>
-                        @foreach($requestTypes as $requestType)
-                            <option value="{{ $requestType->id }}"> {{ $requestType->label }}</option>
+                        @foreach($employees as $employee)
+                            <option value="{{ $employee->id }}">{{ $employee->user->getFullName() }}</option>
                         @endforeach
                     </select>
                     <!--end::Input-->
-                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                </div>
                 <!--end::Input group-->
             </div>
             <!--end::Row-->

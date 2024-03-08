@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Client;
+use App\Models\Employee;
 use App\Models\RequestType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -93,6 +94,7 @@ class ClientRequestController extends Controller
             'breadcrumbs' => $breadcrumbs,
             'requestTypes' => RequestType::get(),
             'clients' => Client::get(),
+            'employees' => Employee::get()
         ];
 
         return view('admin.request.create', $viewParams);
@@ -104,7 +106,8 @@ class ClientRequestController extends Controller
             'request_client' => 'required',
             'request_type' => 'required',
             'request_subject' => 'required',
-            'request_description' => 'nullable'
+            'request_description' => 'nullable',
+            'assignee_employee' => 'nullable'
         ]);
 
         //Generating Ticket ID
@@ -116,6 +119,7 @@ class ClientRequestController extends Controller
         $clientRequest = new \App\Models\Request();
         $clientRequest->ticket_id = $generateTicketId;
         $clientRequest->client()->associate($validatedData['request_client']);
+        $clientRequest->employee()->associate($validatedData['assignee_employee']);
         $clientRequest->requestType()->associate($validatedData['request_type']);
         $clientRequest->subject = $validatedData['request_subject'];
         $clientRequest->description = $validatedData['request_description'];
