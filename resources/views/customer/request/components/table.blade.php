@@ -2,7 +2,7 @@
     <thead>
     <tr>
         <th>Ticket ID</th>
-        <th>Employee</th>
+        <th>Created By</th>
         <th>Subject</th>
         <th>Request Type</th>
         <th>Status</th>
