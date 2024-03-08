@@ -20,4 +20,6 @@
 
 @section('pageInnerModals')
     @include('employee.project.components.view.task.create-target-model')
+    @include('employee.project.components.view.task.edit-target-model')
+    @include('employee.project.components.view.task.view-target-drawer')
 @endsection

@@ -11,14 +11,14 @@
     </li>
     <!--end::Nav item-->
     <!--begin::Nav item-->
-    <li class="nav-item">
-        <a class="nav-link text-active-primary py-5 me-6" href="javascript:void(0);">Files</a>
-    </li>
-    <!--end::Nav item-->
-    <!--begin::Nav item-->
-    <li class="nav-item">
-        <a class="nav-link text-active-primary py-5 me-6" href="javascript:void(0);">Activity</a>
-    </li>
+{{--    <li class="nav-item">--}}
+{{--        <a class="nav-link text-active-primary py-5 me-6" href="javascript:void(0);">Files</a>--}}
+{{--    </li>--}}
+{{--    <!--end::Nav item-->--}}
+{{--    <!--begin::Nav item-->--}}
+{{--    <li class="nav-item">--}}
+{{--        <a class="nav-link text-active-primary py-5 me-6" href="javascript:void(0);">Activity</a>--}}
+{{--    </li>--}}
     <!--end::Nav item-->
 </ul>
 <!--end::Nav-->

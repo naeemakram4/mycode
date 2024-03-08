@@ -1,4 +1,4 @@
-<div class="modal fade" id="kt_modal_new_target"  aria-modal="true">
+<div class="modal fade" id="kt_modal_edit_target"  aria-modal="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <!--begin::Modal content-->
@@ -22,12 +22,13 @@
             <!--begin::Modal body-->
             <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
                 <!--begin:Form-->
-                <form method="POST" action="{{ route('admin.task.store') }}" class="form fv-plugins-bootstrap5 fv-plugins-framework">
+                <form method="POST" id="editTargetForm" class="form fv-plugins-bootstrap5 fv-plugins-framework">
                     @csrf
+                    @method('PUT')
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->
-                        <h1 class="mb-3">Set New Task</h1>
+                        <h1 class="mb-3">Update Task</h1>
                         <!--end::Title-->
                         <!--begin::Description-->
                         <div class="text-muted fw-bold fs-5">If you need more info, please check

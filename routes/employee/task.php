@@ -1,3 +1,10 @@
 <?php
 
-Route::resource('task', \App\Http\Controllers\Employee\TaskController::class);
+use App\Http\Controllers\Employee\TaskController;
+
+Route::group(['prefix' => 'task', 'as' => 'task.'], function () {
+    Route::post('/add-group', [TaskController::class, 'addGroup'])->name('add.group');
+    Route::get('/view-group-tasks/{id}', [TaskController::class, 'viewGroupTasks'])->name('view.group.tasks');
+});
+
+Route::resource('task', TaskController::class);
