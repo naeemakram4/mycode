@@ -19,7 +19,7 @@ class RequestController extends Controller
         $pageTitle = 'Requests';
         $breadcrumbs = [['text' => $pageTitle]];
         $action = [
-            'text' => 'Generate New Request',
+            'text' => 'New Request',
             'route' => route('customer.request.create'),
         ];
 
@@ -80,7 +80,7 @@ class RequestController extends Controller
 
     public function create()
     {
-        $pageTitle = 'Generate New Request';
+        $pageTitle = 'New Request';
         $breadcrumbs = [['text' => 'Requests', 'url' => '/customer/request'], ['text' => $pageTitle]];
 
         $viewParams = [
