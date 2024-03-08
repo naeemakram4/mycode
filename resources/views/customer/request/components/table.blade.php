@@ -1,7 +1,6 @@
 <table class="data-table table align-middle table-row-dashed g-5">
     <thead>
     <tr>
-        <th>ID</th>
         <th>Ticket ID</th>
         <th>Employee</th>
         <th>Subject</th>
@@ -32,10 +31,9 @@
                     {
                         data: 'id',
                         "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                            $(nTd).html('<a href="javascript:void(0);" id="kt_drawer_example_dismiss_button" data-id="'+ oData.id +'">' + oData.id + '</a>');
+                            $(nTd).html('<a href="javascript:void(0);" id="kt_drawer_example_dismiss_button" data-id="'+ oData.id +'">' + oData.ticket_id + '</a>');
                         }
                     },
-                    {data: 'ticket_id',name: 'ticket_id'},
                     {data: 'employee',name: 'employee'},
                     {data: 'subject',name: 'subject'},
                     {data: 'request_type',name: 'request_type'},
