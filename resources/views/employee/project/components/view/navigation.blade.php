@@ -7,7 +7,7 @@
     <!--end::Nav item-->
     <!--begin::Nav item-->
     <li class="nav-item">
-        <a class="nav-link text-active-primary py-5 me-6 {{ request()->url() == route('employee.project.target', $project->id) ? 'active' : '' }}" href="{{ route('employee.project.target', $project->id) }}">Targets</a>
+        <a class="nav-link text-active-primary py-5 me-6 {{ request()->url() == route('employee.project.task', $project->id) ? 'active' : '' }}" href="{{ route('employee.project.task', $project->id) }}">Targets</a>
     </li>
     <!--end::Nav item-->
     <!--begin::Nav item-->

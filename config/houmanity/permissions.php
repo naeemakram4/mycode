@@ -13,7 +13,7 @@ return [
 //        'customer.project.edit' => 'Project Edit Form',
 //        'customer.project.update' => 'Projects Update',
 //        'customer.project.show' => 'Project View',
-//        'customer.project.target' => 'Projects Target View',
+//        'customer.project.task' => 'Projects Target View',
 
         'customer.statics.seo' => 'SEO view',
         'customer.statics.ppc' => 'PPC view',
@@ -37,7 +37,7 @@ return [
         'employee.project.edit' => 'Project Edit Form',
         'employee.project.update' => 'Projects Update',
         'employee.project.show' => 'Project View',
-        'employee.project.target' => 'Projects Target View',
+        'employee.project.task' => 'Projects Target View',
 
         'employee.request.index' => 'Requests List',
         'employee.request.create' => 'Request Create Form',

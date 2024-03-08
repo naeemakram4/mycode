@@ -49,7 +49,7 @@ class ClientController extends Controller
                     }
                 })
                 ->editColumn('website', function ($data) {
-                    return '<a href="//' . $data->website . '" target="_blank">' . $data->website . '</a>';
+                    return '<a href="//' . $data->website . '" task="_blank">' . $data->website . '</a>';
                 })
                 ->filter(function ($instance) use ($request) {
                     if ($request->get('date_range') != '') {

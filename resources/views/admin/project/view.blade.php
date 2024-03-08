@@ -13,13 +13,13 @@
 
     @if(request()->url() == route('admin.project.show', $project->id))
         @include('admin.project.components.view.overview.index')
-    @elseif(request()->url() == route('admin.project.target', $project->id))
-        @include('admin.project.components.view.target.index')
+    @elseif(request()->url() == route('admin.project.task', $project->id))
+        @include('admin.project.components.view.task.index')
     @endif
 @endsection
 
 @section('pageInnerModals')
-    @include('admin.project.components.view.target.create-target-model')
-    @include('admin.project.components.view.target.edit-target-model')
-    @include('admin.project.components.view.target.view-target-drawer')
+    @include('admin.project.components.view.task.create-target-model')
+    @include('admin.project.components.view.task.edit-target-model')
+    @include('admin.project.components.view.task.view-target-drawer')
 @endsection

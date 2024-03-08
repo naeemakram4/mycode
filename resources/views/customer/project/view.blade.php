@@ -13,7 +13,7 @@
 
     @if(request()->url() == route('customer.project.show', $project->id))
         @include('customer.project.components.view.overview.index')
-    @elseif(request()->url() == route('customer.project.target', $project->id))
+    @elseif(request()->url() == route('customer.project.task', $project->id))
         @include('customer.project.components.view.target.index')
     @endif
 @endsection

@@ -4,7 +4,7 @@ use App\Http\Controllers\Customer\ProjectController;
 
 Route::group([], function () {
     Route::prefix('project/{id}')->name('project.')->group(function () {
-        Route::get('/target', [ProjectController::class, 'target'])->name('target');
+        Route::get('/task', [ProjectController::class, 'target'])->name('task');
     });
 });
 
