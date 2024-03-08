@@ -14,10 +14,10 @@
     @if(request()->url() == route('employee.project.show', $project->id))
         @include('employee.project.components.view.overview.index')
     @elseif(request()->url() == route('employee.project.task', $project->id))
-        @include('employee.project.components.view.target.index')
+        @include('employee.project.components.view.task.index')
     @endif
 @endsection
 
 @section('pageInnerModals')
-    @include('employee.project.components.view.target.create-target-model')
+    @include('employee.project.components.view.task.create-target-model')
 @endsection

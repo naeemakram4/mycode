@@ -26,7 +26,7 @@
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->
-                        <h1 class="mb-3">Set First Target</h1>
+                        <h1 class="mb-3">Set First Task</h1>
                         <!--end::Title-->
                         <!--begin::Description-->
                         <div class="text-muted fw-bold fs-5">If you need more info, please check
@@ -38,11 +38,11 @@
                     <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
                         <!--begin::Label-->
                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Target Title</span>
-                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="" data-bs-original-title="Specify a target name for future usage and reference" aria-label="Specify a target name for future usage and reference"></i>
+                            <span class="required">Task Title</span>
+                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="" data-bs-original-title="Specify a task name for future usage and reference" aria-label="Specify a task name for future usage and reference"></i>
                         </label>
                         <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" placeholder="Enter Target Title" name="target_title">
+                        <input type="text" class="form-control form-control-solid" placeholder="Enter task Title" name="target_title">
                         <div class="fv-plugins-message-container invalid-feedback"></div></div>
                     <!--end::Input group-->
                     <!--begin::Input group-->

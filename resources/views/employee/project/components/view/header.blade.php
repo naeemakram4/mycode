@@ -35,7 +35,7 @@
             <!--end::Details-->
             <!--begin::Actions-->
             <div class="d-flex mb-4">
-                <a href="#" class="btn btn-sm btn-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_target">Add Target</a>
+                <a href="#" class="btn btn-sm btn-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_target">Add Task</a>
                 <!--begin::Menu-->
                 <div class="me-0">
                     <button class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
@@ -56,7 +56,7 @@
                         <!--begin::Menu item-->
                         <div class="menu-item px-3">
                             <a href="#" class="menu-link flex-stack px-3">Create Payment
-                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="" data-bs-original-title="Specify a target name for future usage and reference" aria-label="Specify a target name for future usage and reference"></i></a>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="" data-bs-original-title="Specify a task name for future usage and reference" aria-label="Specify a task name for future usage and reference"></i></a>
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->

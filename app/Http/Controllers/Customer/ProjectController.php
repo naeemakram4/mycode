@@ -155,7 +155,7 @@ class ProjectController extends Controller
         //
     }
 
-    public function target(Project $project, $id)
+    public function task(Project $project, $id)
     {
         $pageTitle = 'Project Details';
         $breadcrumbs = [['text' => 'Projects', 'url' => '/customer/project'], ['text' => $pageTitle]];
