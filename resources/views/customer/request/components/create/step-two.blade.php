@@ -20,7 +20,7 @@
             <label class="form-label required">Request Subject</label>
             <!--end::Label-->
             <!--begin::Input-->
-            <input name="request_subject" class="form-control form-control-lg form-control-solid" value="Keenthemes Inc.">
+            <input name="request_subject" class="form-control form-control-lg form-control-solid" value="{{ old('request_subject') }}">
             <!--end::Input-->
             <div class="fv-plugins-message-container invalid-feedback"></div></div>
         <!--end::Input group-->
