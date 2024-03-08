@@ -5,7 +5,7 @@
         <!--begin::Heading-->
         <div class="pb-10 pb-lg-12">
             <!--begin::Title-->
-            <h2 class="fw-bolder text-dark">Attache Document</h2>
+            <h2 class="fw-bolder text-dark">Attach Document</h2>
             <!--end::Title-->
             <!--begin::Notice-->
             <div class="text-muted fw-bold fs-6">If you need more info, please check out

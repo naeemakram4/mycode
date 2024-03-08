@@ -55,7 +55,7 @@
                 <!--end::Icon-->
                 <!--begin::Label-->
                 <div class="stepper-label">
-                    <h3 class="stepper-title">Attache Document</h3>
+                    <h3 class="stepper-title">Attach Document</h3>
                     <div class="stepper-desc fw-bold">Attache Required Documents</div>
                 </div>
                 <!--end::Label-->
