@@ -4,9 +4,11 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
 use App\Models\RequestType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -16,6 +18,10 @@ class ClientRequestController extends Controller
     {
         $pageTitle = 'Requests';
         $breadcrumbs = [['text' => $pageTitle]];
+        $action = [
+            'text' => 'New Request',
+            'route' => route('admin.request.create'),
+        ];
 
         if ($request->ajax()) {
             $data = \App\Models\Request::latest();
@@ -69,11 +75,60 @@ class ClientRequestController extends Controller
         $viewParams = [
             'pageTitle' => $pageTitle,
             'breadcrumbs' => $breadcrumbs,
+            'action' => $action,
             'requestTypes' => RequestType::get(),
             'status' => \App\Models\Request::getAllRequestStatus()
         ];
 
         return view('admin.request.index', $viewParams);
+    }
+
+    public function create()
+    {
+        $pageTitle = 'New Request';
+        $breadcrumbs = [['text' => 'Requests', 'url' => '/admin/request'], ['text' => $pageTitle]];
+
+        $viewParams = [
+            'pageTitle' => $pageTitle,
+            'breadcrumbs' => $breadcrumbs,
+            'requestTypes' => RequestType::get(),
+            'clients' => Client::get(),
+        ];
+
+        return view('admin.request.create', $viewParams);
+    }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'request_client' => 'required',
+            'request_type' => 'required',
+            'request_subject' => 'required',
+            'request_description' => 'nullable'
+        ]);
+
+        //Generating Ticket ID
+        $totalRequests = \App\Models\Request::get()->count();
+        $totalRequests = $totalRequests + 1;
+        $generateTicketId = date('ymds')."-".str_pad(strval($totalRequests),5,'0', STR_PAD_LEFT);
+
+        // Creating new record
+        $clientRequest = new \App\Models\Request();
+        $clientRequest->ticket_id = $generateTicketId;
+        $clientRequest->client()->associate($validatedData['request_client']);
+        $clientRequest->requestType()->associate($validatedData['request_type']);
+        $clientRequest->subject = $validatedData['request_subject'];
+        $clientRequest->description = $validatedData['request_description'];
+
+        if ($clientRequest->save()) {
+//            event(new RequestGeneratedEvent());
+
+            Session::flash('successMessage', 'A new request has been generated!');
+            return redirect()->route('admin.request.index');
+        }
+
+        return redirect()->back()
+            ->withErrors('Try again, Failed to generate new request!');
     }
 
     public function show(string $id)
