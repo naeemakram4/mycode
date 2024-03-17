@@ -9,6 +9,7 @@ use App\Models\Employee;
 use App\Models\Project;
 use App\Models\SalesRepresentativeDim;
 use App\Models\Service;
+use App\Traits\FileHandling;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -16,6 +17,8 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ProjectController extends Controller
 {
+    use FileHandling;
+
     public function index(Request $request)
     {
         $pageTitle = 'Projects';
@@ -34,7 +37,7 @@ class ProjectController extends Controller
                 })
                 ->editColumn('logo', function ($data) {
                     return '<div class="symbol symbol-50px w-50px bg-light">
-                            <img src="' . asset('assets/media/logos/favicon.png') . '" alt="image" class="p-3">
+                            <img src="'. asset('storage/'. $data->logo ).'" alt="image" class="p-3">
                         </div>';
                 })
                 ->addColumn('client', function ($data) {
@@ -135,8 +138,11 @@ class ProjectController extends Controller
             'status' => 'required'
         ]);
 
+        $projectLogo = $this->uploadObject(config('houmanity.filehandling.storage.projects'), $request->file('project_logo'));
+
         $project = new Project();
         $project->client()->associate($validatedData['client_id']);
+        $project->logo = $projectLogo;
         $project->name = $validatedData['project_name'];
         $project->description = $validatedData['description'];
         $project->start_date = $validatedData['start_date'];
