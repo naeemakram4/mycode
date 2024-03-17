@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Employee;
 use App\Models\RequestType;
+use App\Traits\FileHandling;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ClientRequestController extends Controller
 {
+    use FileHandling;
     public function index(Request $request)
     {
         $pageTitle = 'Requests';
@@ -113,6 +115,10 @@ class ClientRequestController extends Controller
             'assignee_employee' => 'nullable'
         ]);
 
+        // Uploading request file/image
+        $requestFile = $this->uploadObject(config('houmanity.filehandling.storage.requests'), $request->file('request_file'));
+
+
         //Generating Ticket ID
         $totalRequests = \App\Models\Request::get()->count();
         $totalRequests = $totalRequests + 1;
@@ -125,6 +131,7 @@ class ClientRequestController extends Controller
         $clientRequest->employee()->associate($validatedData['assignee_employee']);
         $clientRequest->requestType()->associate($validatedData['request_type']);
         $clientRequest->subject = $validatedData['request_subject'];
+        $clientRequest->file = $requestFile;
         $clientRequest->description = $validatedData['request_description'];
 
         if ($clientRequest->save()) {

@@ -18,7 +18,8 @@
             <!--begin::Input-->
             <input type="file" name="request_file" class="form-control form-control-solid">
             <!--end::Input-->
-            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+            <div class="fv-plugins-message-container invalid-feedback"></div>
+        </div>
         <!--end::Input group-->
     </div>
     <!--end::Wrapper-->

@@ -7,9 +7,9 @@
         </li>
         <!--end:::Tab item-->
         <!--begin:::Tab item-->
-{{--        <li class="nav-item">--}}
-{{--            <a class="nav-link text-active-primary pb-4" data-kt-countup-tabs="true" data-bs-toggle="tab" href="#kt_request_view_files">Files</a>--}}
-{{--        </li>--}}
+        <li class="nav-item">
+            <a class="nav-link text-active-primary pb-4" data-kt-countup-tabs="true" data-bs-toggle="tab" href="#kt_request_view_files">Files</a>
+        </li>
 {{--        <!--end:::Tab item-->--}}
 {{--        <!--begin:::Tab item-->--}}
 {{--        <li class="nav-item">--}}
@@ -111,48 +111,51 @@
             <!--end::Tasks-->
         </div>
         <!--end:::Tab pane-->
-{{--        <!--begin:::Tab pane-->--}}
-{{--        <div class="tab-pane fade" id="kt_request_view_files" role="tabpanel">--}}
-{{--            <!--begin::Card-->--}}
-{{--            <div class="card pt-4 mb-6 mb-xl-9">--}}
-{{--                <!--begin::Card header-->--}}
-{{--                <div class="card-header border-0">--}}
-{{--                    <!--begin::Card title-->--}}
-{{--                    <div class="card-title">--}}
-{{--                        <h2>Assigned Clients</h2>--}}
-{{--                    </div>--}}
-{{--                    <!--end::Card title-->--}}
-{{--                </div>--}}
-{{--                <!--end::Card header-->--}}
-{{--                <!--begin::Card body-->--}}
-{{--                <div class="card-body pt-0 pb-5">--}}
-{{--                </div>--}}
-{{--                <!--end::Card body-->--}}
-{{--            </div>--}}
-{{--            <!--end::Card-->--}}
-{{--        </div>--}}
-{{--        <!--end:::Tab pane-->--}}
-{{--        <!--begin:::Tab pane-->--}}
-{{--        <div class="tab-pane fade" id="kt_request_view_comments" role="tabpanel">--}}
-{{--            <!--begin::Card-->--}}
-{{--            <div class="card pt-4 mb-6 mb-xl-9">--}}
-{{--                <!--begin::Card header-->--}}
-{{--                <div class="card-header border-0">--}}
-{{--                    <!--begin::Card title-->--}}
-{{--                    <div class="card-title">--}}
-{{--                        <h2>Assigned Clients</h2>--}}
-{{--                    </div>--}}
-{{--                    <!--end::Card title-->--}}
-{{--                </div>--}}
-{{--                <!--end::Card header-->--}}
-{{--                <!--begin::Card body-->--}}
-{{--                <div class="card-body pt-0 pb-5">--}}
-{{--                </div>--}}
-{{--                <!--end::Card body-->--}}
-{{--            </div>--}}
-{{--            <!--end::Card-->--}}
-{{--        </div>--}}
-{{--        <!--end:::Tab pane-->--}}
+        <!--begin:::Tab pane-->
+        <div class="tab-pane fade" id="kt_request_view_files" role="tabpanel">
+            <!--begin::Card-->
+            <div class="card pt-4 mb-6 mb-xl-9">
+                <!--begin::Card header-->
+                <div class="card-header border-0">
+                    <!--begin::Card title-->
+                    <div class="card-title">
+                        <h2>Request Files</h2>
+                    </div>
+                    <!--end::Card title-->
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0 pb-5">
+                    <div class="symbol symbol-75px w-75px bg-light">
+                        <img src="{{ asset('storage/'. $request->file ) }}" alt="image" class="p-3">
+                    </div>
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end:::Tab pane-->
+        <!--begin:::Tab pane-->
+        <div class="tab-pane fade" id="kt_request_view_comments" role="tabpanel">
+            <!--begin::Card-->
+            <div class="card pt-4 mb-6 mb-xl-9">
+                <!--begin::Card header-->
+                <div class="card-header border-0">
+                    <!--begin::Card title-->
+                    <div class="card-title">
+                        <h2>Assigned Clients</h2>
+                    </div>
+                    <!--end::Card title-->
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0 pb-5">
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end:::Tab pane-->
     </div>
     <!--end:::Tab content-->
 </div>
