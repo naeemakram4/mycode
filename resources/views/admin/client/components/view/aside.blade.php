@@ -8,7 +8,7 @@
             <div class="d-flex flex-center flex-column mb-5">
                 <!--begin::Avatar-->
                 <div class="symbol symbol-100px symbol-circle mb-7">
-                    <img src="{{asset("/assets/media/avatars/blank.png")}}" alt="Profile Image">
+                    <img src="{{asset("storage/". $client->company_logo)}}" alt="Profile Image">
                 </div>
                 <!--end::Avatar-->
                 <!--begin::Name-->

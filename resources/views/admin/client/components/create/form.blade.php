@@ -1,4 +1,4 @@
-<form class="form p-5" method="POST" action="{{ route('admin.client.store') }}">
+<form class="form p-5" method="POST" action="{{ route('admin.client.store') }}" enctype="multipart/form-data">
     @csrf
     <div class="row mb-5">
         <!--begin::Col-->
@@ -76,11 +76,17 @@
 
     <div class="row mb-5">
         <div class="col-md-6 fv-row">
+            <label for="company" class="required form-label">Company Logo</label>
+            <input id="company_logo" class="form-control" type="file" name="company_logo" />
+        </div>
+        <div class="col-md-6 fv-row">
             <label for="company" class="required form-label">Company</label>
             <input id="company" class="form-control" type="text" name="company_name"
                    value="{{ old('company_name') }}"/>
         </div>
+    </div>
 
+    <div class="row mb-5">
         <div class="col-md-6 fv-row">
             <label for="website" class="form-label">Website</label>
             <input id="website" class="form-control" type="text" name="website"

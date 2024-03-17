@@ -8,15 +8,17 @@ use App\Models\ClientService;
 use App\Models\Role;
 use App\Models\Service;
 use App\Models\User;
+use App\Traits\FileHandling;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
 
 class ClientController extends Controller
 {
+    use FileHandling;
+
     public function index(Request $request)
     {
         $pageTitle = 'Clients';
@@ -32,7 +34,7 @@ class ClientController extends Controller
             return Datatables::eloquent($data)
                 ->addColumn('company', function ($data) {
                     return '<div class="symbol symbol-50px w-50px bg-light">
-                                <img src="/assets/media/logos/favicon.png" alt="image" class="p-3">
+                                <img src="'. asset('storage/'. $data->company_logo ).'" alt="image" class="p-3">
                             </div>
                             <a href="' . route('admin.client.show', $data->id) . '">' . $data->company_name . '</a>';
                 })
@@ -111,6 +113,8 @@ class ClientController extends Controller
             'company_name' => 'required|string'
         ]);
 
+        $companyLogo = $this->uploadObject(config('houmanity.filehandling.storage.clients'), $request->file('company_logo'));
+
         $user = new User();
         $user->role_id = Role::CLIENT_ROLE;
         $user->first_name = $validatedData['first_name'];
@@ -125,6 +129,7 @@ class ClientController extends Controller
 
         $client = new Client();
         $client->user()->associate($user);
+        $client->company_logo = $companyLogo;
         $client->company_name = $validatedData['company_name'];
         $client->website = $request->website;
         $client->address = $request->address;
@@ -213,6 +218,14 @@ class ClientController extends Controller
             }
             $user->status = ($request->status == "on") ? User::STATUS_ACTIVE : User::STATUS_DISABLE;
             $user->save();
+
+            if ($request->hasFile('company_logo')) {
+                $existingImage = $client->company_logo;
+                $companyLogo = $this->uploadObject(config('houmanity.filehandling.storage.clients'), $request->file('company_logo'));
+                $client->company_logo = $companyLogo;
+
+                $this->deleteObject($existingImage);
+            }
 
             $client->company_name = $validatedData['company_name'];
             $client->website = $request->website;

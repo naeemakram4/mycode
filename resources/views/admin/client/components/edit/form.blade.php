@@ -1,4 +1,4 @@
-<form class="form p-5" method="POST" action="{{ route('admin.client.update', $client->id) }}">
+<form class="form p-5" method="POST" action="{{ route('admin.client.update', $client->id) }}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="row mb-5">
@@ -75,12 +75,23 @@
     <div class="separator separator-content my-15">Business Details</div>
 
     <div class="row mb-5">
+        <div class="col-md-1 fv-row">
+            <div class="symbol symbol-75px w-75px bg-light">
+                <img src="{{ asset('storage/'. $client->company_logo ) }}" alt="image" class="p-3">
+            </div>
+        </div>
+        <div class="col-md-5 fv-row">
+            <label for="company" class="required form-label">New Company Logo</label>
+            <input id="company_logo" class="form-control" type="file" name="company_logo" />
+        </div>
         <div class="col-md-6 fv-row">
             <label for="company" class="required form-label">Company</label>
             <input id="company" class="form-control" type="text" name="company_name"
                    value="{{ old('company_name', $client->company_name) }}"/>
         </div>
+    </div>
 
+    <div class="row mb-5">
         <div class="col-md-6 fv-row">
             <label for="website" class="form-label">Website</label>
             <input id="website" class="form-control" type="text" name="website"
