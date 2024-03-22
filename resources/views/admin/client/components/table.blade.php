@@ -1,8 +1,7 @@
 <table class="data-table table align-middle table-row-dashed g-5">
     <thead>
     <tr class="fw-bold fs-6 text-muted">
-        <th>ID</th>
-        <th>Company</th>
+        <th class="w-200px">Company</th>
         <th>Client</th>
         <th>Website</th>
         <th>Status</th>
@@ -27,7 +26,6 @@
                     }
                 },
                 columns: [
-                    {data: 'id', name: 'id'},
                     {data: 'company',name: 'company'},
                     {data: 'client',name: 'client'},
                     {data: 'website',name: 'website'},

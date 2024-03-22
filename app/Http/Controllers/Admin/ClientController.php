@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
 class ClientController extends Controller
@@ -33,10 +34,16 @@ class ClientController extends Controller
 
             return Datatables::eloquent($data)
                 ->addColumn('company', function ($data) {
-                    return '<div class="symbol symbol-50px w-50px bg-light">
-                                <img src="'. asset('storage/'. $data->company_logo ).'" alt="image" class="p-3">
+                    if ($data->company_logo) {
+                        return '<div class="symbol symbol-50px w-50px bg-light">
+                                <img src="' . asset('storage/' . $data->company_logo) . '" alt="image" class="p-2">
                             </div>
-                            <a href="' . route('admin.client.show', $data->id) . '">' . $data->company_name . '</a>';
+                            <a href="' . route('admin.client.show', $data->id) . '">' . Str::limit($data->company_name, 15) . '</a>';
+                    }
+                    return '<div class="symbol symbol-50px w-50px bg-light">
+                                <img src="' . asset('assets/media/logos/avatar.png') . '" alt="image" class="p-2">
+                            </div>
+                            <a href="' . route('admin.client.show', $data->id) . '">' . Str::limit($data->company_name, 15) . '</a>';
                 })
                 ->addColumn('client', function ($data) {
                     return $data->user->getFullName() . '<br>' . $data->user->email;
@@ -51,7 +58,7 @@ class ClientController extends Controller
                     }
                 })
                 ->editColumn('website', function ($data) {
-                    return '<a href="//' . $data->website . '" task="_blank">' . $data->website . '</a>';
+                    return '<a href="//' . $data->website . '" target="_blank">' . $data->website . '</a>';
                 })
                 ->filter(function ($instance) use ($request) {
                     if ($request->get('date_range') != '') {
@@ -70,7 +77,7 @@ class ClientController extends Controller
 
                     if (!empty($request->get('search_company'))) {
                         $companyName = $request->get('search_company');
-                        $instance->where('company_name', 'like', '%'. $companyName . '%');
+                        $instance->where('company_name', 'like', '%' . $companyName . '%');
                     }
                 })
                 ->rawColumns(['id', 'company', 'client', 'website', 'status'])
@@ -113,7 +120,9 @@ class ClientController extends Controller
             'company_name' => 'required|string'
         ]);
 
-        $companyLogo = $this->uploadObject(config('houmanity.filehandling.storage.clients'), $request->file('company_logo'));
+        if ($request->file('company_logo')) {
+            $companyLogo = $this->uploadObject(config('houmanity.filehandling.storage.clients'), $request->file('company_logo'));
+        }
 
         $user = new User();
         $user->role_id = Role::CLIENT_ROLE;
@@ -129,7 +138,7 @@ class ClientController extends Controller
 
         $client = new Client();
         $client->user()->associate($user);
-        $client->company_logo = $companyLogo;
+        $client->company_logo = $companyLogo ?? null;
         $client->company_name = $validatedData['company_name'];
         $client->website = $request->website;
         $client->address = $request->address;
@@ -224,7 +233,9 @@ class ClientController extends Controller
                 $companyLogo = $this->uploadObject(config('houmanity.filehandling.storage.clients'), $request->file('company_logo'));
                 $client->company_logo = $companyLogo;
 
-                $this->deleteObject($existingImage);
+                if ($existingImage) {
+                    $this->deleteObject($existingImage);
+                }
             }
 
             $client->company_name = $validatedData['company_name'];

@@ -77,7 +77,11 @@
     <div class="row mb-5">
         <div class="col-md-1 fv-row">
             <div class="symbol symbol-75px w-75px bg-light">
-                <img src="{{ asset('storage/'. $client->company_logo ) }}" alt="image" class="p-3">
+                @if($client->company_logo)
+                    <img src="{{ asset('storage/'. $client->company_logo ) }}" alt="No Logo" class="p-2">
+                @else
+                    <img src="{{ asset('assets/media/logos/avatar.png') }}" alt="No Logo" class="p-3">
+                @endif
             </div>
         </div>
         <div class="col-md-5 fv-row">

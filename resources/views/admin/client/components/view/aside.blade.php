@@ -8,7 +8,11 @@
             <div class="d-flex flex-center flex-column mb-5">
                 <!--begin::Avatar-->
                 <div class="symbol symbol-100px symbol-circle mb-7">
-                    <img src="{{asset("storage/". $client->company_logo)}}" alt="Profile Image">
+                    @if($client->company_logo)
+                        <img src="{{asset("storage/". $client->company_logo)}}" alt="Profile Image">
+                    @else
+                        <img src="{{asset('assets/media/logos/avatar.png')}}" alt="Profile Image">
+                    @endif
                 </div>
                 <!--end::Avatar-->
                 <!--begin::Name-->
@@ -97,7 +101,7 @@
                         <!--end::Svg Icon-->
                                             </span></div>
                 <span data-bs-toggle="tooltip" data-bs-trigger="hover" title=""
-                      data-bs-original-title="Edit employee details">
+                      data-bs-original-title="Edit client details">
                     <a href="{{ route('admin.client.edit', $client->id) }}" data-id="{{ $client->id }}" class="btn btn-sm btn-light-primary">Edit</a>
                 </span>
             </div>
