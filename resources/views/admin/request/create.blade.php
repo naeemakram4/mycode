@@ -21,5 +21,5 @@
 @endsection
 
 @section('pageScriptFiles')
-    <script src="{{ asset('js/employee-create-request-form.js') }}"></script>
+    <script src="{{ asset('js/admin-create-request-form.js') }}"></script>
 @endsection

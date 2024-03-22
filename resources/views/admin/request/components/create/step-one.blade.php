@@ -54,7 +54,7 @@
                 <!--begin::Input group-->
                 <div class="fv-row mb-10 fv-plugins-icon-container">
                     <!--begin::Label-->
-                    <label class="form-label required">Select Employee</label>
+                    <label class="form-label">Select Employee</label>
                     <!--end::Label-->
                     <!--begin::Input-->
                     <select name="assignee_employee" class="form-select form-select-lg form-select-solid select2-hidden-accessible" data-control="select2" data-placeholder="Select Employee" data-allow-clear="true" data-hide-search="false" tabindex="-1" aria-hidden="true">

@@ -1754,6 +1754,7 @@
     "/css/fonts/line-awesome/la-solid-900.ttf": "/css/fonts/line-awesome/la-solid-900.ttf",
     "/css/fonts/line-awesome/la-solid-900.woff": "/css/fonts/line-awesome/la-solid-900.woff",
     "/css/fonts/line-awesome/la-solid-900.woff2": "/css/fonts/line-awesome/la-solid-900.woff2",
+    "/js/admin-create-request-form.js": "/js/admin-create-request-form.js",
     "/js/customer-create-request-form.js": "/js/customer-create-request-form.js",
     "/js/employee-create-request-form.js": "/js/employee-create-request-form.js"
 }
