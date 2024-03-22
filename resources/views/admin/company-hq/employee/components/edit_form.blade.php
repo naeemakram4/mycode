@@ -1,7 +1,23 @@
 <!--begin::Form-->
-<form method="POST" class="form" action="{{ route('admin.employee.update', $employee->id) }}">
+<form method="POST" class="form" action="{{ route('admin.employee.update', $employee->id) }}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
+
+    <div class="row mb-7 fv-plugins-icon-container">
+        <div class="col-md-1 fv-row">
+            <div class="symbol symbol-75px w-75px bg-light">
+                @if($employee->image)
+                <img src="{{ asset('storage/'. $employee->image ) }}" alt="No image" class="p-3">
+                @else
+                    <img src="{{ asset('/assets/media/avatars/blank.png') }}" alt="No image">
+                @endif
+            </div>
+        </div>
+        <div class="col-md-6 fv-row">
+            <label for="employee_image" class="form-label">New Image</label>
+            <input id="employee_image" class="form-control" type="file" name="employee_image" />
+        </div>
+    </div>
 
     <!--begin::Input group-->
     <div class="row mb-7 fv-plugins-icon-container">

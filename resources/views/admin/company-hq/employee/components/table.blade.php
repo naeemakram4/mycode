@@ -1,10 +1,8 @@
 <table id="kt_datatable_example_1" class="table table-row-bordered gy-5">
     <thead>
     <tr class="fw-bold fs-6 text-muted">
-        <th>ID</th>
-        <th>FullName</th>
+        <th>Employee</th>
         <th>Username</th>
-        <th>Email</th>
         <th>Phone</th>
         <th>Total Clients</th>
         <th>Status</th>
@@ -15,12 +13,28 @@
     @if(count($employees) > 0)
         @foreach($employees as $employee)
             <tr>
-                <td>
-                    <a href="{{ route('admin.employee.show', $employee->id) }}">{{ $employee->id }}</a>
+                <td class="d-flex align-items-center">
+                    <!--begin:: Avatar -->
+                    <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                        <a href="{{ route('admin.employee.show', $employee->id) }}">
+                            <div class="symbol-label">
+                                @if($employee->image)
+                                    <img src="{{asset("storage/". $employee->image)}}" alt="No image" class="w-100">
+                                @else
+                                    <img src="{{asset("/assets/media/avatars/blank.png")}}" alt="No image" class="w-100">
+                                @endif
+                            </div>
+                        </a>
+                    </div>
+                    <!--end::Avatar-->
+                    <!--begin::User details-->
+                    <div class="d-flex flex-column">
+                        <a href="{{ route('admin.employee.show', $employee->id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $employee->user->getFullName() }}</a>
+                        <span>{{ $employee->user->email }}</span>
+                    </div>
+                    <!--begin::User details-->
                 </td>
-                <td>{{ $employee->user->getFullName() }}</td>
                 <td>{{ $employee->user->user_name }}</td>
-                <td>{{ $employee->user->email }}</td>
                 <td>{{ $employee->user->phone }}</td>
                 <td>{{ count($employee->clients) }}</td>
                 <td>

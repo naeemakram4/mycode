@@ -10,12 +10,15 @@ use App\Models\Designation;
 use App\Models\Employee;
 use App\Models\Role;
 use App\Models\User;
+use App\Traits\FileHandling;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class EmployeeController extends Controller
 {
+    use FileHandling;
+
     public function index()
     {
         $pageTitle = 'Employee';
@@ -62,6 +65,10 @@ class EmployeeController extends Controller
             'password' => 'required'
         ]);
 
+        if (!empty($request->file('employee_image'))) {
+            $employeeImage = $this->uploadObject(config('houmanity.filehandling.storage.employees'), $request->file('employee_image'));
+        }
+
         $user = new User;
         $user->role_id = Role::EMPLOYEE_ROLE;
         $user->first_name = $validatedData['first_name'];
@@ -75,6 +82,7 @@ class EmployeeController extends Controller
 
         $employee = new Employee();
         $employee->user_id = $user->id;
+        $employee->image = $employeeImage ?? null;
         $employee->remarks = $request->remarks;
 
         if ($employee->save()) {
@@ -122,7 +130,7 @@ class EmployeeController extends Controller
         $validatedData = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'user_name' => 'required|unique:users,user_name,'.$employee->user_id,
+            'user_name' => 'required|unique:users,user_name,' . $employee->user_id,
             'email' => 'required|email|unique:users,email,' . $employee->user_id,
             'phone' => 'nullable',
             'clients' => 'required|array',
@@ -142,6 +150,17 @@ class EmployeeController extends Controller
                 $user->password = Hash::make($request->new_password);
             }
             $user->save();
+
+            if ($request->hasFile('employee_image')) {
+                $existingImage = $employee->image;
+                $employeeImage = $this->uploadObject(config('houmanity.filehandling.storage.employees'), $request->file('employee_image'));
+                $employee->image = $employeeImage;
+
+                if ($existingImage) {
+                    $this->deleteObject($existingImage);
+                }
+            }
+
             $employee->remarks = $request->remarks;
 
             if ($employee->save()) {

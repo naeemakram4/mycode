@@ -2,6 +2,13 @@
 <form method="POST" action="{{ route('admin.employee.store') }}" class="form"
       enctype="multipart/form-data">
     @csrf
+    <div class="row mb-7 fv-plugins-icon-container">
+        <div class="col-md-6 fv-row">
+            <label for="employee_image" class="form-label">Image</label>
+            <input id="employee_image" class="form-control" type="file" name="employee_image" />
+        </div>
+    </div>
+
     <!--begin::Input group-->
     <div class="row mb-7 fv-plugins-icon-container">
         <div class="col-md-4">
@@ -65,7 +72,7 @@
 
     <!--begin::Input group-->
     <div class="fv-row mb-7 fv-plugins-icon-container">
-        <label class="form-label required">Remarks</label>
+        <label class="form-label">Remarks</label>
         <textarea name="remarks" class="form-control  form-control-solid" rows="1"></textarea>
     </div>
     <!--end::Input group-->
