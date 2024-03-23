@@ -10,10 +10,19 @@
             <input type="text" name="project_name" class="form-control form-control-solid"
                    value="{{old('project_name', $project->name)}}">
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
             <label class="form-label">Project Logo</label>
             <input type="file" name="project_logo" class="form-control form-control-solid"
                    value="{{old('project_logo')}}">
+        </div>
+        <div class="col-md-1 fv-row">
+            <div class="symbol symbol-75px w-75px bg-light">
+                @if($project->logo)
+                    <img src="{{ asset('storage/'. $project->logo ) }}" alt="No Logo" class="p-2">
+                @else
+                    <img src="{{ asset('assets/media/logos/avatar.png') }}" alt="No Logo" class="p-3">
+                @endif
+            </div>
         </div>
     </div>
     <!--end::Input group-->

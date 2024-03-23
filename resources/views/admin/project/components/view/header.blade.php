@@ -2,7 +2,11 @@
 <div class="d-flex flex-wrap flex-sm-nowrap mb-6">
     <!--begin::Image-->
     <div class="d-flex flex-center flex-shrink-0 bg-light rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4">
-        <img class="mw-50px mw-lg-75px" src="{{ asset('assets/media/logos/favicon.png') }}" alt="image">
+        @if($project->logo)
+            <img class="mw-50px mw-lg-75px" src="{{ asset('storage/'. $project->logo) }}" alt="image">
+        @else
+            <img class="mw-50px mw-lg-75px" src="{{ asset('assets/media/logos/avatar.png') }}" alt="image">
+        @endif
     </div>
     <!--end::Image-->
     <!--begin::Wrapper-->

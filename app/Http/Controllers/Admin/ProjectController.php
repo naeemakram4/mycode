@@ -36,8 +36,13 @@ class ProjectController extends Controller
                     return '<a href="' . route('admin.project.show', $data->id) . '" >' . $data->id . '</a>';
                 })
                 ->editColumn('logo', function ($data) {
+                    if ($data->logo) {
+                        return '<div class="symbol symbol-50px w-50px bg-light">
+                            <img src="' . asset('storage/' . $data->logo) . '" alt="image" class="p-2">
+                        </div>';
+                    }
                     return '<div class="symbol symbol-50px w-50px bg-light">
-                            <img src="'. asset('storage/'. $data->logo ).'" alt="image" class="p-3">
+                            <img src="' . asset('assets/media/logos/avatar.png') . '" alt="image" class="p-2">
                         </div>';
                 })
                 ->addColumn('client', function ($data) {
@@ -83,7 +88,7 @@ class ProjectController extends Controller
 
                     if (!empty($request->get('search_project'))) {
                         $projectName = $request->get('search_project');
-                        $instance->where('name', 'like', '%'. $projectName . '%');
+                        $instance->where('name', 'like', '%' . $projectName . '%');
                     }
                 })
                 ->rawColumns(['id', 'logo', 'name', 'description', 'start_date', 'client', 'status'])
@@ -138,11 +143,13 @@ class ProjectController extends Controller
             'status' => 'required'
         ]);
 
-        $projectLogo = $this->uploadObject(config('houmanity.filehandling.storage.projects'), $request->file('project_logo'));
+        if ($request->file('project_logo')) {
+            $projectLogo = $this->uploadObject(config('houmanity.filehandling.storage.projects'), $request->file('project_logo'));
+        }
 
         $project = new Project();
         $project->client()->associate($validatedData['client_id']);
-        $project->logo = $projectLogo;
+        $project->logo = $projectLogo ?? null;
         $project->name = $validatedData['project_name'];
         $project->description = $validatedData['description'];
         $project->start_date = $validatedData['start_date'];
@@ -204,6 +211,16 @@ class ProjectController extends Controller
         ]);
 
         if ($project) {
+            if ($request->hasFile('project_logo')) {
+                $existingImage = $project->logo;
+                $projectLogo = $this->uploadObject(config('houmanity.filehandling.storage.projects'), $request->file('project_logo'));
+                $project->logo = $projectLogo;
+
+                if ($existingImage) {
+                    $this->deleteObject($existingImage);
+                }
+            }
+
             $project->client()->associate($validatedData['client_id']);
             $project->name = $validatedData['project_name'];
             $project->description = $validatedData['description'];
@@ -248,9 +265,9 @@ class ProjectController extends Controller
     public function getEmployees($id)
     {
         $employees = Employee::with('user')
-            ->whereHas('clients', function ($builder) use($id) {
-            return $builder->where('id', $id);
-        })->get();
+            ->whereHas('clients', function ($builder) use ($id) {
+                return $builder->where('id', $id);
+            })->get();
 
         return response()->json($employees->toArray(), 200);
     }
