@@ -15,7 +15,11 @@
                     <div class="card-title m-0">
                         <!--begin::Avatar-->
                         <div class="symbol symbol-50px w-50px bg-light">
-                            <img src="{{ asset('assets/media/logos/favicon.png') }}" alt="image" class="p-3">
+                            @if($project->logo)
+                                <img src="{{ asset('storage/'. $project->logo) }}" alt="image" class="p-2">
+                            @else
+                                <img src="{{ asset('assets/media/logos/favicon.png') }}" alt="image" class="p-2">
+                            @endif
                         </div>
                         <!--end::Avatar-->
                     </div>
@@ -67,11 +71,19 @@
                     <!--begin::Users-->
                     <div class="symbol-group symbol-hover">
                         @foreach($project->employees as $employee)
-                        <!--begin::User-->
-                        <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $employee->user->getFullName() }}">
-                            <span class="symbol-label bg-primary text-inverse-primary fw-bolder">{{ $employee->user->getNameFirstLetter() }}</span>
-                        </div>
-                        <!--begin::User-->
+                            @if($employee->image)
+                                <!--begin::User-->
+                                <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $employee->user->getFullName() }}">
+                                    <img src="{{ asset('storage/'.$employee->image) }}" alt="image">
+                                </div>
+                                <!--begin::User-->
+                            @else
+                                <!--begin::User-->
+                                <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $employee->user->getFullName() }}">
+                                    <span class="symbol-label bg-primary text-inverse-primary fw-bolder">{{ $employee->user->getNameFirstLetter() }}</span>
+                                </div>
+                                <!--begin::User-->
+                            @endif
                         @endforeach
                     </div>
                     <!--end::Users-->
