@@ -1,8 +1,9 @@
 <table id="kt_datatable_example_1" class="table table-row-bordered gy-5">
     <thead>
     <tr class="fw-bold fs-6 text-muted">
+        <th class="w-200px">Company</th>
         <th>Name</th>
-        <th>Company/ Website</th>
+        <th>Website</th>
         <th>Phone/ Email</th>
         <th>Service</th>
         <th>Start Date</th>
@@ -13,8 +14,21 @@
     <tbody>
     @foreach($clients as $client)
         <tr>
+            <td>
+                @if($client->company_logo)
+                    <div class="symbol symbol-50px w-50px bg-light">
+                        <img src="{{ asset('storage/' . $client->company_logo )}}" alt="image" class="p-2">
+                    </div>
+                    <a href="javascript:void(0);"> {{ Str::limit($client->company_name, 15) }} </a>
+                @else
+                    <div class="symbol symbol-50px w-50px bg-light">
+                        <img src="{{ asset('assets/media/logos/avatar.png')}}" alt="image" class="p-2">
+                    </div>
+                    <a href="javascript:void(0);"> {{ Str::limit($client->company_name, 15) }} </a>
+                @endif
+            </td>
             <td>{{ $client->user->first_name .' '. $client->user->last_name }}</td>
-            <td>{{ $client->company_name ?? ''}} <br>
+            <td>
                 <a href="{{ $client->website ?? '' }}" target="_blank">{{ $client->website ?? ''}}</a>
             </td>
             <td>
