@@ -41,14 +41,24 @@
                             <div class="d-flex flex-stack py-5">
                                 <!--begin::Details-->
                                 <div class="d-flex align-items-center">
-                                    <!--begin::Avatar-->
-                                    <a href="{{ route('admin.client.show', $client->id) }}">
-                                        <div class="symbol symbol-35px symbol-circle">
-                                            <span class="symbol-label bg-light-{{ config('houmanity.settings.symbol_label_colors')[$client->user->getNameFirstLetter()] }}
-                                            text-{{ config('houmanity.settings.symbol_label_colors')[$client->user->getNameFirstLetter()] }} fw-bold">{{ $client->user->getNameFirstLetter() }}</span>
-                                        </div>
-                                    </a>
-                                    <!--end::Avatar-->
+                                    @if($client->company_logo)
+                                        <!--begin::Avatar-->
+                                        <a href="{{ route('admin.client.show', $client->id) }}">
+                                            <div class="symbol symbol-35px symbol-circle">
+                                                <img alt="logo" src="{{ asset('storage/'.$client->company_logo) }}">
+                                            </div>
+                                        </a>
+                                        <!--end::Avatar-->
+                                    @else
+                                        <!--begin::Avatar-->
+                                        <a href="{{ route('admin.client.show', $client->id) }}">
+                                            <div class="symbol symbol-35px symbol-circle">
+                                                <span class="symbol-label bg-light-{{ config('houmanity.settings.symbol_label_colors')[$client->user->getNameFirstLetter()] }}
+                                                text-{{ config('houmanity.settings.symbol_label_colors')[$client->user->getNameFirstLetter()] }} fw-bold">{{ $client->user->getNameFirstLetter() }}</span>
+                                            </div>
+                                        </a>
+                                        <!--end::Avatar-->
+                                    @endif
                                     <!--begin::Details-->
                                     <div class="ms-6">
                                         <!--begin::Name-->
@@ -68,7 +78,7 @@
                                 <div class="d-flex">
                                     <!--begin::Sales-->
                                     <div class="text-end">
-                                        <div class="fs-5 fw-bolder text-dark">{{ rand(1,10) }}</div>
+                                        <div class="fs-5 fw-bolder text-dark">{{ count($client->projects) }}</div>
                                         <div class="fs-7 text-muted">Projects</div>
                                     </div>
                                     <!--end::Sales-->

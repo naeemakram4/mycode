@@ -83,9 +83,15 @@
                 <div class="symbol-group symbol-hover mb-9">
                     @foreach($clients as $key => $client)
                         @if($key <= 7)
-                            <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $client->user->getFullName() }}">
-                                <span class="symbol-label bg-{{ config('houmanity.settings.symbol_label_colors')[$client->user->getNameFirstLetter()] }} text-inverse-warning fw-bolder">{{ $client->user->getNameFirstLetter() }}</span>
-                            </div>
+                            @if($client->company_logo)
+                                <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="" data-bs-original-title="Michael Eberon">
+                                    <img alt="logo" src="{{ asset('storage/'.$client->company_logo) }}">
+                                </div>
+                            @else
+                                <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $client->user->getFullName() }}">
+                                    <span class="symbol-label bg-{{ config('houmanity.settings.symbol_label_colors')[$client->user->getNameFirstLetter()] }} text-inverse-warning fw-bolder">{{ $client->user->getNameFirstLetter() }}</span>
+                                </div>
+                            @endif
                         @endif
                     @endforeach
 
