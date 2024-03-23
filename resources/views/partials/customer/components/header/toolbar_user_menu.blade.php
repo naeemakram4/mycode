@@ -2,7 +2,11 @@
 <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
     <!--begin::Menu wrapper-->
     <div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-        <img src="{{ asset('assets/media/logos/avatar.png') }}" alt="avatar">
+        @if(auth()->guard('web')->user()->client->company_logo)
+            <img alt="Logo" src="{{ asset('storage/'. auth()->guard('web')->user()->client->company_logo)}}"  />
+        @else
+            <img alt="Logo" src="{{ asset('assets/media/logos/avatar.png')}}"  />
+        @endif
     </div>
 
     <!--begin::User store-setting menu-->
@@ -11,7 +15,11 @@
             <div class="menu-content d-flex align-items-center px-3">
                 <!--begin::Avatar-->
                 <div class="symbol symbol-50px me-5">
-                    <img alt="Logo" src="{{ asset('assets/media/logos/avatar.png') }}">
+                    @if(auth()->guard('web')->user()->client->company_logo)
+                        <img alt="Logo" src="{{ asset('storage/'. auth()->guard('web')->user()->client->company_logo)}}" />
+                    @else
+                        <img alt="Logo" src="{{ asset('assets/media/logos/avatar.png')}}" />
+                    @endif
                 </div>
                 <!--end::Avatar-->
                 <!--begin::Username-->
