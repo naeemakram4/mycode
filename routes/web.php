@@ -77,6 +77,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         require __DIR__ . '/admin/followup.php';
         require __DIR__ . '/admin/service.php';
         require __DIR__ . '/admin/proposal.php';
+        require __DIR__ . '/admin/file_manager.php';
         require __DIR__ . '/admin/invoice.php';
 
         // System Management

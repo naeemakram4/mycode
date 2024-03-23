@@ -119,6 +119,11 @@ return [
             ]
         ],
         [
+            'title' => 'File Manager',
+            'route' => 'admin.file.manager.index',
+            'icon' => 'images',
+        ],
+        [
             'title' => 'Access Management',
             'route' => 'test',
             'icon' => 'shield-check',
