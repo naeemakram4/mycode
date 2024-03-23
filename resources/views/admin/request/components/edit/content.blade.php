@@ -127,7 +127,9 @@
                 <!--begin::Card body-->
                 <div class="card-body pt-0 pb-5">
                     <div class="symbol symbol-75px w-75px bg-light">
-                        <img src="{{ asset('storage/'. $request->file ) }}" alt="image" class="p-3">
+                        @if($request->file)
+                            <img src="{{ asset('storage/'. $request->file ) }}" alt="image" class="p-3">
+                        @endif
                     </div>
                 </div>
                 <!--end::Card body-->

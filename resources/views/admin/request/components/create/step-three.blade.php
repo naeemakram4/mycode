@@ -16,7 +16,7 @@
         <!--begin::Input group-->
         <div class="fv-row mb-10 fv-plugins-icon-container">
             <!--begin::Input-->
-            <input type="file" multiple name="request_file" class="form-control form-control-solid">
+            <input type="file" name="request_file" class="form-control form-control-solid">
             <!--end::Input-->
             <div class="fv-plugins-message-container invalid-feedback"></div>
         </div>
