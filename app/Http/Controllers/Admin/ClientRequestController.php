@@ -115,9 +115,10 @@ class ClientRequestController extends Controller
             'assignee_employee' => 'nullable'
         ]);
 
-        // Uploading request file/image
-        $requestFile = $this->uploadObject(config('houmanity.filehandling.storage.requests'), $request->file('request_file'));
-
+        if ($request->file('request_file')) {
+            // Uploading request file/image
+            $requestFile = $this->uploadObject(config('houmanity.filehandling.storage.requests'), $request->file('request_file'));
+        }
 
         //Generating Ticket ID
         $totalRequests = \App\Models\Request::get()->count();
@@ -131,7 +132,7 @@ class ClientRequestController extends Controller
         $clientRequest->employee()->associate($validatedData['assignee_employee']);
         $clientRequest->requestType()->associate($validatedData['request_type']);
         $clientRequest->subject = $validatedData['request_subject'];
-        $clientRequest->file = $requestFile;
+        $clientRequest->file = $requestFile ?? null;
         $clientRequest->description = $validatedData['request_description'];
 
         if ($clientRequest->save()) {
