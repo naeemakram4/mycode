@@ -51,7 +51,7 @@
         <!--begin::Budget-->
         <div class="card h-100">
             <div class="card-body p-9">
-                <div class="fs-2hx fw-bolder">$3,290.00</div>
+                <div class="fs-2hx fw-bolder">$4,290.00</div>
                 <div class="fs-4 fw-bold text-gray-400 mb-7">Project Finance</div>
                 <div class="fs-6 d-flex justify-content-between mb-4">
                     <div class="fw-bold">Avg. Project Budget</div>
