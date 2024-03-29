@@ -122,10 +122,16 @@
                                     </select>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <label for="startDate" class="required form-label">Start Date</label>
                                     <input id="startDate" class="form-control" type="date" name="start_date"
                                            value="{{ $value->pivot->start_date }}"/>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="endDate" class="form-label">End Date</label>
+                                    <input id="endDate" class="form-control" type="date" name="end_date"
+                                           value="{{ $value->pivot->end_date }}"/>
                                 </div>
                             </div>
                             <!--end::Input group-->

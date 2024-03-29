@@ -19,7 +19,7 @@ class Service extends Model
 
     public function clients(): BelongsToMany
     {
-        return $this->belongsToMany(Client::class, 'client_service')->withPivot('id', 'start_date');
+        return $this->belongsToMany(Client::class, 'client_service')->withPivot('id', 'start_date', 'end_date');
     }
 
     public function leadManagements(): HasMany

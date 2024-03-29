@@ -151,7 +151,8 @@ class ClientController extends Controller
                     ClientService::create([
                         'client_id' => $client->id,
                         'service_id' => $client_service['service_id'],
-                        'start_date' => $client_service['start_date']
+                        'start_date' => $client_service['start_date'],
+                        'end_date' => $client_service['end_date'] ?? null,
                     ]);
                 }
             }
@@ -268,14 +269,17 @@ class ClientController extends Controller
                             ClientService::create([
                                 'client_id' => $client->id,
                                 'service_id' => $service['service_id'],
-                                'start_date' => $service['start_date']
+                                'start_date' => $service['start_date'],
+                                'end_date' => $service['end_date']
+
                             ]);
                         }
 
                         if (count($client->services) > 0) {
                             ClientService::where('id', $service['client_service_table_id'])->update([
                                 'service_id' => $service['service_id'],
-                                'start_date' => $service['start_date']
+                                'start_date' => $service['start_date'],
+                                'end_date' => $service['end_date']
                             ]);
                         }
                     }
