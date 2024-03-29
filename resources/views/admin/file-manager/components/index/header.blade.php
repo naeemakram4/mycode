@@ -24,7 +24,7 @@
                     <a href="{{ route('admin.dashboard') }}">{{ config('app.name') }}</a>
                     <span class="mx-3">|</span>
                     <a href="javascript:void(0);">{{ $pageTitle }}</a>
-                    <span class="mx-3">|</span>{{ $dirCount }} items</div>
+                    <span class="mx-3">|</span>{{ count($clients) }} items</div>
             </div>
             <!--end::Title-->
         </div>

@@ -23,8 +23,9 @@
                 <div class="text-muted fw-bolder">
                     <a href="{{ route('admin.dashboard') }}">{{ config('app.name') }}</a>
                     <span class="mx-3">|</span>
-                    <a href="{{ route('admin.file.manager.index') }}">{{ $pageTitle }}</a>
+                    <a href="{{ route('admin.file.manager.index') }}"> File Manager</a>
                     <span class="mx-3">|</span>
+                    <a href="{{ route('admin.file.manager.directories', $request->client->id) }}">{{ $request->client->company_name }}</a>
             </div>
             <!--end::Title-->
         </div>
@@ -37,7 +38,7 @@
             <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold flex-nowrap">
                 <!--begin::Nav item-->
                 <li class="nav-item">
-                    <a class="nav-link text-active-primary me-6 active" href="javascript:void(0);">{{ $client->company_name }}</a>
+                    <a class="nav-link text-active-primary me-6 active" href="javascript:void(0);">{{ $request->ticket_id }}</a>
                 </li>
                 <!--end::Nav item-->
             </ul>
