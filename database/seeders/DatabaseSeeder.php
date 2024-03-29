@@ -12,23 +12,31 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $this->call([
-            RoleSeeder::class,
-            PermissionSeeder::class,
-            AdminSeeder::class,
-            UserSeeder::class,
-            ServiceSeeder::class,
-            ClientSeeder::class,
-            EmployeeSeeder::class,
-            ProjectSeeder::class,
-            TaskSeeder::class,
-            RequestTypeSeeder::class,
-            RequestSeeder::class,
-            LeadManagementTypeSeeder::class,
+        if (config('app.env') == 'local') {
+            $this->call([
+                RoleSeeder::class,
+                PermissionSeeder::class,
+                AdminSeeder::class,
+                UserSeeder::class,
+                ServiceSeeder::class,
+                ClientSeeder::class,
+                EmployeeSeeder::class,
+                ProjectSeeder::class,
+                TaskSeeder::class,
+                RequestTypeSeeder::class,
+                RequestSeeder::class,
+                LeadManagementTypeSeeder::class,
 
 //            DepartmentSeeder::class,
 //            DesignationSeeder::class,
 //            TaskGroupSeeder::class,
-        ]);
+            ]);
+        } else {
+            $this->call([
+                RoleSeeder::class,
+                PermissionSeeder::class,
+                AdminSeeder::class,
+            ]);
+        }
     }
 }
