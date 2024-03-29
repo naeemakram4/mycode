@@ -108,16 +108,51 @@
             <!--begin::Form group-->
             <div class="form-group">
                 <div data-repeater-list="client_services">
-                    @foreach($client->services as $value)
+                    @if(count($client->services) > 0)
+                        @foreach($client->services as $value)
+                            <div data-repeater-item>
+                                <div class="form-group row">
+                                    <input type="hidden" name="client_service_table_id" value="{{ $value->pivot->id }}">
+                                    <div class="col-md-6">
+                                        <label for="service_id" class="required form-label">Select Services</label>
+                                        <select name="service_id" id="service_id" class="form-select" data-control="select2" data-placeholder="Select Services">
+                                            <option value=""></option>
+                                            @foreach($services as $service)
+                                                <option value="{{ $service->id }}" {{ $service->id == $value->pivot->service_id ? 'selected' : '' }}>{{ $service->label }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label for="startDate" class="required form-label">Start Date</label>
+                                        <input id="startDate" class="form-control" type="date" name="start_date"
+                                               value="{{ $value->pivot->start_date }}"/>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label for="endDate" class="form-label">End Date</label>
+                                        <input id="endDate" class="form-control" type="date" name="end_date"
+                                               value="{{ $value->pivot->end_date }}"/>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <div class="col-md-3">
+                                    <a href="javascript:void(0);" data-repeater-delete class="btn btn-light-danger mt-3 mt-md-8">
+                                        <i class="la la-trash-o"></i>Delete
+                                    </a>
+                                </div>
+                                <div class="separator separator-dashed border-secondary my-10 mx-20"></div>
+                            </div>
+                        @endforeach
+                    @else
                         <div data-repeater-item>
                             <div class="form-group row">
-                                <input type="hidden" name="client_service_table_id" value="{{ $value->pivot->id }}">
                                 <div class="col-md-6">
                                     <label for="service_id" class="required form-label">Select Services</label>
                                     <select name="service_id" id="service_id" class="form-select" data-control="select2" data-placeholder="Select Services">
                                         <option value=""></option>
                                         @foreach($services as $service)
-                                            <option value="{{ $service->id }}" {{ $service->id == $value->pivot->service_id ? 'selected' : '' }}>{{ $service->label }}</option>
+                                            <option value="{{ $service->id }}">{{ $service->label }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -125,13 +160,13 @@
                                 <div class="col-md-3">
                                     <label for="startDate" class="required form-label">Start Date</label>
                                     <input id="startDate" class="form-control" type="date" name="start_date"
-                                           value="{{ $value->pivot->start_date }}"/>
+                                           value="{{ old('start_date') }}"/>
                                 </div>
 
                                 <div class="col-md-3">
                                     <label for="endDate" class="form-label">End Date</label>
                                     <input id="endDate" class="form-control" type="date" name="end_date"
-                                           value="{{ $value->pivot->end_date }}"/>
+                                           value="{{ old('end_date') }}"/>
                                 </div>
                             </div>
                             <!--end::Input group-->
@@ -142,7 +177,7 @@
                             </div>
                             <div class="separator separator-dashed border-secondary my-10 mx-20"></div>
                         </div>
-                    @endforeach
+                    @endif
                 </div>
             </div>
             <!--end::Form group-->
@@ -178,7 +213,7 @@
 @push('pageInnerScript')
     <script>
         $('#service').repeater({
-            initEmpty: false,
+            initEmpty: {{ (count($client->services) > 0) ?  'false' : 'true'}},
             show: function () {
                 $('.form-select').select2({placeholder: 'Select an option'})
                 $(this).slideDown();
