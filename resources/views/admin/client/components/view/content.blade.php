@@ -135,18 +135,30 @@
                 <div class="card-body d-flex flex-column">
                     @foreach($client->services as $service)
                         <!--begin::Item-->
-                        <div class="d-flex align-items-center position-relative mb-7">
-                            <!--begin::Label-->
-                            <div class="position-absolute top-0 start-0 rounded h-100 bg-secondary w-4px"></div>
-                            <!--end::Label-->
+                        <div class="d-flex align-items-center justify-content-between position-relative mb-7">
                             <!--begin::Details-->
                             <div class="fw-bold ms-5">
+                                <!--begin::Label-->
+                                <div class="position-absolute top-0 start-0 rounded h-100 bg-secondary w-4px"></div>
+                                <!--end::Label-->
                                 <span class="fs-5 fw-bolder text-dark">{{ $service->label }}</span>
+                                <div class="badge badge-lg badge-light-{{ (\Carbon\Carbon::parse($service->pivot->end_date)->isPast()) ? 'danger' : 'success' }} d-inline">
+                                    {{ (\Carbon\Carbon::parse($service->pivot->end_date)->isPast()) ? 'Ended' : 'Continue' }}
+                                </div>
                                 <!--begin::Info-->
                                 <div class="fs-7 text-muted">Start Date: {{ Carbon\Carbon::parse($service->pivot->start_date)->format('d-m-Y') }}</div>
                                 <!--end::Info-->
+                                <!--begin::Info-->
+                                <div class="fs-7 text-muted">End Date: {{ Carbon\Carbon::parse($service->pivot->end_date)->format('d-m-Y') }}</div>
+                                <!--end::Info-->
                             </div>
                             <!--end::Details-->
+
+                            <!--begin::Badge-->
+                            <div>
+                                <div class="badge badge-lg badge-light-primary d-inline">Service Duration: {{ \Carbon\Carbon::parse($service->pivot->start_date)->diffInDays(\Carbon\Carbon::parse($service->pivot->end_date)) }} Days</div> <br>
+                            </div>
+                            <!--begin::Badge-->
                         </div>
                         <!--end::Item-->
                     @endforeach
