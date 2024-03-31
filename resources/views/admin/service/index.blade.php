@@ -12,3 +12,7 @@
     </div>
     <!--end::Card-->
 @endsection
+
+@section('pageInnerModals')
+    @include('admin.service.components.create_service_model')
+@endsection

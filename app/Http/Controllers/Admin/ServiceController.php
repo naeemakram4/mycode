@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ServiceController extends Controller
 {
@@ -15,61 +16,59 @@ class ServiceController extends Controller
         $action = [
             'text' => 'Add Service',
             'route' => 'javascript:void(0);',
-            'data' => ''
+            'data' => 'data-bs-toggle=modal data-bs-target=#addNewService'
         ];
 
         $viewParams = [
             'pageTitle' => $pageTitle,
             'breadcrumbs' => $breadcrumbs,
             'action' => $action,
+            'services' => Service::withCount('clients', 'leadManagements')->latest()->get()
         ];
 
         return view('admin.service.index', $viewParams);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'label' => 'required|string'
+        ]);
+
+        $service = new Service();
+        $service->label = ucfirst($validatedData['label']);
+        $service->name = lcfirst(str_replace(' ', '_', $validatedData['label']));
+        $service->description = $request->description;
+
+        if ($service->save()) {
+            Session::flash('successMessage', 'Service has been added successfully!');
+            return redirect()->back();
+        }
+
+        return redirect()->back()
+            ->withErrors('Failed to create new service, Try again!');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Service $service)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Service $service)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Service $service)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Service $service)
     {
         //
