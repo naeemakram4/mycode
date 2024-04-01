@@ -6,6 +6,7 @@
         <th>Total Clients</th>
         <th>Total Leads</th>
         <th>Description</th>
+        <th>Action</th>
     </tr>
     </thead>
     <tbody>
@@ -17,6 +18,12 @@
                 <td>{{ $service->clients_count }}</td>
                 <td>{{ $service->lead_managements_count }}</td>
                 <td>{{ $service->description ?? '--'}}</td>
+                <td>
+                    <button class="btn btn-sm btn-light-primary"
+                            id="editService" data-id="{{ $service->id }}">
+                        Edit
+                    </button>
+                </td>
             </tr>
         @endforeach
     @endif

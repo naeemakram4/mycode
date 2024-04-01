@@ -61,12 +61,26 @@ class ServiceController extends Controller
 
     public function edit(Service $service)
     {
-        //
+        return response()->json($service);
     }
 
     public function update(Request $request, Service $service)
     {
-        //
+        $validatedData = $request->validate([
+            'label' => 'required|string'
+        ]);
+
+        $service->label = ucfirst($validatedData['label']);
+        $service->name = lcfirst(str_replace(' ', '_', $validatedData['label']));
+        $service->description = $request->description;
+
+        if ($service->save()) {
+            Session::flash('successMessage', 'Service has been updated successfully!');
+            return redirect()->back();
+        }
+
+        return redirect()->back()
+            ->withErrors('Failed to update service, Try again!');
     }
 
     public function destroy(Service $service)
