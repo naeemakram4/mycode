@@ -76,7 +76,7 @@
 
     <div class="row mb-5">
         <div class="col-md-6 fv-row">
-            <label for="company" class="required form-label">Company Logo</label>
+            <label for="company" class="form-label">Company Logo</label>
             <input id="company_logo" class="form-control" type="file" name="company_logo" />
         </div>
         <div class="col-md-6 fv-row">

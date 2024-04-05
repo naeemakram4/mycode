@@ -85,7 +85,7 @@
             </div>
         </div>
         <div class="col-md-5 fv-row">
-            <label for="company" class="required form-label">New Company Logo</label>
+            <label for="company" class="form-label">New Company Logo</label>
             <input id="company_logo" class="form-control" type="file" name="company_logo" />
         </div>
         <div class="col-md-6 fv-row">
