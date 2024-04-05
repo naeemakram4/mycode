@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
                 PermissionSeeder::class,
                 AdminSeeder::class,
                 LeadManagementTypeSeeder::class,
+                RequestTypeSeeder::class,
             ]);
         }
     }

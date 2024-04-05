@@ -11,20 +11,12 @@ class RequestTypeSeeder extends Seeder
     public function run(): void
     {
         RequestType::create([
-           'name' => 'graphic_designing',
-           'label' => 'Graphic Designing'
+           'name' => 'change_request',
+           'label' => 'Change Request'
         ]);
         RequestType::create([
-            'name' => 'web_designing',
-            'label' => 'Web Designing'
-        ]);
-        RequestType::create([
-            'name' => 'seo',
-            'label' => 'Seo Services'
-        ]);
-        RequestType::create([
-            'name' => 'new_project',
-            'label' => 'New Project'
+            'name' => 'bug_report',
+            'label' => 'Bug Report'
         ]);
     }
 }
