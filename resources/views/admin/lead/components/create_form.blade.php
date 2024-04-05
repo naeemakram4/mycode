@@ -152,7 +152,7 @@
         <div class="mb-10">
             <input class="form-check-input" name="is_seo_audit" type="checkbox"/>
             <label class="form-check-label" for="form_checkbox">
-                Is SEO Audit
+                Request SEO Audit
             </label>
         </div>
 
