@@ -139,7 +139,7 @@
                             <!--end::Menu item-->
                             <!--begin::Menu item-->
                             <div class="menu-item px-3 my-1">
-                                <a href="{{ route('admin.task.edit', $task->id) }}" id="taskSettings" data-id="{{ $task->id }}" class="menu-link px-3">Settings</a>
+                                <a href="{{ route('admin.task.edit', $task->id) }}" id="taskSettings" data-id="{{ $task->id }}" class="menu-link px-3">Edit</a>
                             </div>
                             <!--end::Menu item-->
                             <!--begin::Menu item-->
