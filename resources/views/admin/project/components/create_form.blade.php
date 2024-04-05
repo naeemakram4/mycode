@@ -27,7 +27,7 @@
     <!--begin::Input group-->
     <div class="row mb-7 fv-plugins-icon-container">
         <div class="col-md-6">
-            <label class="form-label required">Start Date</label>
+            <label class="form-label">Start Date</label>
             <input type="date" name="start_date" class="form-control  form-control-solid"
                    value="{{old('start_date')}}">
         </div>

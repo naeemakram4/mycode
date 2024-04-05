@@ -136,8 +136,8 @@ class ProjectController extends Controller
     {
         $validatedData = $request->validate([
             'project_name' => 'required|string',
-            'description' => 'required|string',
-            'start_date' => 'required',
+            'description' => 'nullable',
+            'start_date' => 'nullable',
             'due_date' => 'nullable',
             'client_id' => 'required',
             'status' => 'required'
@@ -203,8 +203,8 @@ class ProjectController extends Controller
     {
         $validatedData = $request->validate([
             'project_name' => 'required|string',
-            'description' => 'required|string',
-            'start_date' => 'required',
+            'description' => 'nullable',
+            'start_date' => 'nullable',
             'due_date' => 'nullable',
             'client_id' => 'required',
             'status' => 'required'
