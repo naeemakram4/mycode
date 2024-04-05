@@ -59,14 +59,14 @@ class LeadManagementController extends Controller
         $validatedData = $request->validate([
             'service' => 'required',
             'lead_type' => 'required',
-            'name' => 'required',
+            'lead_value' => 'required',
             'status' => 'required',
         ]);
 
         $lead = new LeadManagement();
         $lead->service()->associate($validatedData['service']);
         $lead->leadManagementType()->associate($validatedData['lead_type']);
-        $lead->lead_value = $request->lead_value;
+        $lead->lead_value = $validatedData['lead_value'];
         $lead->company = $request->company;
         $lead->position = $request->position;
         $lead->website = $request->website;
@@ -136,14 +136,14 @@ class LeadManagementController extends Controller
         $validatedData = $request->validate([
             'service' => 'required',
             'lead_type' => 'required',
-            'name' => 'required',
+            'lead_value' => 'required',
             'status' => 'required',
         ]);
 
         if ($leadManagement) {
             $leadManagement->service()->associate($validatedData['service']);
             $leadManagement->leadManagementType()->associate($validatedData['lead_type']);
-            $leadManagement->lead_value = $request->lead_value;
+            $leadManagement->lead_value = $validatedData['lead_value'];
             $leadManagement->company = $request->company;
             $leadManagement->position = $request->position;
             $leadManagement->website = $request->website;

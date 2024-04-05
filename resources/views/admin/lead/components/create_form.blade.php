@@ -14,7 +14,7 @@
             </select>
         </div>
         <div class="col-md-4">
-            <label class="form-label">Lead Value</label>
+            <label class="required form-label">Lead Value</label>
             <input type="text" name="lead_value" class="form-control"
                    value="{{old('lead_value')}}">
         </div>
@@ -37,7 +37,7 @@
 
     <div class="row mb-7 fv-plugins-icon-container">
         <div class="col-md-8">
-            <label for="employees" class="required form-label">Select Employees</label>
+            <label for="employees" class="form-label">Select Employees</label>
             <select name="employees[]" class="form-select" multiple data-control="select2"
                     data-placeholder="Select Employees">
                 <option value=""></option>
@@ -94,7 +94,7 @@
 
     <div class="row mb-7 fv-plugins-icon-container">
         <div class="col-md-4">
-            <label class="form-label required">Email</label>
+            <label class="form-label">Email</label>
             <input type="email" name="email" class="form-control"
                    value="{{old('email')}}">
         </div>
