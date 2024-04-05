@@ -107,7 +107,7 @@
                         <!--begin::Col-->
                         <div class="col-md-6">
                             <label class="required fw-bold mb-2">Service</label>
-                            <select name="service" class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="Select a employee"  aria-hidden="true">
+                            <select name="service" class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="Select a service"  aria-hidden="true">
                                 <option></option>
                                 @foreach(\App\Models\Service::get() as $service)
                                     <option value="{{ $service->id }}">{{ $service->label }}</option>
