@@ -18,7 +18,7 @@
             </select>
         </div>
         <div class="col-md-4">
-            <label class="required form-label">Lead Value</label>
+            <label class="form-label">Lead Value</label>
             <input type="text" name="lead_value" class="form-control"
                    value="{{old('lead_value', $lead->lead_value)}}">
         </div>

@@ -59,7 +59,7 @@ class LeadManagementController extends Controller
         $validatedData = $request->validate([
             'services' => 'required|array',
             'lead_type' => 'required',
-            'lead_value' => 'required',
+            'lead_value' => 'nullable',
             'status' => 'required',
         ]);
 
@@ -137,7 +137,7 @@ class LeadManagementController extends Controller
         $validatedData = $request->validate([
             'services' => 'required|array',
             'lead_type' => 'required',
-            'lead_value' => 'required',
+            'lead_value' => 'nullable',
             'status' => 'required',
         ]);
 
