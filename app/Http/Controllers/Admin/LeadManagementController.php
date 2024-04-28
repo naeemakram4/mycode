@@ -57,14 +57,13 @@ class LeadManagementController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'service' => 'required',
+            'services' => 'required|array',
             'lead_type' => 'required',
             'lead_value' => 'required',
             'status' => 'required',
         ]);
 
         $lead = new LeadManagement();
-        $lead->service()->associate($validatedData['service']);
         $lead->leadManagementType()->associate($validatedData['lead_type']);
         $lead->lead_value = $validatedData['lead_value'];
         $lead->company = $request->company;
@@ -88,6 +87,8 @@ class LeadManagementController extends Controller
 
         if ($lead->save()) {
             $lead->employees()->sync($request->employees);
+            $lead->services()->sync($validatedData['services']);
+
 
             Session::flash('successMessage', 'A new client has been create successfully!');
             return redirect()->route('admin.lead-management.index');
@@ -134,14 +135,13 @@ class LeadManagementController extends Controller
     public function update(Request $request, LeadManagement $leadManagement)
     {
         $validatedData = $request->validate([
-            'service' => 'required',
+            'services' => 'required|array',
             'lead_type' => 'required',
             'lead_value' => 'required',
             'status' => 'required',
         ]);
 
         if ($leadManagement) {
-            $leadManagement->service()->associate($validatedData['service']);
             $leadManagement->leadManagementType()->associate($validatedData['lead_type']);
             $leadManagement->lead_value = $validatedData['lead_value'];
             $leadManagement->company = $request->company;
@@ -168,6 +168,8 @@ class LeadManagementController extends Controller
 
             if ($leadManagement->save()) {
                 $leadManagement->employees()->sync($request->employees);
+                $leadManagement->services()->sync($validatedData['services']);
+
 
                 Session::flash('successMessage', 'A new client has been create successfully!');
                 return redirect()->route('admin.lead-management.index');

@@ -6,11 +6,14 @@
     <div class="row mb-7 fv-plugins-icon-container">
         <div class="col-md-8">
             <label for="service" class="required form-label">Lead Service</label>
-            <select name="service" id="service" class="form-select" data-control="select2"
+            <select name="services[]" id="service" multiple class="form-select" data-control="select2"
                     data-placeholder="Lead Service">
                 <option value=""></option>
                 @foreach($services as $service)
-                    <option value="{{ $service->id }}" {{ ($service->id == $lead->service_id) ? 'selected' : '' }}>{{ $service->label }}</option>
+                    <option value="{{ $service->id }}"
+                        @if($lead->hasService($service->id)) selected @endif>
+                        {{ $service->label }}
+                    </option>
                 @endforeach
             </select>
         </div>
@@ -43,9 +46,10 @@
                     data-placeholder="Select Employees">
                 <option value=""></option>
                 @foreach($employees as $employee)
-                    @foreach($lead->employees as $leadEmployee)
-                        <option value="{{ $employee->id }}" {{ ($employee->id == $leadEmployee->pivot->employee_id) ? 'selected' : '' }}>{{ $employee->user->getFullName() }}</option>
-                    @endforeach
+                    <option value="{{ $employee->id }}"
+                            @if($lead->hasEmployee($employee->id)) selected @endif>
+                        {{ $employee->user->getFullName() }}
+                    </option>
                 @endforeach
             </select>
         </div>

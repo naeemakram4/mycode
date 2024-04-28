@@ -5,7 +5,7 @@
     <div class="row mb-7 fv-plugins-icon-container">
         <div class="col-md-8">
             <label for="service" class="required form-label">Lead Service</label>
-            <select name="service" id="service" class="form-select" data-control="select2"
+            <select name="services[]" id="service" multiple class="form-select" data-control="select2"
                     data-placeholder="Lead Service">
                 <option value=""></option>
                 @foreach($services as $service)

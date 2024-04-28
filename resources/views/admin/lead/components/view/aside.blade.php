@@ -59,13 +59,15 @@
             <!--begin::Section-->
             <div class="mb-10">
                 <!--begin::Title-->
-                <h5 class="mb-4">Lead Service</h5>
+                <h5 class="mb-4">Lead Services</h5>
                 <!--end::Title-->
                 <!--begin::Details-->
                 <div class="mb-0">
-                    <!--begin::Card expiry-->
-                    <div class="fw-bold text-gray-600">{{ $lead->service->label }}</div>
-                    <!--end::Card expiry-->
+                    @foreach($lead->services as $service)
+                        <!--begin::Card expiry-->
+                        <div class="fw-bold text-gray-600">{{ $service->label }}</div>
+                        <!--end::Card expiry-->
+                    @endforeach
                 </div>
                 <!--end::Details-->
             </div>

@@ -47,9 +47,9 @@ class LeadManagement extends Model
         return $this->belongsToMany(Employee::class);
     }
 
-    public function service(): BelongsTo
+    public function services(): BelongsToMany
     {
-        return $this->belongsTo(Service::class);
+        return $this->belongsToMany(Service::class, 'lead_management_service');
     }
 
     public function leadManagementType(): BelongsTo
@@ -60,5 +60,15 @@ class LeadManagement extends Model
     public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);
+    }
+
+    public function hasService($service)
+    {
+        return $this->services->contains('id', $service);
+    }
+
+    public function hasEmployee($employee)
+    {
+        return $this->employees->contains('id', $employee);
     }
 }
