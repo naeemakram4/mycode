@@ -5,19 +5,19 @@
         <!--begin::Col-->
         <daiv class="col-md-4 fv-row fv-plugins-icon-container">
             <label for="firstName" class="required form-label">First Name</label>
-            <input id="firstName" class="form-control" type="text" name="first_name" value="{{ old('first_name', $client->user->first_name) }}"/>
+            <input id="firstName" required class="form-control" type="text" name="first_name" value="{{ old('first_name', $client->user->first_name) }}"/>
         </daiv>
         <!--end::Col-->
         <!--begin::Col-->
         <div class="col-md-4 fv-row fv-plugins-icon-container">
             <label for="lastName" class="required form-label">Last Name</label>
-            <input id="lastName" class="form-control" type="text" name="last_name"
+            <input id="lastName" required class="form-control" type="text" name="last_name"
                    value="{{ old('last_name', $client->user->last_name) }}"/>
         </div>
         <!--end::Col-->
         <div class="col-md-4 fv-row fv-plugins-icon-container">
             <label for="userName" class="required form-label">Username</label>
-            <input id="userName" class="form-control" type="text" name="user_name" value="{{ $client->user->user_name }}"/>
+            <input id="userName" required class="form-control" type="text" name="user_name" value="{{ $client->user->user_name }}"/>
         </div>
     </div>
 
@@ -25,13 +25,13 @@
         <!--begin::Col-->
         <daiv class="col-md-4 fv-row fv-plugins-icon-container">
             <label for="phone" class="required form-label">Phone</label>
-            <input id="phone" class="form-control" type="tel" maxlength="10" name="phone" value="{{ old('phone', $client->user->phone) }}"/>
+            <input id="phone" required class="form-control" type="tel" maxlength="10" name="phone" value="{{ old('phone', $client->user->phone) }}"/>
         </daiv>
         <!--end::Col-->
         <!--begin::Col-->
         <div class="col-md-4 fv-row fv-plugins-icon-container">
             <label for="email" class="required form-label">Email</label>
-            <input id="email" class="form-control" type="email" name="email"
+            <input id="email" required class="form-control" type="email" name="email"
                    value="{{ old('email', $client->user->email) }}"/>
         </div>
         <!--end::Col-->
@@ -69,7 +69,7 @@
 
     <div class="mb-10">
         <label for="password" class="required form-label">New Password</label>
-        <input id="password" class="form-control" type="password" name="new_password"/>
+        <input id="password" required class="form-control" type="password" name="new_password"/>
     </div>
 
     <div class="separator separator-content my-15">Business Details</div>
@@ -90,7 +90,7 @@
         </div>
         <div class="col-md-6 fv-row">
             <label for="company" class="required form-label">Company</label>
-            <input id="company" class="form-control" type="text" name="company_name"
+            <input id="company" required class="form-control" type="text" name="company_name"
                    value="{{ old('company_name', $client->company_name) }}"/>
         </div>
     </div>
@@ -115,7 +115,7 @@
                                     <input type="hidden" name="client_service_table_id" value="{{ $value->pivot->id }}">
                                     <div class="col-md-6">
                                         <label for="service_id" class="required form-label">Select Services</label>
-                                        <select name="service_id" id="service_id" class="form-select" data-control="select2" data-placeholder="Select Services">
+                                        <select name="service_id" required id="service_id" class="form-select" data-control="select2" data-placeholder="Select Services">
                                             <option value=""></option>
                                             @foreach($services as $service)
                                                 <option value="{{ $service->id }}" {{ $service->id == $value->pivot->service_id ? 'selected' : '' }}>{{ $service->label }}</option>
@@ -125,13 +125,13 @@
 
                                     <div class="col-md-3">
                                         <label for="startDate" class="required form-label">Start Date</label>
-                                        <input id="startDate" class="form-control" type="date" name="start_date"
+                                        <input id="startDate" required class="form-control" type="date" name="start_date"
                                                value="{{ $value->pivot->start_date }}"/>
                                     </div>
 
                                     <div class="col-md-3">
-                                        <label for="endDate" class="form-label">End Date</label>
-                                        <input id="endDate" class="form-control" type="date" name="end_date"
+                                        <label for="endDate" class="form-label required">End Date</label>
+                                        <input id="endDate" required class="form-control" type="date" name="end_date"
                                                value="{{ $value->pivot->end_date }}"/>
                                     </div>
                                 </div>
@@ -149,7 +149,7 @@
                             <div class="form-group row">
                                 <div class="col-md-6">
                                     <label for="service_id" class="required form-label">Select Services</label>
-                                    <select name="service_id" id="service_id" class="form-select" data-control="select2" data-placeholder="Select Services">
+                                    <select name="service_id" required id="service_id" class="form-select" data-control="select2" data-placeholder="Select Services">
                                         <option value=""></option>
                                         @foreach($services as $service)
                                             <option value="{{ $service->id }}">{{ $service->label }}</option>
@@ -159,13 +159,13 @@
 
                                 <div class="col-md-3">
                                     <label for="startDate" class="required form-label">Start Date</label>
-                                    <input id="startDate" class="form-control" type="date" name="start_date"
+                                    <input id="startDate" required class="form-control" type="date" name="start_date"
                                            value="{{ old('start_date') }}"/>
                                 </div>
 
                                 <div class="col-md-3">
-                                    <label for="endDate" class="form-label">End Date</label>
-                                    <input id="endDate" class="form-control" type="date" name="end_date"
+                                    <label for="endDate" class="form-label required">End Date</label>
+                                    <input id="endDate" required class="form-control" type="date" name="end_date"
                                            value="{{ old('end_date') }}"/>
                                 </div>
                             </div>

@@ -149,7 +149,7 @@
                                 <div class="fs-7 text-muted">Start Date: {{ Carbon\Carbon::parse($service->pivot->start_date)->format('d-m-Y') }}</div>
                                 <!--end::Info-->
                                 <!--begin::Info-->
-                                <div class="fs-7 text-muted">End Date: {{ Carbon\Carbon::parse($service->pivot->end_date)->format('d-m-Y') }}</div>
+                                <div class="fs-7 text-muted">End Date: {{ !empty($service->pivot->end_date) ? Carbon\Carbon::parse($service->pivot->end_date)->format('d-m-Y') : '---' }}</div>
                                 <!--end::Info-->
                             </div>
                             <!--end::Details-->

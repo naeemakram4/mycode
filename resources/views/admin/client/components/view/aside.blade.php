@@ -116,6 +116,10 @@
                     </div>
                     <!--begin::Badge-->
                     <!--begin::Details item-->
+                    <div class="fw-bolder mt-5">Company Name</div>
+                    <div class="text-gray-600">{{ $client->company_name }}</div>
+                    <!--begin::Details item-->
+                    <!--begin::Details item-->
                     <div class="fw-bolder mt-5">Username</div>
                     <div class="text-gray-600">{{ $client->user->user_name }}</div>
                     <!--begin::Details item-->
@@ -128,6 +132,13 @@
                     <!--begin::Details item-->
                     <div class="fw-bolder mt-5">Phone</div>
                     <div class="text-gray-600">{{ $client->user->phone }}</div>
+                    <!--begin::Details item-->
+                    <!--begin::Details item-->
+                    <div class="fw-bolder mt-5">Address</div>
+                    <div class="text-gray-600">{{ $client->address }}, <br>
+                        {{ $client->city }}, {{ $client->state }}<br>
+                        {{ $client->postal_code }}
+                    </div>
                     <!--begin::Details item-->
                     <!--begin::Details item-->
                     <div class="fw-bolder mt-5">Created At</div>

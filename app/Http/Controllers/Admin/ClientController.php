@@ -148,6 +148,7 @@ class ClientController extends Controller
         if ($client->save()) {
             if ($request->client_services !== null) {
                 foreach ($request->client_services as $key => $client_service) {
+
                     ClientService::create([
                         'client_id' => $client->id,
                         'service_id' => $client_service['service_id'],
