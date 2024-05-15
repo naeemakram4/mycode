@@ -15,7 +15,6 @@ class EmployeeSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('employees')->delete();
         $faker = \Faker\Factory::create();
 
         $totalTeamRecords = 10;

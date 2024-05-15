@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Models\Employee;
 use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
@@ -13,7 +14,10 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::create([
+        //Creating default Employee
+        $empUser = User::create([
+            'first_name' => 'Default',
+            'last_name' => 'Employee',
             'role_id' => Role::EMPLOYEE_ROLE,
             'user_name' => 'employee',
             'password' => Hash::make('admin123'),
@@ -21,7 +25,15 @@ class UserSeeder extends Seeder
             'email_verified_at' => Carbon::now()
         ]);
 
+        $employee = Employee::create([
+            'user_id' => $empUser->id,
+            'remarks' => 'This is dummy default employee records!',
+        ]);
+
+        //Creating default Client
         User::create([
+            'first_name' => 'Default',
+            'last_name' => 'Client',
             'role_id' => Role::CLIENT_ROLE,
             'user_name' => 'customer',
             'password' => Hash::make('admin123'),
