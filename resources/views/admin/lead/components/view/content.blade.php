@@ -111,9 +111,9 @@
                 <!--begin::Title-->
                 <h5 class="mb-4">SEO Audit:
                     @if($lead->is_seo_audit == 1)
-                        <span class="badge badge-light-success me-2">True</span>
+                        <span class="badge badge-light-success me-2">Request</span>
                     @else
-                        <span class="badge badge-light-danger me-2">False</span>
+                        <span class="badge badge-light-danger me-2">Not Request</span>
                     @endif
                 </h5>
                 <!--end::Title-->

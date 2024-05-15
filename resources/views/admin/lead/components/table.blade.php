@@ -15,8 +15,8 @@
     <tbody>
     @foreach($leads as $lead)
         <tr>
-            <td><a href="{{ route('admin.lead-management.show', $lead->id) }}">{{ $lead->id }}</a></td>
-            <td>{{ $lead->name }}</td>
+            <td>{{ $lead->id }}</td>
+            <td><a href="{{ route('admin.lead-management.show', $lead->id) }}">{{ $lead->name }}</a></td>
             <td><span class="badge badge-light-dark">{{ $lead->leadManagementType->label }}</span></td>
             <td>{{ $lead->company }}</td>
             <td>{{ $lead->email }} <br> {{ $lead->contact }}</td>
