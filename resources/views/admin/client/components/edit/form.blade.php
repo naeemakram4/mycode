@@ -68,8 +68,8 @@
     </div>
 
     <div class="mb-10">
-        <label for="password" class="required form-label">New Password</label>
-        <input id="password" required class="form-control" type="password" name="new_password"/>
+        <label for="password" class="form-label">New Password</label>
+        <input id="password" class="form-control" type="password" name="new_password"/>
     </div>
 
     <div class="separator separator-content my-15">Business Details</div>

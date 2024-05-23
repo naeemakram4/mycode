@@ -176,6 +176,7 @@ class ClientController extends Controller
                 'pageTitle' => $pageTitle,
                 'breadcrumbs' => $breadcrumbs,
                 'client' => $client,
+                'requests' => $client->requests()->latest()->get()
             ];
 
             return view('admin.client.view', $viewParams);
@@ -247,26 +248,30 @@ class ClientController extends Controller
             $client->state = $request->state;
             $client->postal_code = $request->postal_code;
             if ($client->save()) {
-                if ($request->client_services !== null) {
-                    $existingServices = [];
-                    foreach ($client->services as $value) {
-                        $existingServices[] = $value->pivot->id;
-                    }
 
-                    $comingServices = [];
+                $existingServices = [];
+                foreach ($client->services as $value) {
+                    $existingServices[] = $value->pivot->id;
+                }
+
+                $comingServices = [];
+                if (!empty($request->client_services)) {
                     foreach ($request->client_services as $value) {
-                        $comingServices [] = $value['client_service_table_id'];
+                        $comingServices [] = $value['service_id'];
                     }
+                }
 
-                    $ServicesToBeRemoved = array_diff($existingServices, $comingServices);
+                $ServicesToBeRemoved = array_diff($existingServices, $comingServices);
+                $ServicesToBeAdded = array_diff($comingServices, $existingServices);
 
-                    // If there are Spare parts to removed from product.
-                    if (!empty($ServicesToBeRemoved)) {
-                        ClientService::whereIn('id', $ServicesToBeRemoved)->delete();
-                    }
+                // If there are Spare parts to removed from product.
+                if (!empty($ServicesToBeRemoved)) {
+                    ClientService::whereIn('id', $ServicesToBeRemoved)->delete();
+                }
 
+                if (!empty($request->client_services)) {
                     foreach ($request->client_services as $key => $service) {
-                        if ($service['client_service_table_id'] == null) {
+                        if (in_array($service['service_id'], $ServicesToBeAdded)) {
                             ClientService::create([
                                 'client_id' => $client->id,
                                 'service_id' => $service['service_id'],
@@ -274,10 +279,8 @@ class ClientController extends Controller
                                 'end_date' => $service['end_date']
 
                             ]);
-                        }
-
-                        if (count($client->services) > 0) {
-                            ClientService::where('id', $service['client_service_table_id'])->update([
+                        } else {
+                            $client->services()->updateExistingPivot($service['service_id'], [
                                 'service_id' => $service['service_id'],
                                 'start_date' => $service['start_date'],
                                 'end_date' => $service['end_date']

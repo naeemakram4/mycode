@@ -31,7 +31,7 @@
                 <!--end::Card header-->
                 <!--begin::Card body-->
                 <div class="card-body d-flex flex-column">
-                    @foreach($client->requests as $request)
+                    @foreach($requests as $request)
                     <!--begin::Item-->
                     <div class="d-flex align-items-center position-relative mb-7">
                         <!--begin::Label-->
