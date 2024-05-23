@@ -61,12 +61,14 @@
                 let id = $(this).data('id');
 
                 $.get('/admin/request/' + id, function (data) {
+                    var createdAtDate = new Date(data.created_at);
+
                     $('#drawerRequestType').text(data.request_type.label);
                     $('#drawerRequestStatus').text(data.status);
                     $('#drawerRequestTicketID').text(data.ticket_id);
                     $('#drawerRequestEmployeeName').text((data.employee != null) ? data.employee.user.first_name + ' ' + data.employee.user.last_name : 'Admin');
                     $('#drawerRequestEmployeeEmail').text((data.employee != null) ? data.employee.user.email : '');
-                    $('#drawerRequestDate').text(data.created_at);
+                    $('#drawerRequestDate').text(createdAtDate.getMonth()  + '-' + createdAtDate.getDate() +'-'+ createdAtDate.getFullYear());
                     $('#drawerRequestSubject').text(data.subject);
                     $('#drawerRequestDescription').text(data.description);
                 });

@@ -83,10 +83,10 @@
                 </div>
                 <!--end:::Tab pane-->
                 <div class="separator my-10"></div>
-                <div class="d-flex flex-column gap-1">
-                    <div class="fw-bolder text-muted">Attachments</div>
-                    <p class="text-danger">No attachment found!</p>
-                </div>
+{{--                <div class="d-flex flex-column gap-1">--}}
+{{--                    <div class="fw-bolder text-muted">Attachments</div>--}}
+{{--                    <p class="text-danger">No attachment found!</p>--}}
+{{--                </div>--}}
             </div>
             <!--end::Tab content-->
         </div>
