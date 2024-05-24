@@ -30,16 +30,16 @@ class ProjectController extends Controller
         ];
 
         if ($request->ajax()) {
-            $data = Project::with('employees')->latest();
+            $data = Project::with('employees', 'client')->latest();
 
             return Datatables::eloquent($data)
                 ->editColumn('id', function ($data) {
                     return '<a href="' . route('admin.project.show', $data->id) . '" >' . $data->id . '</a>';
                 })
                 ->editColumn('logo', function ($data) {
-                    if ($data->logo) {
+                    if ($data->client->company_logo) {
                         return '<div class="symbol symbol-50px w-50px bg-light">
-                            <img src="' . asset('storage/' . $data->logo) . '" alt="image" class="p-2">
+                            <img src="' . asset('storage/' . $data->client->company_logo) . '" alt="image" class="p-2">
                         </div>';
                     }
                     return '<div class="symbol symbol-50px w-50px bg-light">
@@ -144,13 +144,13 @@ class ProjectController extends Controller
             'status' => 'required'
         ]);
 
-        if ($request->file('project_logo')) {
-            $projectLogo = $this->uploadObject(config('houmanity.filehandling.storage.projects'), $request->file('project_logo'));
-        }
+//        if ($request->file('project_logo')) {
+//            $projectLogo = $this->uploadObject(config('houmanity.filehandling.storage.projects'), $request->file('project_logo'));
+//        }
 
         $project = new Project();
         $project->client()->associate($validatedData['client_id']);
-        $project->logo = $projectLogo ?? null;
+//        $project->logo = $projectLogo ?? null; // TODO: Remove this part after some time. We don't need project logo it will be replaced by client logo
         $project->name = $validatedData['project_name'];
         $project->description = $validatedData['description'];
         $project->start_date = $validatedData['start_date'];
@@ -212,15 +212,17 @@ class ProjectController extends Controller
         ]);
 
         if ($project) {
-            if ($request->hasFile('project_logo')) {
-                $existingImage = $project->logo;
-                $projectLogo = $this->uploadObject(config('houmanity.filehandling.storage.projects'), $request->file('project_logo'));
-                $project->logo = $projectLogo;
 
-                if ($existingImage) {
-                    $this->deleteObject($existingImage);
-                }
-            }
+            //TODO: Remove this part after some time. We don't need project logo it will be replaced by client logo
+//            if ($request->hasFile('project_logo')) {
+//                $existingImage = $project->logo;
+//                $projectLogo = $this->uploadObject(config('houmanity.filehandling.storage.projects'), $request->file('project_logo'));
+//                $project->logo = $projectLogo;
+//
+//                if ($existingImage) {
+//                    $this->deleteObject($existingImage);
+//                }
+//            }
 
             $project->client()->associate($validatedData['client_id']);
             $project->name = $validatedData['project_name'];
@@ -228,10 +230,11 @@ class ProjectController extends Controller
             $project->start_date = $validatedData['start_date'];
             $project->due_date = $validatedData['due_date'];
             $project->status = $validatedData['status'];
-
             if ($project->save()) {
                 if ($request->employees) {
                     $project->employees()->sync($request->employees);
+                } else {
+                    $project->employees()->detach($request->employees);
                 }
 
                 Session::flash('successMessage', 'Project has been updated successfully!');

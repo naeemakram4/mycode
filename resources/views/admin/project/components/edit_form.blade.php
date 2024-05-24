@@ -7,23 +7,24 @@
     <div class="row mb-7 fv-plugins-icon-container">
         <div class="col-md-6">
             <label class="form-label required">Project Name</label>
-            <input type="text" name="project_name" class="form-control form-control-solid"
+            <input type="text" required name="project_name" class="form-control form-control-solid"
                    value="{{old('project_name', $project->name)}}">
         </div>
-        <div class="col-md-5">
-            <label class="form-label">Project Logo</label>
-            <input type="file" name="project_logo" class="form-control form-control-solid"
-                   value="{{old('project_logo')}}">
-        </div>
-        <div class="col-md-1 fv-row">
-            <div class="symbol symbol-75px w-75px bg-light">
-                @if($project->logo)
-                    <img src="{{ asset('storage/'. $project->logo ) }}" alt="No Logo" class="p-2">
-                @else
-                    <img src="{{ asset('assets/media/logos/avatar.png') }}" alt="No Logo" class="p-3">
-                @endif
-            </div>
-        </div>
+        {{-- TODO: Remove this part after some time. We don't need project logo it will be replaced by client logo--}}
+{{--        <div class="col-md-5">--}}
+{{--            <label class="form-label">Project Logo</label>--}}
+{{--            <input type="file" name="project_logo" class="form-control form-control-solid"--}}
+{{--                   value="{{old('project_logo')}}">--}}
+{{--        </div>--}}
+{{--        <div class="col-md-1 fv-row">--}}
+{{--            <div class="symbol symbol-75px w-75px bg-light">--}}
+{{--                @if($project->logo)--}}
+{{--                    <img src="{{ asset('storage/'. $project->logo ) }}" alt="No Logo" class="p-2">--}}
+{{--                @else--}}
+{{--                    <img src="{{ asset('assets/media/logos/avatar.png') }}" alt="No Logo" class="p-3">--}}
+{{--                @endif--}}
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
     <!--end::Input group-->
 
@@ -52,7 +53,7 @@
     <div class="row mb-7 fv-plugins-icon-container">
         <div class="col-md-6">
             <label for="clients" class="required form-label">Select Client</label>
-            <select name="client_id"  class="form-select" data-control="select2"
+            <select name="client_id" required class="form-select" data-control="select2"
                     data-placeholder="Select Client">
                 <option value=""></option>
                 @foreach($clients as $client)
@@ -63,7 +64,7 @@
             </select>
         </div>
         <div class="col-md-6">
-            <label for="employee" class="required form-label">Assign Employee</label>
+            <label for="employee" class="form-label">Assign Employee</label>
             <select name="employees"  class="form-select" data-control="select2"
                     data-placeholder="Assign Employee">
                 <option value=""></option>
@@ -73,7 +74,7 @@
 
     <div class="fv-row mb-7 fv-plugins-icon-container">
         <label for="status" class="required form-label">Select Status</label>
-        <select name="status"  class="form-select" data-control="select2"
+        <select name="status" required class="form-select" data-control="select2"
                 data-placeholder="Select Status">
             <option value=""></option>
             @foreach($status as $value)
@@ -106,9 +107,8 @@
                 });
             });
 
-            // Select the sales representative
             let client = {{ $project->client_id }};
-            let employee = {{ $project->employees[0]->id }};
+            let employee = {{$project->employees[0]->id ?? 0}};
             $.get('/admin/project/get-employees/' + client, function (data) {
                 let emp = data;
                 $("select[name=employees]").empty();
