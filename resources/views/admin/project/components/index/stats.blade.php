@@ -49,21 +49,21 @@
         <!--begin::Budget-->
         <div class="card h-100">
             <div class="card-body p-9">
-                <div class="fs-2hx fw-bolder">329</div>
+                <div class="fs-2hx fw-bolder">{{ count($tasks) }}</div>
                 <div class="fs-4 fw-bold text-gray-400 mb-7">Total Tasks</div>
                 <div class="fs-6 d-flex justify-content-between mb-4">
-                    <div class="fw-bold">Avg. Project Tasks</div>
-                    <div class="d-flex fw-bolder">65</div>
+                    <div class="fw-bold">Yet to start</div>
+                    <div class="d-flex fw-bolder">{{ count($tasks->where('status', \App\Models\Task::YET_TO_STATUS)) }}</div>
                 </div>
                 <div class="separator separator-dashed"></div>
                 <div class="fs-6 d-flex justify-content-between my-4">
-                    <div class="fw-bold">Completed Tasks</div>
-                    <div class="d-flex fw-bolder">40</div>
+                    <div class="fw-bold">In Progress</div>
+                    <div class="d-flex fw-bolder">{{ count($tasks->where('status', \App\Models\Task::IN_PROGRESS_STATUS)) }}</div>
                 </div>
                 <div class="separator separator-dashed"></div>
                 <div class="fs-6 d-flex justify-content-between mt-4">
-                    <div class="fw-bold">Pending Tasks</div>
-                    <div class="d-flex fw-bolder">92</div>
+                    <div class="fw-bold">Completed</div>
+                    <div class="d-flex fw-bolder">{{ count($tasks->where('status', \App\Models\Task::COMPLETED_STATUS)) }}</div>
                 </div>
             </div>
         </div>

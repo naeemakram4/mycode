@@ -9,6 +9,7 @@ use App\Models\Employee;
 use App\Models\Project;
 use App\Models\SalesRepresentativeDim;
 use App\Models\Service;
+use App\Models\Task;
 use App\Traits\FileHandling;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -109,11 +110,11 @@ class ProjectController extends Controller
             'labels' => json_encode($labels),
             'chartData' => json_encode($chartData),
             'chartLabelAndData' => array_combine($labels, $chartData),
-            'projects' => Project::latest()->get(),
+            'projects' => Project::withCount('tasks')->latest()->get(),
+            'tasks' => Task::get(),
             'clients' => Client::get(),
             'status' => Project::getAllProjectStatus()
         ];
-
         return view('admin.project.index', $viewParams);
     }
 
