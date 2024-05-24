@@ -101,7 +101,7 @@
                 <!--begin::Card title-->
                 <div class="card-title flex-column">
                     <h3 class="fw-bolder mb-1">Tasks Summary</h3>
-                    <div class="fs-6 fw-bold text-gray-400">{{ $project->tasks->where('due_date', '<', \Carbon\Carbon::today())->count() }} Overdue Tasks</div>
+                    <div class="fs-6 fw-bold text-gray-400">{{ $project->tasks->where('status', '!=', \App\Models\Task::COMPLETED_STATUS)->where('due_date', '<', \Carbon\Carbon::today())->count() }} Overdue Tasks</div>
                 </div>
                 <!--end::Card title-->
                 <!--begin::Card toolbar-->
@@ -151,27 +151,31 @@
                         <div class="d-flex fs-6 fw-bold align-items-center">
                             <div class="bullet bg-danger me-3"></div>
                             <div class="text-gray-400">Overdue</div>
-                            <div class="ms-auto fw-bolder text-gray-700">{{ $project->tasks->where('due_date', '<', \Carbon\Carbon::today())->count() }}</div>
+                            <div class="ms-auto fw-bolder text-gray-700">{{ $project->tasks->where('status', '!=', \App\Models\Task::COMPLETED_STATUS)->where('due_date', '<', \Carbon\Carbon::today())->count() }}</div>
                         </div>
                         <!--end::Label-->
                     </div>
                     <!--end::Labels-->
                 </div>
                 <!--end::Wrapper-->
+                @if($project->tasks->where('status', '!=', \App\Models\Task::COMPLETED_STATUS)->where('due_date', '<', \Carbon\Carbon::today())->count() > 0)
                 <!--begin::Notice-->
-                <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6">
+                <div class="notice d-flex bg-light-danger rounded border-danger border border-dashed p-6">
                     <!--begin::Wrapper-->
                     <div class="d-flex flex-stack flex-grow-1">
                         <!--begin::Content-->
                         <div class="fw-bold">
                             <div class="fs-6 text-gray-700">
-                                <a href="#" class="fw-bolder me-1">Invite New .NET Collaborators</a>to create great outstanding business to business .jsp modutr class scripts</div>
+                                <span class="fs-4 fw-bold text-danger">Alert!</span> <br>
+                                <p>There are {{ $project->tasks->where('status', '!=', \App\Models\Task::COMPLETED_STATUS)->where('due_date', '<', \Carbon\Carbon::today())->count() }} Overdue tasks, Please look into tasks section to proceed with the overdue tasks. </p>
+                            </div>
                         </div>
                         <!--end::Content-->
                     </div>
                     <!--end::Wrapper-->
                 </div>
                 <!--end::Notice-->
+                @endif
             </div>
             <!--end::Card body-->
         </div>
