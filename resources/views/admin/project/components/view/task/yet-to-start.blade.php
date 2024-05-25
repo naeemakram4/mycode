@@ -218,19 +218,18 @@
             let id = $(this).data('id');
 
             $.get('/admin/task/' + id + '/edit', function (data) {
-                console.log(data.priority);
+                console.log(data);
                 $('#editTargetForm').prop('action', '/admin/task/'+data.id);
                 $('input[name="subject"]').val(data.subject);
                 $('textarea[name="description"]').text(data.description);
                 $('input[name="due_date"]').val(data.due_date);
-
-                $('select[name="task_priority"] option[value="High"]').prop('selected', 'selected');
-                // $('select[name="task_priority"]').val(data.priority);
+                $('select[name="task_assignees"]').val(data.employees[0].id);
+                $('select[name="task_priority"]').val(data.priority);
                 $('select[name="service"]').val(data.service_id);
                 $('select[name="status"]').val(data.status);
 
                 $('#kt_modal_edit_target').modal('show');
-            })
+            });
         });
     </script>
 @endpush

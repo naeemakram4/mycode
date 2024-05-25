@@ -156,7 +156,7 @@
                 <div class="fs-6 fw-bold text-gray-600 mb-5">{{ $task->description }}</div>
                 <!--end::Content-->
                 <!--begin::Footer-->
-                <div class="d-flex flex-stack flex-wrapr">
+                <div class="d-flex flex-stack flex-wrap">
                     <!--begin::Users-->
                     <div class="symbol-group symbol-hover my-1">
                         @foreach($task->employees as $employee)

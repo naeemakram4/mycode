@@ -43,7 +43,7 @@
                             <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="" data-bs-original-title="Specify a task name for future usage and reference" aria-label="Specify a task name for future usage and reference"></i>
                         </label>
                         <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" placeholder="Enter Task Subject" name="subject" value="{{old('subject')}}">
+                        <input type="text" required class="form-control form-control-solid" placeholder="Enter Task Subject" name="subject" value="{{old('subject')}}">
                         <div class="fv-plugins-message-container invalid-feedback"></div>
                     </div>
                     <!--end::Input group-->
@@ -52,7 +52,7 @@
                         <!--begin::Col-->
                         <div class="col-md-6 fv-row fv-plugins-icon-container">
                             <label class="required fs-6 fw-bold mb-2">Assignees</label>
-                            <select name="task_assignees[]" multiple class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="Select a employee">
+                            <select name="task_assignees[]" required class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="Select a employee">
                                 <option></option>
                                 @foreach($project->employees as $employee)
                                     <option value="{{ $employee->id }}">{{ $employee->user->getFullName() }}</option>
@@ -77,7 +77,7 @@
                                 <!--end::Svg Icon-->
                                 <!--end::Icon-->
                                 <!--begin::Datepicker-->
-                                <input type="date" class="form-control form-control-solid ps-12 flatpickr-input" placeholder="Select a date" name="due_date" value="{{old('due_date')}}">
+                                <input type="date" required class="form-control form-control-solid ps-12 flatpickr-input" placeholder="Select a date" name="due_date" value="{{old('due_date')}}">
                                 <!--end::Datepicker-->
                             </div>
                             <!--end::Input-->
@@ -96,7 +96,7 @@
                         <!--begin::Col-->
                         <div class="col-md-6">
                             <label class="required fw-bold mb-2">Select Priority</label>
-                            <select name="task_priority" class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="Select Priority"  aria-hidden="true">
+                            <select name="task_priority" required class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="Select Priority"  aria-hidden="true">
                                 <option></option>
                                 @foreach(\App\Models\Task::allTaskPriorities() as $taskPriority)
                                     <option value="{{ $taskPriority }}">{{ ucfirst($taskPriority) }}</option>
@@ -107,7 +107,7 @@
                         <!--begin::Col-->
                         <div class="col-md-6">
                             <label class="required fw-bold mb-2">Service</label>
-                            <select name="service" class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="Select a service"  aria-hidden="true">
+                            <select name="service" required class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="Select a service"  aria-hidden="true">
                                 <option></option>
                                 @foreach(\App\Models\Service::get() as $service)
                                     <option value="{{ $service->id }}">{{ $service->label }}</option>
@@ -120,7 +120,7 @@
                     <!--begin::Input group-->
                     <div class="fv-row mb-7 fv-plugins-icon-container">
                         <label class="required fw-bold mb-2">Status</label>
-                        <select name="status" class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="Select a status"  aria-hidden="true">
+                        <select name="status" required class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="Select a status"  aria-hidden="true">
                             <option></option>
                             @foreach(\App\Models\Task::allTaskStatus() as $status)
                                 <option value="{{ $status }}">{{ str_replace('_', ' ', $status) }}</option>
