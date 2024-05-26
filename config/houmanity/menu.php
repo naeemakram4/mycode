@@ -101,26 +101,27 @@ return [
 //            'route' => 'admin.task.index',
 //            'icon' => 'list-check',
 //        ],
-        [
-            'title' => 'Invoices',
-            'route' => 'javascript:void(0);',
-            'icon' => 'receipt',
-            'heading' => 'System Management',
-            'sub_routes' => ['admin.invoice.index', 'admin.invoice.create'],
-            'sub' => [
-                [
-                    'title' => 'Invoices List',
-                    'route' => 'admin.invoice.index'
-                ],
-                [
-                    'title' => 'Create Invoice',
-                    'route' => 'admin.invoice.create'
-                ]
-            ]
-        ],
+//        [
+//            'title' => 'Invoices',
+//            'route' => 'javascript:void(0);',
+//            'icon' => 'receipt',
+//            'heading' => 'System Management',
+//            'sub_routes' => ['admin.invoice.index', 'admin.invoice.create'],
+//            'sub' => [
+//                [
+//                    'title' => 'Invoices List',
+//                    'route' => 'admin.invoice.index'
+//                ],
+//                [
+//                    'title' => 'Create Invoice',
+//                    'route' => 'admin.invoice.create'
+//                ]
+//            ]
+//        ],
         [
             'title' => 'File Manager',
             'route' => 'admin.file.manager.index',
+            'heading' => 'System Management',
             'icon' => 'images',
         ],
         [
