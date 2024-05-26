@@ -34,29 +34,35 @@
                     <div>
                         <div class="fw-bolder text-muted">Priority</div>
                         <div class="fw-bolder fs-5">
-                                <span class="badge badge-light-danger">High</span>
+                            <span class="badge badge-light-primary" id="drawerPriority">High</span>
                         </div>
                     </div>
 
                     <div class="ms-5">
                         <div class="fw-bolder text-muted">Status</div>
                         <div class="fw-bolder fs-5">
-                                <span class="badge badge-light-warning">Yet To Start</span>
+                                <span class="badge badge-light-dark" id="drawerStatus">Yet To Start</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="d-flex flex-column gap-2">
-                    <div class="">
-                        <label class="form-label" for="">Update Status</label>
-                        <select class="form-select form-select-solid" data-control="select2" data-placeholder="Update Status" data-hide-search="true">>
-                            <option></option>
-                            <option value="1">Not Started</option>
-                            <option value="2">In Progress</option>
-                            <option value="2">Completed</option>
-                        </select>
+                <form action="{{ route('admin.task.update.task.status') }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="d-flex flex-column gap-2">
+                        <div class="">
+                            <label class="form-label" for="">Update Status</label>
+                            <select class="form-select form-select-solid" name="drawer_task_status_update" id="drawerUpdateStatus" >
+                                <option></option>
+                                @foreach(\App\Models\Task::allTaskStatus() as $status)
+                                    <option value="{{ $status}}"> {{ str_replace('_', ' ',$status)  }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <input type="hidden" name="task_id" id="drawerTaskId">
+                        <button type="submit" class="btn btn-sm btn-primary">Update</button>
                     </div>
-                </div>
+                </form>
 
             </div>
             <!--end::Profile-->
@@ -87,36 +93,37 @@
                         <!--begin::City-->
                         <div class="d-flex flex-column gap-1">
                             <div class="fw-bolder text-muted">Service</div>
-                            <div class="fw-bolder fs-5">Service-1</div>
+                            <div class="fw-bolder fs-5" id="drawerService"></div>
                         </div>
                         <!--end::City-->
                         <!--begin::Country-->
                         <div class="d-flex flex-column gap-1">
-                            <div class="fw-bolder text-muted">Created By</div>
-                            <div class="fw-bolder fs-5">---</div>
+                            <div class="fw-bolder text-muted">Created at</div>
+                            <div class="fw-bolder fs-5" id="drawerCreatedBy">---</div>
                         </div>
 
                         <div class="d-flex flex-column gap-1">
                             <div class="fw-bolder text-muted">Due Date</div>
-                            <div class="fw-bolder fs-5">23-12-2023</div>
+                            <div class="fw-bolder fs-5" id="drawerDueDate">---</div>
                         </div>
                         <!--end::Country-->
                         <!--begin::Notes-->
                         <div class="d-flex flex-column gap-1">
                             <div class="fw-bolder text-muted">Description</div>
-                            <p>This is a dummy project's target description. This is a dummy project's target description. This is a dummy project's target description.</p>
-                        </div>
-                        <!--end::Notes-->
-                        <div class="d-flex flex-column gap-1">
-                            <div class="fw-bolder text-muted">Attachments</div>
-                            <p class="text-danger">No attachment found!</p>
+                            <p id="drawerDescription">This is a dummy project's target description. This is a dummy project's target description. This is a dummy project's target description.</p>
                         </div>
 
-                        <div class="d-flex flex-column gap-1">
-                            <div class="fw-bolder text-muted">Comment</div>
-                            <textarea class="form-control" rows="3"></textarea>
-                            <button class="btn w-25 btn-sm btn-primary">Add Comment</button>
-                        </div>
+                        <!--end::Notes-->
+{{--                        <div class="d-flex flex-column gap-1">--}}
+{{--                            <div class="fw-bolder text-muted">Attachments</div>--}}
+{{--                            <p class="text-danger">No attachment found!</p>--}}
+{{--                        </div>--}}
+
+{{--                        <div class="d-flex flex-column gap-1">--}}
+{{--                            <div class="fw-bolder text-muted">Comment</div>--}}
+{{--                            <textarea class="form-control" rows="3"></textarea>--}}
+{{--                            <button class="btn w-25 btn-sm btn-primary">Add Comment</button>--}}
+{{--                        </div>--}}
                     </div>
                     <!--end::Additional details-->
                 </div>

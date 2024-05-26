@@ -72,43 +72,29 @@ class TaskController extends Controller
             ->withInput()->withErrors('Failed to create task, Try again!');
     }
 
-    public function show(Task $task)
+    public function show($id)
     {
-        $pageTitle = 'Task';
-        $breadcrumbs = [['text' => $pageTitle]];
-        $action = [
-            'text' => 'Add Task',
-            'route' => 'javascript:void(0);',
-            'data' => 'data-bs-toggle=modal data-bs-target=#addNewTask'
-        ];
+        $task = \App\Models\Task::with('employees', 'employees.user', 'service')
+            ->whereId($id)
+            ->first();
 
-        if ($task){
-            $viewParams = [
-                'pageTitle' => $pageTitle,
-                'breadcrumbs' => $breadcrumbs,
-                'action' => $action,
-                'groups' => TaskGroup::withCount('tasks')->get(),
-                'tasks' => Task::get(),
-                'task' => $task,
-                'services' => Service::get(),
-                'employees' => Employee::get(),
-                'taskPriorities' => Task::allTaskPriorities()
-            ];
-
-            return view('admin.task.index', $viewParams);
+        if ($task) {
+            return response()->json($task);
         }
-
-        return redirect()->back()
-            ->withErrors('Invalid data, Try again.');
+        return response()->json([
+            'error' => 'Invalid request'
+        ], 404);
     }
 
-    public function edit($id)
+    public
+    function edit($id)
     {
         $task = Task::with('employees', 'employees.user')->whereId($id)->first();
         return response()->json($task);
     }
 
-    public function update(Request $request, Task $task)
+    public
+    function update(Request $request, Task $task)
     {
         $validatedData = $request->validate([
             'subject' => 'required|string',
@@ -136,12 +122,14 @@ class TaskController extends Controller
             ->withInput()->withErrors('Failed to update task, Try again!');
     }
 
-    public function destroy(Task $task)
+    public
+    function destroy(Task $task)
     {
         //
     }
 
-    public function addGroup(Request $request)
+    public
+    function addGroup(Request $request)
     {
         $validatedData = $request->validate([
             'group_name' => 'required|string'
@@ -160,7 +148,8 @@ class TaskController extends Controller
             ->withErrors('Invalid data, Try again!');
     }
 
-    public function viewGroupTasks($id)
+    public
+    function viewGroupTasks($id)
     {
         $pageTitle = 'Task';
         $breadcrumbs = [['text' => $pageTitle]];
@@ -183,5 +172,20 @@ class TaskController extends Controller
         ];
 
         return view('admin.task.index', $viewParams);
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $task = Task::whereId($request->task_id)->first();
+        if ($task) {
+            $task->status = $request->drawer_task_status_update;
+            $task->save();
+
+            Session::flash('successMessage', 'Task status has been updated successfully!');
+            return redirect()->back();
+        }
+
+        return redirect()->back()
+            ->withErrors('Invalid data, try again!');
     }
 }

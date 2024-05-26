@@ -149,7 +149,9 @@
                 <!--end::Header-->
                 <!--begin::Title-->
                 <div class="mb-2">
-                    <a href="#" class="fs-4 fw-bolder mb-1 text-gray-900 text-hover-primary">{{ $task->subject }}</a>
+                    <a href="javascript:void(0);" class="fs-4 fw-bolder mb-1 text-gray-900 text-hover-primary" id="kt_drawer_example_dismiss_button" data-id="{{$task->id}}">
+                        {{ $task->subject }}
+                    </a>
                 </div>
                 <!--end::Title-->
                 <!--begin::Content-->
