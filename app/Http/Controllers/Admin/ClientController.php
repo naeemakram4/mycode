@@ -111,11 +111,11 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
+            'first_name' => 'nullable',
+            'last_name' => 'nullable',
             'user_name' => 'required|string|unique:users',
-            'phone' => 'required|string|max:10',
-            'email' => 'required|email|unique:users',
+            'phone' => 'nullable',
+            'email' => 'nullable|email|unique:users',
             'password' => 'required|min:8',
             'company_name' => 'required|string'
         ]);
@@ -209,11 +209,11 @@ class ClientController extends Controller
     public function update(Request $request, Client $client)
     {
         $validatedData = $request->validate([
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
+            'first_name' => 'nullable',
+            'last_name' => 'nullable',
             'user_name' => 'required|string|unique:users,user_name,' . $client->user_id,
-            'phone' => 'required|string|max:10',
-            'email' => 'required|email|unique:users,email,' . $client->user_id,
+            'phone' => 'nullable',
+            'email' => 'nullable|email|unique:users,email,' . $client->user_id,
             'new_password' => 'nullable|min:8',
             'company_name' => 'required|string'
         ]);

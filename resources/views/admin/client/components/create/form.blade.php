@@ -3,14 +3,14 @@
     <div class="row mb-5">
         <!--begin::Col-->
         <daiv class="col-md-4 fv-row fv-plugins-icon-container">
-            <label for="firstName" class="required form-label">First Name</label>
-            <input id="firstName" required class="form-control" type="text" name="first_name" value="{{ old('first_name') }}"/>
+            <label for="firstName" class="form-label">First Name</label>
+            <input id="firstName" class="form-control" type="text" name="first_name" value="{{ old('first_name') }}"/>
         </daiv>
         <!--end::Col-->
         <!--begin::Col-->
         <div class="col-md-4 fv-row fv-plugins-icon-container">
-            <label for="lastName" class="required form-label">Last Name</label>
-            <input id="lastName" required class="form-control" type="text" name="last_name"
+            <label for="lastName" class="form-label">Last Name</label>
+            <input id="lastName" class="form-control" type="text" name="last_name"
                    value="{{ old('last_name') }}"/>
         </div>
         <!--end::Col-->
@@ -23,14 +23,14 @@
     <div class="row mb-5">
         <!--begin::Col-->
         <daiv class="col-md-4 fv-row fv-plugins-icon-container">
-            <label for="phone" class="required form-label">Phone</label>
-            <input id="phone" required class="form-control" type="tel" maxlength="10" name="phone" value="{{ old('phone') }}"/>
+            <label for="phone" class="form-label">Phone</label>
+            <input id="phone" class="form-control" type="tel" maxlength="10" name="phone" value="{{ old('phone') }}"/>
         </daiv>
         <!--end::Col-->
         <!--begin::Col-->
         <div class="col-md-4 fv-row fv-plugins-icon-container">
-            <label for="email" class="required form-label">Email</label>
-            <input id="email" required class="form-control" type="email" name="email"
+            <label for="email" class="form-label">Email</label>
+            <input id="email" class="form-control" type="email" name="email"
                    value="{{ old('email') }}"/>
         </div>
         <!--end::Col-->
@@ -80,7 +80,7 @@
             <input id="company_logo" class="form-control" type="file" name="company_logo" />
         </div>
         <div class="col-md-6 fv-row">
-            <label for="company" class="required form-label">Company</label>
+            <label for="company" class="required form-label">Company Name</label>
             <input id="company" required class="form-control" type="text" name="company_name"
                    value="{{ old('company_name') }}"/>
         </div>
