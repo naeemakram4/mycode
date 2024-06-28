@@ -146,11 +146,11 @@
                                    data-id="{{ $task->id }}" class="menu-link px-3">Edit</a>
                             </div>
                             <!--end::Menu item-->
-                            {{--                            <!--begin::Menu item-->--}}
-                            {{--                            <div class="menu-item px-3 my-1">--}}
-                            {{--                                <a href="#" class="menu-link px-3">Delete</a>--}}
-                            {{--                            </div>--}}
-                            {{--                            <!--end::Menu item-->--}}
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-3 my-1">
+                                <a href="{{ route('admin.task.comments', $task->id) }}" target="_blank" class="menu-link px-3">Comments</a>
+                            </div>
+                            <!--end::Menu item-->
                         </div>
                         <!--end::Menu 3-->
                     </div>
@@ -196,24 +196,26 @@
                                                 </svg>
                                             </span>
                             <!--end::Svg Icon-->
-                            <span class="ms-1 fs-7 fw-bolder text-gray-600">0</span>
+                            <span class="ms-1 fs-7 fw-bolder text-gray-600">{{ $task->taskComments->where('file', '!=', null)->count() }}</span>
                         </div>
                         <!--end::Stat-->
                         <!--begin::Stat-->
                         <div class="border border-dashed border-gray-300 rounded py-2 px-3 ms-3">
-                            <!--begin::Svg Icon | path: icons/duotune/communication/com012.svg-->
-                            <span class="svg-icon svg-icon-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none">
-                                    <path opacity="0.3"
-                                          d="M20 3H4C2.89543 3 2 3.89543 2 5V16C2 17.1046 2.89543 18 4 18H4.5C5.05228 18 5.5 18.4477 5.5 19V21.5052C5.5 22.1441 6.21212 22.5253 6.74376 22.1708L11.4885 19.0077C12.4741 18.3506 13.6321 18 14.8167 18H20C21.1046 18 22 17.1046 22 16V5C22 3.89543 21.1046 3 20 3Z"
-                                          fill="black"></path>
-                                    <rect x="6" y="12" width="7" height="2" rx="1" fill="black"></rect>
-                                    <rect x="6" y="7" width="12" height="2" rx="1" fill="black"></rect>
-                                </svg>
-                            </span>
-                            <!--end::Svg Icon-->
-                            <span class="ms-1 fs-7 fw-bolder text-gray-600">0</span>
+                            <a href="{{ route('admin.task.comments', $task->id) }}" target="_blank">
+                                <!--begin::Svg Icon | path: icons/duotune/communication/com012.svg-->
+                                <span class="svg-icon svg-icon-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none">
+                                        <path opacity="0.3"
+                                              d="M20 3H4C2.89543 3 2 3.89543 2 5V16C2 17.1046 2.89543 18 4 18H4.5C5.05228 18 5.5 18.4477 5.5 19V21.5052C5.5 22.1441 6.21212 22.5253 6.74376 22.1708L11.4885 19.0077C12.4741 18.3506 13.6321 18 14.8167 18H20C21.1046 18 22 17.1046 22 16V5C22 3.89543 21.1046 3 20 3Z"
+                                              fill="black"></path>
+                                        <rect x="6" y="12" width="7" height="2" rx="1" fill="black"></rect>
+                                        <rect x="6" y="7" width="12" height="2" rx="1" fill="black"></rect>
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <span class="ms-1 fs-7 fw-bolder text-gray-600">{{ $task->taskComments->count() }}</span>
+                            </a>
                         </div>
                         <!--end::Stat-->
                     </div>

@@ -11,7 +11,7 @@
 
     <div class="card shadow-none rounded-0 w-100">
         <div class="card-header">
-            <h5 class="card-title fw-bold">Target Details</h5>
+            <h5 class="card-title fw-bold">Task Details</h5>
             <div class="card-toolbar">
                 <button type="button" class="btn btn-sm btn-icon explore-btn-dismiss me-n5" id="kt_help_close" data-kt-drawer-dismiss="true">
                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
@@ -113,17 +113,6 @@
                             <p id="drawerDescription">This is a dummy project's target description. This is a dummy project's target description. This is a dummy project's target description.</p>
                         </div>
 
-                        <!--end::Notes-->
-{{--                        <div class="d-flex flex-column gap-1">--}}
-{{--                            <div class="fw-bolder text-muted">Attachments</div>--}}
-{{--                            <p class="text-danger">No attachment found!</p>--}}
-{{--                        </div>--}}
-
-{{--                        <div class="d-flex flex-column gap-1">--}}
-{{--                            <div class="fw-bolder text-muted">Comment</div>--}}
-{{--                            <textarea class="form-control" rows="3"></textarea>--}}
-{{--                            <button class="btn w-25 btn-sm btn-primary">Add Comment</button>--}}
-{{--                        </div>--}}
                     </div>
                     <!--end::Additional details-->
                 </div>

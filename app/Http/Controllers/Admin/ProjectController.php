@@ -10,10 +10,12 @@ use App\Models\Project;
 use App\Models\SalesRepresentativeDim;
 use App\Models\Service;
 use App\Models\Task;
+use App\Models\TaskComment;
 use App\Traits\FileHandling;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
 class ProjectController extends Controller
@@ -264,6 +266,64 @@ class ProjectController extends Controller
         ];
 
         return view('admin.project.view', $viewParams);
+    }
+
+    public function taskComments($id)
+    {
+        $pageTitle = 'Task Comments';
+        $breadcrumbs = [['text' => 'Projects', 'url' => '/admin/project'], ['text' => $pageTitle]];
+
+        $task = Task::with('taskComments')->whereId($id)->first();
+        if ($task) {
+            $viewParams = [
+                'pageTitle' => $pageTitle,
+                'breadcrumbs' => $breadcrumbs,
+                'task' => $task
+            ];
+
+            return view('admin.project.components.view.task.comments', $viewParams);
+        }
+
+        return redirect()->back()
+            ->withErrors('Invalid data provided');
+    }
+
+    public function taskCommentSubmit(Request $request, $id)
+    {
+        if ($request->file('task_comment_file')) {
+            $taskCommentFile = $this->uploadObject(config('houmanity.filehandling.storage.tasks'), $request->file('task_comment_file'));
+        }
+
+        $taskComment = new TaskComment();
+        $taskComment->task()->associate($id);
+        $taskComment->admin()->associate(auth()->user()->id);
+        $taskComment->file = $taskCommentFile ?? null;
+        $taskComment->comment = $request->task_comment;
+
+        if ($taskComment->save()) {
+            Session::flash('successMessage', 'Comment has been submitted successfully!');
+            return redirect()->back();
+        }
+
+        return redirect()->back()
+            ->withErrors('Failed to submit comment, Try again!');
+    }
+
+    public function downloadCommentFile($file)
+    {
+        return response()->download($file);
+    }
+
+    public function taskCommentFileDownload($id)
+    {
+        $comment = TaskComment::whereId($id)->first();
+        if ($comment) {
+            $filePath = public_path('/storage/'.$comment->file);
+            return $this->downloadCommentFile($filePath);
+        }
+
+        return redirect()->back()
+            ->withErrors('Invalid data!');
     }
 
     public function getEmployees($id)

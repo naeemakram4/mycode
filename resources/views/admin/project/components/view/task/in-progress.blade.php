@@ -135,12 +135,12 @@
                             <div class="menu-item px-3 my-1">
                                 <a href="{{ route('admin.task.edit', $task->id) }}" id="taskSettings" data-id="{{ $task->id }}" class="menu-link px-3">Edit</a>
                             </div>
+
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-3 my-1">
+                                <a href="{{ route('admin.task.comments', $task->id) }}" target="_blank" class="menu-link px-3">Comments</a>
+                            </div>
                             <!--end::Menu item-->
-                            {{--                            <!--begin::Menu item-->--}}
-                            {{--                            <div class="menu-item px-3 my-1">--}}
-                            {{--                                <a href="#" class="menu-link px-3">Delete</a>--}}
-                            {{--                            </div>--}}
-                            {{--                            <!--end::Menu item-->--}}
                         </div>
                         <!--end::Menu 3-->
                     </div>
@@ -180,11 +180,12 @@
                                                 </svg>
                                             </span>
                             <!--end::Svg Icon-->
-                            <span class="ms-1 fs-7 fw-bolder text-gray-600">0</span>
+                            <span class="ms-1 fs-7 fw-bolder text-gray-600">{{ $task->taskComments->where('file', '!=', null)->count() }}</span>
                         </div>
                         <!--end::Stat-->
                         <!--begin::Stat-->
                         <div class="border border-dashed border-gray-300 rounded py-2 px-3 ms-3">
+                            <a href="{{ route('admin.task.comments', $task->id) }}" target="_blank">
                             <!--begin::Svg Icon | path: icons/duotune/communication/com012.svg-->
                             <span class="svg-icon svg-icon-3">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -194,7 +195,8 @@
                                                 </svg>
                                             </span>
                             <!--end::Svg Icon-->
-                            <span class="ms-1 fs-7 fw-bolder text-gray-600">0</span>
+                            <span class="ms-1 fs-7 fw-bolder text-gray-600">{{ $task->taskComments->count() }}</span>
+                            </a>
                         </div>
                         <!--end::Stat-->
                     </div>
