@@ -59,7 +59,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getNameFirstLetter()
     {
-        return ucfirst(substr($this->first_name, 0, 1));
+        return ucfirst(substr($this->first_name ?? ucfirst(chr(rand(97, 122))), 0, 1));
     }
 
     public function ability($permission): bool
