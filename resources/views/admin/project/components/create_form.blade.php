@@ -47,7 +47,7 @@
                     data-placeholder="Select Client">
                 <option value=""></option>
                 @foreach($clients as $client)
-                    <option value="{{ $client->id }}">{{ $client->user->first_name .' '. $client->user->last_name }}</option>
+                    <option value="{{ $client->id }}">{{ $client->company_name }}</option>
                 @endforeach
             </select>
         </div>

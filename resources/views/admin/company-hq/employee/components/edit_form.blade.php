@@ -71,7 +71,7 @@
             @foreach($clients as $client)
                 <option value="{{ $client->id }}"
                     @if($employee->hasClient($client->id)) selected @endif>
-                    {{ $client->user->first_name .' '. $client->user->last_name }}
+                    {{ $client->company_name }}
                 </option>
             @endforeach
         </select>

@@ -38,7 +38,7 @@
                                 data-control="select2" data-hide-search="false">
                             <option value="">All Clients</option>
                             @foreach($clients as $client)
-                                <option value="{{ $client->id }}">{{ $client->user->getFullName() }}</option>
+                                <option value="{{ $client->id }}">{{ $client->company_name }}</option>
                             @endforeach
                         </select>
                     </div>

@@ -44,7 +44,7 @@
                     <select name="request_client" class="form-select form-select-lg form-select-solid select2-hidden-accessible" data-control="select2" data-placeholder="Select Client" data-allow-clear="true" data-hide-search="false" tabindex="-1" aria-hidden="true">
                         <option></option>
                         @foreach($clients as $client)
-                            <option value="{{ $client->id }}">{{ $client->user->getFullName() }}</option>
+                            <option value="{{ $client->id }}">{{ $client->company_name }}</option>
                         @endforeach
                     </select>
                     <!--end::Input-->
