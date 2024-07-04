@@ -2,8 +2,7 @@
     <thead>
     <tr class="fw-bold fs-6 text-muted">
         <th class="w-200px">Company</th>
-        <th>Client</th>
-        <th>Website</th>
+        <th>Services</th>
         <th>Status</th>
     </tr>
     </thead>
@@ -27,8 +26,7 @@
                 },
                 columns: [
                     {data: 'company',name: 'company'},
-                    {data: 'client',name: 'client'},
-                    {data: 'website',name: 'website'},
+                    {data: 'services',name: 'services'},
                     {data: 'status',name: 'status'},
                 ],
             });

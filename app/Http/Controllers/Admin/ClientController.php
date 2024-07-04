@@ -30,7 +30,7 @@ class ClientController extends Controller
         ];
 
         if ($request->ajax()) {
-            $data = Client::latest();
+            $data = Client::orderBy('company_name')->latest();
 
             return Datatables::eloquent($data)
                 ->addColumn('company', function ($data) {
@@ -38,21 +38,25 @@ class ClientController extends Controller
                         return '<div class="symbol symbol-50px w-50px bg-light">
                                 <img src="' . asset('storage/' . $data->company_logo) . '" alt="image" class="p-2">
                             </div>
-                            <a href="' . route('admin.client.show', $data->id) . '">' . Str::limit($data->company_name, 15) . '</a>';
+                            <a href="' . route('admin.client.show', $data->id) . '">' . $data->company_name . '</a>';
                     }
                     return '<div class="symbol symbol-50px w-50px bg-light">
                                 <img src="' . asset('assets/media/logos/avatar.png') . '" alt="image" class="p-2">
                             </div>
-                            <a href="' . route('admin.client.show', $data->id) . '">' . Str::limit($data->company_name, 15) . '</a>';
+                            <a href="' . route('admin.client.show', $data->id) . '">' . $data->company_name. '</a>';
                 })
-                ->addColumn('client', function ($data) {
-                    return $data->user->getFullName() . '<br>' . $data->user->email;
+                ->addColumn('services', function ($data) {
+                    $services = [];
+                    foreach ($data->services as $ser) {
+                        $services[] = $ser->label;
+                    }
+                    return $services;
                 })
                 ->addColumn('status', function ($data) {
                     if ($data->user->status == \App\Models\User::STATUS_ACTIVE) {
                         return '<span class="badge badge-light-success fw-bolder me-auto px-4 py-3">' . ucfirst($data->user->status) . '</span>';
                     } elseif ($data->user->status == \App\Models\User::STATUS_DISABLE) {
-                        return '<span class="badge badge-light-danger fw-bolder me-auto px-4 py-3">' . ucfirst($data->user->status) . '</span>';
+                        return '<span class="badge badge-light-danger fw-bolder me-auto px-4 py-3"> Inactive </span>';
                     } else {
                         return '';
                     }
@@ -80,7 +84,7 @@ class ClientController extends Controller
                         $instance->where('company_name', 'like', '%' . $companyName . '%');
                     }
                 })
-                ->rawColumns(['id', 'company', 'client', 'website', 'status'])
+                ->rawColumns(['id', 'company', 'services', 'website', 'status'])
                 ->make(true);
         }
 
