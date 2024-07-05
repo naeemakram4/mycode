@@ -130,8 +130,8 @@
                                     </div>
 
                                     <div class="col-md-3">
-                                        <label for="endDate" class="form-label required">End Date</label>
-                                        <input id="endDate" required class="form-control" type="date" name="end_date"
+                                        <label for="endDate" class="form-label">End Date</label>
+                                        <input id="endDate" class="form-control" type="date" name="end_date"
                                                value="{{ $value->pivot->end_date }}"/>
                                     </div>
                                 </div>
