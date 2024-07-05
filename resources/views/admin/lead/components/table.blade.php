@@ -6,7 +6,7 @@
         <th>Lead Source</th>
         <th>Name</th>
         <th>Services Interested in</th>
-        <th>Created at</th>
+        <th>Created</th>
         <th>Status</th>
         <th class="text-end">Actions</th>
     </tr>
