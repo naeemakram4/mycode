@@ -2,11 +2,10 @@
     <thead>
     <tr class="fw-bold fs-6 text-muted">
         <th>ID</th>
-        <th>Name</th>
-        <th>Lead Type</th>
         <th>Company</th>
-        <th>Email/ Phone</th>
-        <th>Lead Value</th>
+        <th>Lead Source</th>
+        <th>Name</th>
+        <th>Services Interested in</th>
         <th>Created at</th>
         <th>Status</th>
         <th class="text-end">Actions</th>
@@ -16,12 +15,15 @@
     @foreach($leads as $lead)
         <tr>
             <td>{{ $lead->id }}</td>
-            <td><a href="{{ route('admin.lead-management.show', $lead->id) }}">{{ $lead->name }}</a></td>
-            <td><span class="badge badge-light-dark">{{ $lead->leadManagementType->label }}</span></td>
             <td>{{ $lead->company }}</td>
-            <td>{{ $lead->email }} <br> {{ $lead->contact }}</td>
-            <td>${{ $lead->lead_value }}</td>
-            <td>{{ $lead->created_at }}</td>
+            <td><span class="badge badge-light-dark">{{ $lead->leadManagementType->label }}</span></td>
+            <td><a href="{{ route('admin.lead-management.show', $lead->id) }}">{{ $lead->name }}</a></td>
+            <td>
+                @foreach($lead->services as $service)
+                    <span class="badge badge-primary">{{ $service->label }}</span>
+                @endforeach
+            </td>
+            <td>{{ \Carbon\Carbon::parse($lead->created_at)->format('m/d/Y')  }}</td>
             <td>
                 @if($lead->status == \App\Models\LeadManagement::CLOSED_NOT_CONVERTED_STATUS)
                     <span class="badge badge-light-danger">{{ ucfirst(str_replace('_', ' ',$lead->status)) }}</span>
