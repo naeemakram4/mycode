@@ -61,7 +61,7 @@ class EmployeeController extends Controller
             'user_name' => 'required|unique:users,user_name',
             'email' => 'required|unique:users,email',
             'phone' => 'nullable',
-            'clients' => 'required|array',
+            'clients' => 'nullable|array',
             'password' => 'required'
         ]);
 
@@ -86,7 +86,7 @@ class EmployeeController extends Controller
         $employee->remarks = $request->remarks;
 
         if ($employee->save()) {
-            $employee->clients()->sync($validatedData['clients']);
+            $employee->clients()->sync($request->clients);
 
             Session::flash('successMessage', 'A new employee has been created successfully!');
             return redirect()->route('admin.employee.index');
@@ -133,7 +133,7 @@ class EmployeeController extends Controller
             'user_name' => 'required|unique:users,user_name,' . $employee->user_id,
             'email' => 'required|email|unique:users,email,' . $employee->user_id,
             'phone' => 'nullable',
-            'clients' => 'required|array',
+            'clients' => 'nullable|array',
         ]);
 
         $user = User::where('id', $employee->user_id)->first();
@@ -164,7 +164,7 @@ class EmployeeController extends Controller
             $employee->remarks = $request->remarks;
 
             if ($employee->save()) {
-                $employee->clients()->sync($validatedData['clients']);
+                $employee->clients()->sync($request->clients);
 
                 Session::flash('successMessage', 'Employee has been updated successfully!');
                 return redirect()->route('admin.employee.index');
