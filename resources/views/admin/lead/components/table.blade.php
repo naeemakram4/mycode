@@ -22,7 +22,17 @@
             <td>{{ $lead->email }} <br> {{ $lead->contact }}</td>
             <td>${{ $lead->lead_value }}</td>
             <td>{{ $lead->created_at }}</td>
-            <td><span class="badge badge-light-primary">{{ ucfirst($lead->status) }}</span></td>
+            <td>
+                @if($lead->status == \App\Models\LeadManagement::CLOSED_NOT_CONVERTED_STATUS)
+                    <span class="badge badge-light-danger">{{ ucfirst(str_replace('_', ' ',$lead->status)) }}</span>
+                @elseif($lead->status == \App\Models\LeadManagement::Working_CONTACTED_STATUS)
+                    <span class="badge badge-light-warning">{{ ucfirst(str_replace('_', ' ',$lead->status)) }}</span>
+                @elseif($lead->status == \App\Models\LeadManagement::CLOSED_CONVERTED_STATUS)
+                    <span class="badge badge-light-success">{{ ucfirst(str_replace('_', ' ',$lead->status)) }}</span>
+                @elseif($lead->status == \App\Models\LeadManagement::OPEN_NOT_CONTACTED_STATUS)
+                    <span class="badge badge-light-primary">{{ ucfirst(str_replace('_', ' ',$lead->status)) }}</span>
+                @endif
+            </td>
             <td>
                 <div class="d-flex justify-content-end flex-shrink-0">
                     <a href="{{ route('admin.lead-management.edit', $lead->id) }}" id="" data-id="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">

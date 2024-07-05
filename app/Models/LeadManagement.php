@@ -15,9 +15,10 @@ class LeadManagement extends Model
     protected $table = 'lead_managements';
 
     // Lead Status
-    const IN_PROGRESS_STATUS = 'in_progress';
-    const ON_HOLD_STATUS = 'on_hold';
-    const FINISHED_STATUS = 'finished';
+    const OPEN_NOT_CONTACTED_STATUS = 'open_not_contacted';
+    const Working_CONTACTED_STATUS = 'working_contacted';
+    const CLOSED_CONVERTED_STATUS = 'closed_converted';
+    const CLOSED_NOT_CONVERTED_STATUS = 'closed_not_converted';
 
     // SEO Audit Status
     const REQUESTED_SEO_STATUS = 'requested';
@@ -27,9 +28,10 @@ class LeadManagement extends Model
     public static function getAllStatus(): array
     {
         return [
-            self::IN_PROGRESS_STATUS,
-            self::ON_HOLD_STATUS,
-            self::FINISHED_STATUS,
+            self::OPEN_NOT_CONTACTED_STATUS,
+            self::Working_CONTACTED_STATUS,
+            self::CLOSED_CONVERTED_STATUS,
+            self::CLOSED_NOT_CONVERTED_STATUS
         ];
     }
 
