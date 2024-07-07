@@ -1,4 +1,4 @@
-<div class="modal fade" id="kt_modal_edit_target"  aria-modal="true">
+<div class="modal fade" id="kt_modal_edit_task"  aria-modal="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <!--begin::Modal content-->
@@ -22,7 +22,7 @@
             <!--begin::Modal body-->
             <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
                 <!--begin:Form-->
-                <form method="POST" id="editTargetForm" class="form fv-plugins-bootstrap5 fv-plugins-framework">
+                <form method="POST" id="editTaskForm" class="form fv-plugins-bootstrap5 fv-plugins-framework">
                     @csrf
                     @method('PUT')
                     <!--begin::Heading-->
@@ -53,7 +53,7 @@
                         <!--begin::Col-->
                         <div class="col-md-6 fv-row fv-plugins-icon-container">
                             <label class="required fs-6 fw-bold mb-2">Assignees</label>
-                            <select name="task_assignees[]" multiple class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="Select a employee">
+                            <select name="task_assignees" required class="form-select form-select-solid">
                                 <option></option>
                                 @foreach($project->employees as $employee)
                                     <option value="{{ $employee->id }}">{{ $employee->user->getFullName() }}</option>
@@ -97,7 +97,7 @@
                         <!--begin::Col-->
                         <div class="col-md-6">
                             <label class="required fw-bold mb-2">Select Priority</label>
-                            <select name="task_priority" class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="Select Priority"  aria-hidden="true">
+                            <select name="task_priority" required class="form-select form-select-solid">
                                 <option></option>
                                 @foreach(\App\Models\Task::allTaskPriorities() as $taskPriority)
                                     <option value="{{ $taskPriority }}">{{ ucfirst($taskPriority) }}</option>
@@ -108,7 +108,7 @@
                         <!--begin::Col-->
                         <div class="col-md-6">
                             <label class="required fw-bold mb-2">Service</label>
-                            <select name="service" class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="Select a employee"  aria-hidden="true">
+                            <select name="service" required class="form-select form-select-solid">
                                 <option></option>
                                 @foreach(\App\Models\Service::get() as $service)
                                     <option value="{{ $service->id }}">{{ $service->label }}</option>
@@ -121,7 +121,7 @@
                     <!--begin::Input group-->
                     <div class="fv-row mb-7 fv-plugins-icon-container">
                         <label class="required fw-bold mb-2">Status</label>
-                        <select name="status" class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="Select a status"  aria-hidden="true">
+                        <select name="status" required class="form-select form-select-solid">
                             <option></option>
                             @foreach(\App\Models\Task::allTaskStatus() as $status)
                                 <option value="{{ $status }}">{{ str_replace('_', ' ', $status) }}</option>
@@ -131,12 +131,12 @@
                     <!--end::Input group-->
 
                     <!--begin::Input group-->
-                    <div class="fv-row mb-7 fv-plugins-icon-container">
-                        <label class="form-label">File</label>
-                        <div class="input-group">
-                            <input type="file" name="file" class="form-control form-control-solid">
-                        </div>
-                    </div>
+{{--                    <div class="fv-row mb-7 fv-plugins-icon-container">--}}
+{{--                        <label class="form-label">File</label>--}}
+{{--                        <div class="input-group">--}}
+{{--                            <input type="file" name="file" class="form-control form-control-solid">--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <!--end::Input group-->
 
                     <input type="hidden" name="project_id" value="{{ $project->id }}">

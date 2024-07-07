@@ -21,82 +21,6 @@
                     </span>
                     <!--end::Svg Icon-->
                 </button>
-                <!--begin::Menu 1-->
-                <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_6220ed670be19">
-                    <!--begin::Header-->
-                    <div class="px-7 py-5">
-                        <div class="fs-5 text-dark fw-bolder">Filter Options</div>
-                    </div>
-                    <!--end::Header-->
-                    <!--begin::Menu separator-->
-                    <div class="separator border-gray-200"></div>
-                    <!--end::Menu separator-->
-                    <!--begin::Form-->
-                    <div class="px-7 py-5">
-                        <!--begin::Input group-->
-                        <div class="mb-10">
-                            <!--begin::Label-->
-                            <label class="form-label fw-bold">Status:</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <div>
-                                <select class="form-select form-select-solid select2-hidden-accessible" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_6220ed670be19" data-allow-clear="true" data-select2-id="select2-data-19-4a4x" tabindex="-1" aria-hidden="true">
-                                    <option data-select2-id="select2-data-21-t0vk"></option>
-                                    <option value="1">Approved</option>
-                                    <option value="2">Pending</option>
-                                    <option value="2">In Process</option>
-                                    <option value="2">Rejected</option>
-                                </select><span class="select2 select2-container select2-container--bootstrap5" dir="ltr" data-select2-id="select2-data-20-vaa3" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single form-select form-select-solid" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-se1s-container" aria-controls="select2-se1s-container"><span class="select2-selection__rendered" id="select2-se1s-container" role="textbox" aria-readonly="true" title="Select option"><span class="select2-selection__placeholder">Select option</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-                            </div>
-                            <!--end::Input-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="mb-10">
-                            <!--begin::Label-->
-                            <label class="form-label fw-bold">Member Type:</label>
-                            <!--end::Label-->
-                            <!--begin::Options-->
-                            <div class="d-flex">
-                                <!--begin::Options-->
-                                <label class="form-check form-check-sm form-check-custom form-check-solid me-5">
-                                    <input class="form-check-input" type="checkbox" value="1">
-                                    <span class="form-check-label">Author</span>
-                                </label>
-                                <!--end::Options-->
-                                <!--begin::Options-->
-                                <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                    <input class="form-check-input" type="checkbox" value="2" checked="checked">
-                                    <span class="form-check-label">Customer</span>
-                                </label>
-                                <!--end::Options-->
-                            </div>
-                            <!--end::Options-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="mb-10">
-                            <!--begin::Label-->
-                            <label class="form-label fw-bold">Notifications:</label>
-                            <!--end::Label-->
-                            <!--begin::Switch-->
-                            <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
-                                <input class="form-check-input" type="checkbox" value="" name="notifications" checked="checked">
-                                <label class="form-check-label">Enabled</label>
-                            </div>
-                            <!--end::Switch-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Actions-->
-                        <div class="d-flex justify-content-end">
-                            <button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true">Reset</button>
-                            <button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true">Apply</button>
-                        </div>
-                        <!--end::Actions-->
-                    </div>
-                    <!--end::Form-->
-                </div>
-                <!--end::Menu 1-->
             </div>
             <!--end::Menu-->
         </div>
@@ -131,76 +55,14 @@
                         </button>
                         <!--begin::Menu 3-->
                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
-                            <!--begin::Heading-->
-                            <div class="menu-item px-3">
-                                <div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Payments</div>
-                            </div>
-                            <!--end::Heading-->
                             <!--begin::Menu item-->
-                            <div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3">Create Invoice</a>
-                            </div>
-                            <!--end::Menu item-->
-                            <!--begin::Menu item-->
-                            <div class="menu-item px-3">
-                                <a href="#" class="menu-link flex-stack px-3">Create Payment
-                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="" data-bs-original-title="Specify a target name for future usage and reference" aria-label="Specify a target name for future usage and reference"></i></a>
-                            </div>
-                            <!--end::Menu item-->
-                            <!--begin::Menu item-->
-                            <div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3">Generate Bill</a>
-                            </div>
-                            <!--end::Menu item-->
-                            <!--begin::Menu item-->
-                            <div class="menu-item px-3" data-kt-menu-trigger="hover" data-kt-menu-placement="right-end">
-                                <a href="#" class="menu-link px-3">
-                                    <span class="menu-title">Subscription</span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <!--begin::Menu sub-->
-                                <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="#" class="menu-link px-3">Plans</a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="#" class="menu-link px-3">Billing</a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="#" class="menu-link px-3">Statements</a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu separator-->
-                                    <div class="separator my-2"></div>
-                                    <!--end::Menu separator-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <div class="menu-content px-3">
-                                            <!--begin::Switch-->
-                                            <label class="form-check form-switch form-check-custom form-check-solid">
-                                                <!--begin::Input-->
-                                                <input class="form-check-input w-30px h-20px" type="checkbox" value="1" checked="checked" name="notifications">
-                                                <!--end::Input-->
-                                                <!--end::Label-->
-                                                <span class="form-check-label text-muted fs-6">Recuring</span>
-                                                <!--end::Label-->
-                                            </label>
-                                            <!--end::Switch-->
-                                        </div>
-                                    </div>
-                                    <!--end::Menu item-->
-                                </div>
-                                <!--end::Menu sub-->
+                            <div class="menu-item px-3 my-1">
+                                <a href="{{ route('employee.task.edit', $task->id) }}" id="editTaskBtn" data-id="{{ $task->id }}" class="menu-link px-3">Edit</a>
                             </div>
                             <!--end::Menu item-->
                             <!--begin::Menu item-->
                             <div class="menu-item px-3 my-1">
-                                <a href="#" class="menu-link px-3">Settings</a>
+                                <a href="{{ route('employee.task.comments', $task->id) }}" class="menu-link px-3">Comments</a>
                             </div>
                             <!--end::Menu item-->
                         </div>

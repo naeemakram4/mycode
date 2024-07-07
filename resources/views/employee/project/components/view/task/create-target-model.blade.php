@@ -130,12 +130,12 @@
                     <!--end::Input group-->
 
                     <!--begin::Input group-->
-                    <div class="fv-row mb-7 fv-plugins-icon-container">
-                        <label class="form-label">File</label>
-                        <div class="input-group">
-                            <input type="file" name="file" class="form-control form-control-solid">
-                        </div>
-                    </div>
+{{--                    <div class="fv-row mb-7 fv-plugins-icon-container">--}}
+{{--                        <label class="form-label">File</label>--}}
+{{--                        <div class="input-group">--}}
+{{--                            <input type="file" name="file" class="form-control form-control-solid">--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <!--end::Input group-->
 
                     <input type="hidden" name="project_id" value="{{ $project->id }}">

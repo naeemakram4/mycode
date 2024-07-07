@@ -100,14 +100,38 @@ class TaskController extends Controller
         }
     }
 
-    public function edit(Task $task)
+    public function edit($id)
     {
+        $task = Task::with('employees', 'employees.user')->whereId($id)->first();
         return response()->json($task);
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, Task $task)
     {
-        //
+        $validatedData = $request->validate([
+            'subject' => 'required|string',
+            'task_assignees' => 'required',
+            'due_date' => 'required',
+            'task_priority' => 'required',
+            'service' => 'required',
+            'status' => 'required',
+        ]);
+
+        $task->subject = $validatedData['subject'];
+        $task->due_date = $validatedData['due_date'];
+        $task->priority = $validatedData['task_priority'];
+        $task->service()->associate($validatedData['service']);
+        $task->description = $request->description;
+        $task->status = $validatedData['status'];
+        if ($task->save()) {
+            $task->employees()->sync($validatedData['task_assignees']);
+
+            Session::flash('successMessage', 'Task has been updated successfully!');
+            return redirect()->back();
+        }
+
+        return redirect()->back()
+            ->withInput()->withErrors('Failed to update task, Try again!');
     }
 
     public function destroy(string $id)
@@ -157,5 +181,20 @@ class TaskController extends Controller
         ];
 
         return view('employee.task.index', $viewParams);
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $task = Task::whereId($request->task_id)->first();
+        if ($task) {
+            $task->status = $request->drawer_task_status_update;
+            $task->save();
+
+            Session::flash('successMessage', 'Task status has been updated successfully!');
+            return redirect()->back();
+        }
+
+        return redirect()->back()
+            ->withErrors('Invalid data, try again!');
     }
 }
