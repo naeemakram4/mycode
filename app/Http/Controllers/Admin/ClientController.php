@@ -35,15 +35,26 @@ class ClientController extends Controller
             return Datatables::eloquent($data)
                 ->addColumn('company', function ($data) {
                     if ($data->company_logo) {
-                        return '<div class="symbol symbol-50px w-50px bg-light">
-                                <img src="' . asset('storage/' . $data->company_logo) . '" alt="image" class="p-2">
-                            </div>
-                            <a href="' . route('admin.client.show', $data->id) . '">' . $data->company_name . '</a>';
+                        return '<div class="d-flex align-items-center">
+                                    <div class="symbol symbol-circle overflow-hidden symbol-50px me-3">
+                                        <div class="symbol-label">
+                                            <img src="' . asset('storage/' . $data->company_logo) . '" alt="image" class="w-100">
+                                        </div>
+                                    </div>
+
+                            <div class="d-flex flex-column">
+                                <a href="' . route('admin.client.show', $data->id) . '">' . $data->company_name . '</a>
+                            </div></div>';
                     }
-                    return '<div class="symbol symbol-50px w-50px bg-light">
-                                <img src="' . asset('assets/media/logos/avatar.png') . '" alt="image" class="p-2">
-                            </div>
-                            <a href="' . route('admin.client.show', $data->id) . '">' . $data->company_name. '</a>';
+                    return '<div class="d-flex align-items-center">
+                                <div class="symbol symbol-circle overflow-hidden symbol-50px bg-light">
+                                    <div class="symbol-label">
+                                        <img src="' . asset('assets/media/logos/avatar.png') . '" alt="image" class="w-100">
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <a href="' . route('admin.client.show', $data->id) . '">' . $data->company_name. '</a>
+                                </div></div>';
                 })
                 ->addColumn('services', function ($data) {
                     $services = [];
