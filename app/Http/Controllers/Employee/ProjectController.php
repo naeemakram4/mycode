@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -32,6 +33,10 @@ class ProjectController extends Controller
             'labels' => json_encode($labels),
             'chartData' => json_encode($chartData),
             'chartLabelAndData' => array_combine($labels, $chartData),
+            'tasks' => Task::with('employees')
+                ->whereHas('employees', function($builder) {
+                    return $builder->where('employee_id', auth()->user()->employee->id);
+                })->get(),
             'projects' => Project::whereHas('employees', function($builder){
                 return $builder->where('employee_id', Auth::user()->employee->id);
             })->latest()->get(),
