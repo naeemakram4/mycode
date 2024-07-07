@@ -48,7 +48,7 @@ class ClientController extends Controller
                 ->addColumn('services', function ($data) {
                     $services = [];
                     foreach ($data->services as $ser) {
-                        $services[] = $ser->label;
+                        $services[] = ' '.$ser->label;
                     }
                     return $services;
                 })

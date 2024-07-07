@@ -26,7 +26,12 @@
                 },
                 columns: [
                     {data: 'company',name: 'company'},
-                    {data: 'services',name: 'services'},
+                    {
+                        data: "services",
+                        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                            $(nTd).html('<span class="badge badge-light-dark">' + oData.services + '</span>');
+                        }
+                    },
                     {data: 'status',name: 'status'},
                 ],
             });
