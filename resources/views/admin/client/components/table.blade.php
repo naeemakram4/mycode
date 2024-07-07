@@ -16,6 +16,7 @@
                 searching: false,
                 processing: true,
                 serverSide: true,
+                paging:false,
                 ajax: {
                     url: "{{ route('admin.client.index') }}",
                     data: function (d) {
