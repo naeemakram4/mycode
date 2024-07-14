@@ -34,9 +34,20 @@
                     </div>
 
                     <div class="col-md-3">
-                        <label class="form-label">Date Range:</label>
-                        <input id="kt_daterangepicker_1" name="daterange" class="form-control form-control-sm form-control-solid" placeholder="Pick date rage"/>
+                        <label class="form-label">Select Service:</label>
+                        <select id='service' class="form-select form-select-sm form-select-solid"
+                                data-control="select2" data-hide-search="true">
+                            <option value="">All Status</option>
+                            @foreach($services as $service)
+                                <option value="{{ $service->id }}">{{ ucfirst($service->label) }}</option>
+                            @endforeach
+                        </select>
                     </div>
+
+{{--                    <div class="col-md-3">--}}
+{{--                        <label class="form-label">Date Range:</label>--}}
+{{--                        <input id="kt_daterangepicker_1" name="daterange" class="form-control form-control-sm form-control-solid" placeholder="Pick date rage"/>--}}
+{{--                    </div>--}}
 
                     <div class="col-md-3">
                         <label class="form-label">Search Company:</label>

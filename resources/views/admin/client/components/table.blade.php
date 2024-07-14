@@ -20,8 +20,9 @@
                 ajax: {
                     url: "{{ route('admin.client.index') }}",
                     data: function (d) {
-                        d.status = $('#status').val()
-                        d.date_range = $('#kt_daterangepicker_1').val(),
+                        d.status = $('#status').val(),
+                        d.service = $('#service').val(),
+                        // d.date_range = $('#kt_daterangepicker_1').val(),
                         d.search_company = $('#search_company').val()
                     }
                 },
@@ -37,7 +38,7 @@
                 ],
             });
 
-            $('#status, #kt_daterangepicker_1').change(function () {
+            $('#status, #service').change(function () {
                 table.draw();
             });
 
@@ -45,10 +46,10 @@
                 table.draw();
             });
 
-            $("#kt_daterangepicker_1").daterangepicker({
-                startDate: moment().subtract('days', 29),
-                endDate: moment(),
-            });
+            // $("#kt_daterangepicker_1").daterangepicker({
+            //     startDate: moment().subtract('days', 29),
+            //     endDate: moment(),
+            // });
         });
     </script>
 @endpush

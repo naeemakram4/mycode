@@ -76,17 +76,23 @@ class ClientController extends Controller
                     return '<a href="//' . $data->website . '" target="_blank">' . $data->website . '</a>';
                 })
                 ->filter(function ($instance) use ($request) {
-                    if ($request->get('date_range') != '') {
-                        $dates = explode("-", $request->get('date_range'));
-                        $dateStart = date('Y-m-d', strtotime($dates[0]));
-                        $dateEnd = date('Y-m-d', strtotime($dates[1]));
-                        $instance->whereBetween('created_at', [$dateStart . " 00:00:00", $dateEnd . " 23:59:59"]);
-                    }
+//                    if ($request->get('date_range') != '') {
+//                        $dates = explode("-", $request->get('date_range'));
+//                        $dateStart = date('Y-m-d', strtotime($dates[0]));
+//                        $dateEnd = date('Y-m-d', strtotime($dates[1]));
+//                        $instance->whereBetween('created_at', [$dateStart . " 00:00:00", $dateEnd . " 23:59:59"]);
+//                    }
 
                     if ($request->get('status') == \App\Models\User::STATUS_ACTIVE
                         || $request->get('status') == \App\Models\User::STATUS_DISABLE) {
                         $instance->whereHas('user', function ($builder) use ($request) {
                             return $builder->where('status', $request->get('status'));
+                        });
+                    }
+
+                    if ($request->get('service') != '') {
+                        $instance->whereHas('services', function ($builder) use ($request) {
+                            return $builder->where('service_id', $request->get('service'));
                         });
                     }
 
@@ -103,7 +109,8 @@ class ClientController extends Controller
             'pageTitle' => $pageTitle,
             'breadcrumbs' => $breadcrumbs,
             'action' => $action,
-            'status' => User::allStatus()
+            'status' => User::allStatus(),
+            'services' => Service::get()
         ];
 
         return view('admin.client.index', $viewParams);

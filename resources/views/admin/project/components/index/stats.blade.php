@@ -105,7 +105,7 @@
                 <!--begin::Actions-->
                 <div class="d-flex">
                     <a href="#" class="btn btn-primary btn-sm me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_view_clients">All Clients</a>
-                    <a href="{{ route('admin.client.create') }}" class="btn btn-light btn-sm">Invite New</a>
+                    <a href="{{ route('admin.client.create') }}" class="btn btn-light btn-sm">Create Client</a>
                 </div>
                 <!--end::Actions-->
             </div>
