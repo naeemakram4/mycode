@@ -27,7 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return [
             self::STATUS_ACTIVE,
-            self::STATUS_UNVERIFIED,
+//            self::STATUS_UNVERIFIED,
             self::STATUS_DISABLE
         ];
     }
