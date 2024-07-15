@@ -19,7 +19,7 @@ class FileManagerController extends Controller
         $viewParams = [
             'pageTitle' => $pageTitle,
             'breadcrumbs' => $breadcrumbs,
-            'clients' => Client::latest()->get(),
+            'clients' => Client::orderBy('company_name')->get(),
         ];
 
         return view('admin.file-manager.index', $viewParams);
