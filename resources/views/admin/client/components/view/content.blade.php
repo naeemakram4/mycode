@@ -11,6 +11,12 @@
             <a class="nav-link text-active-primary pb-4" data-kt-countup-tabs="true" data-bs-toggle="tab" href="#service_tab">Client Services</a>
         </li>
         <!--end:::Tab item-->
+
+        <!--begin:::Tab item-->
+        <li class="nav-item">
+            <a class="nav-link text-active-primary pb-4" data-kt-countup-tabs="true" data-bs-toggle="tab" href="#task_tab">Tasks</a>
+        </li>
+        <!--end:::Tab item-->
     </ul>
     <!--end:::Tabs-->
     <!--begin:::Tab content-->
@@ -161,6 +167,73 @@
                             <!--begin::Badge-->
                         </div>
                         <!--end::Item-->
+                    @endforeach
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Tasks-->
+        </div>
+        <!--end:::Tab pane-->
+        <!--begin:::Tab pane-->
+        <div class="tab-pane fade" id="task_tab" role="tabpanel">
+            <!--begin::Tasks-->
+            <div class="card card-flush mb-6 mb-xl-9">
+                <!--begin::Card header-->
+                <div class="card-header mt-6">
+                    <!--begin::Card title-->
+                    <div class="card-title flex-column">
+                        <h2 class="mb-1">Tasks</h2>
+                    </div>
+                    <!--end::Card title-->
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body d-flex flex-column">
+                    @foreach($client->projects as $project)
+                        @foreach($project->tasks as $task)
+                            <!--begin::Item-->
+                            <div class="d-flex align-items-center justify-content-between position-relative mb-7">
+                                <!--begin::Details-->
+                                <div class="fw-bold ms-5">
+                                    <!--begin::Label-->
+                                    <div class="position-absolute top-0 start-0 rounded h-100 bg-secondary w-4px"></div>
+                                    <!--end::Label-->
+                                    <span class="fs-5 fw-bolder text-dark">
+                                       <a href="{{ route('admin.project.task', $task->project_id) }}">{{ $task->subject }}</a>
+                                    </span>
+
+                                    @if($task->status == \App\Models\Task::COMPLETED_STATUS)
+                                        <div class="badge badge-lg badge-light-success d-inline">{{ ucfirst(str_replace('_',' ',$task->status)) }}</div>
+                                    @elseif($task->status == \App\Models\Task::YET_TO_STATUS)
+                                            <div class="badge badge-lg badge-light-warning d-inline">{{ ucfirst(str_replace('_',' ',$task->status)) }}</div>
+                                    @elseif($task->status == \App\Models\Task::IN_PROGRESS_STATUS)
+                                        <div class="badge badge-lg badge-light-primary d-inline">{{ ucfirst(str_replace('_',' ',$task->status)) }}</div>
+                                    @endif
+                                    <!--begin::Info-->
+                                    <div class="fs-7 text-muted">{{ $task->description }}</div>
+                                    <!--end::Info-->
+                                    <!--begin::Info-->
+                                    <div class="fs-7 text-muted">Due Date: {{ Carbon\Carbon::parse($task->due_date)->format('d-m-Y') }}</div>
+                                    <!--end::Info-->
+                                </div>
+                                <!--end::Details-->
+
+                                <!--begin::Badge-->
+                                <div>
+                                    @if($task->priority == \App\Models\Task::LOW_PRIORITY)
+                                        <div class="badge badge-lg badge-light-dark d-inline">Task Priority: {{ $task->priority }}</div> <br>
+                                    @elseif($task->priority == \App\Models\Task::MEDIUM_PRIORITY)
+                                        <div class="badge badge-lg badge-light-primary d-inline">Task Priority: {{ $task->priority }}</div> <br>
+                                    @elseif($task->priority == \App\Models\Task::High_PRIORITY)
+                                        <div class="badge badge-lg badge-light-warning d-inline">Task Priority: {{ $task->priority }}</div> <br>
+                                    @elseif($task->priority == \App\Models\Task::URGENT_PRIORITY)
+                                        <div class="badge badge-lg badge-light-danger d-inline">Task Priority: {{ $task->priority }}</div> <br>
+                                    @endif
+                                </div>
+                                <!--begin::Badge-->
+                            </div>
+                            <!--end::Item-->
+                        @endforeach
                     @endforeach
                 </div>
                 <!--end::Card body-->
