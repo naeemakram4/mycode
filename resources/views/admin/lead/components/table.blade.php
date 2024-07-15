@@ -25,14 +25,16 @@
             </td>
             <td>{{ \Carbon\Carbon::parse($lead->created_at)->format('m/d/Y')  }}</td>
             <td>
-                @if($lead->status == \App\Models\LeadManagement::CLOSED_NOT_CONVERTED_STATUS)
+                @if($lead->status == \App\Models\LeadManagement::CLOSED_LOST_STATUS)
                     <span class="badge badge-light-danger">{{ ucfirst(str_replace('_', ' ',$lead->status)) }}</span>
-                @elseif($lead->status == \App\Models\LeadManagement::Working_CONTACTED_STATUS)
+                @elseif($lead->status == \App\Models\LeadManagement::CONTACTED_STATUS)
                     <span class="badge badge-light-warning">{{ ucfirst(str_replace('_', ' ',$lead->status)) }}</span>
-                @elseif($lead->status == \App\Models\LeadManagement::CLOSED_CONVERTED_STATUS)
+                @elseif($lead->status == \App\Models\LeadManagement::CLOSED_WON_STATUS)
                     <span class="badge badge-light-success">{{ ucfirst(str_replace('_', ' ',$lead->status)) }}</span>
-                @elseif($lead->status == \App\Models\LeadManagement::OPEN_NOT_CONTACTED_STATUS)
+                @elseif($lead->status == \App\Models\LeadManagement::NEW_UNQUALIFIED_STATUS)
                     <span class="badge badge-light-primary">{{ ucfirst(str_replace('_', ' ',$lead->status)) }}</span>
+                @else
+                    <span class="badge badge-light-dark">{{ ucfirst(str_replace('_', ' ',$lead->status)) }}</span>
                 @endif
             </td>
             <td>

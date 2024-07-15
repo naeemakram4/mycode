@@ -15,10 +15,12 @@ class LeadManagement extends Model
     protected $table = 'lead_managements';
 
     // Lead Status
-    const OPEN_NOT_CONTACTED_STATUS = 'open_not_contacted';
-    const Working_CONTACTED_STATUS = 'working_contacted';
-    const CLOSED_CONVERTED_STATUS = 'closed_converted';
-    const CLOSED_NOT_CONVERTED_STATUS = 'closed_not_converted';
+    const NEW_UNQUALIFIED_STATUS = 'new_unqualified';
+    const CONTACTED_STATUS = 'contacted';
+    const QUALIFIED_STATUS = 'qualified';
+    const PROPOSAL_SENT_STATUS = 'proposal_sent';
+    const CLOSED_WON_STATUS = 'closed_won';
+    const CLOSED_LOST_STATUS = 'closed_lost';
 
     // SEO Audit Status
     const REQUESTED_SEO_STATUS = 'requested';
@@ -28,10 +30,12 @@ class LeadManagement extends Model
     public static function getAllStatus(): array
     {
         return [
-            self::OPEN_NOT_CONTACTED_STATUS,
-            self::Working_CONTACTED_STATUS,
-            self::CLOSED_CONVERTED_STATUS,
-            self::CLOSED_NOT_CONVERTED_STATUS
+            self::NEW_UNQUALIFIED_STATUS,
+            self::CONTACTED_STATUS,
+            self::QUALIFIED_STATUS,
+            self::PROPOSAL_SENT_STATUS,
+            self::CLOSED_WON_STATUS,
+            self::CLOSED_LOST_STATUS
         ];
     }
 
