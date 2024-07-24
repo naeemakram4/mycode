@@ -18,7 +18,7 @@ class RoleSeeder extends Seeder
             'active' => true,
         ]);
         Role::create([
-            'id' => 3,
+            'id' => 2,
             'name' => 'employee',
             'label' => 'Employee',
             'active' => true,

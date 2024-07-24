@@ -2,8 +2,6 @@
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminLoginController;
-use App\Http\Controllers\Customer\CustomerDashboardController;
-use App\Http\Controllers\Customer\StaticsController;
 use App\Http\Controllers\Employee\EmployeeDashboard;
 use App\Http\Controllers\Employee\EmployeeLoginController;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', function(){ return redirect()->route('admin.login'); });
+Route::get('/', function () {
+    return redirect()->route('admin.login');
+});
 
 //Employee panel
 Route::group(['prefix' => 'employee', 'as' => 'employee.'], function () {
@@ -44,36 +44,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::group(['middleware' => 'admin.auth'], function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-        require __DIR__ . '/admin/report.php';
-        require __DIR__ . '/admin/meeting.php';
-
-        // Company
-        require __DIR__ . '/admin/department.php';
-        require __DIR__ . '/admin/designation.php';
         require __DIR__ . '/admin/employee.php';
-
-        // Lead Management
-        require __DIR__ . '/admin/lead_management.php';
-
-        require __DIR__ . '/admin/client.php';
-        require __DIR__ . '/admin/request.php';
         require __DIR__ . '/admin/project.php';
-
-        // Sales Channel
-        require __DIR__ . '/admin/followup.php';
-        require __DIR__ . '/admin/service.php';
-        require __DIR__ . '/admin/proposal.php';
-        require __DIR__ . '/admin/file_manager.php';
-        require __DIR__ . '/admin/invoice.php';
-
-        // System Management
         require __DIR__ . '/admin/task.php';
+        require __DIR__ . '/admin/service.php';
+        require __DIR__ . '/admin/access_management.php';
 
 
         Route::post('logout', [AdminLoginController::class, 'logout'])->name('logout');
     });
 });
-
-
-//This is just for menu route option
-Route::get('test', function () { return redirect()->back()->withErrors('Coming Soon!'); })->name('test');

@@ -40,7 +40,7 @@ return [
 
         [
             'title' => 'Access Management',
-            'route' => 'test',
+            'route' => 'admin.access-management.permission.edit',
             'icon' => 'shield-check',
             'heading' => 'Security'
         ],
