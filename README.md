@@ -1,6 +1,4 @@
-<p align="center">
-## MY CODE
-</p>
+## <p align="center">MY CODE</p>
 
 
 ## About MY CODE
