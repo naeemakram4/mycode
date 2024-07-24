@@ -11,20 +11,20 @@
                    value="{{old('project_name', $project->name)}}">
         </div>
         {{-- TODO: Remove this part after some time. We don't need project logo it will be replaced by client logo--}}
-{{--        <div class="col-md-5">--}}
-{{--            <label class="form-label">Project Logo</label>--}}
-{{--            <input type="file" name="project_logo" class="form-control form-control-solid"--}}
-{{--                   value="{{old('project_logo')}}">--}}
-{{--        </div>--}}
-{{--        <div class="col-md-1 fv-row">--}}
-{{--            <div class="symbol symbol-75px w-75px bg-light">--}}
-{{--                @if($project->logo)--}}
-{{--                    <img src="{{ asset('storage/'. $project->logo ) }}" alt="No Logo" class="p-2">--}}
-{{--                @else--}}
-{{--                    <img src="{{ asset('assets/media/logos/avatar.png') }}" alt="No Logo" class="p-3">--}}
-{{--                @endif--}}
-{{--            </div>--}}
-{{--        </div>--}}
+        <div class="col-md-5">
+            <label class="form-label">Project Logo</label>
+            <input type="file" name="project_logo" class="form-control form-control-solid"
+                   value="{{old('project_logo')}}">
+        </div>
+        <div class="col-md-1 fv-row">
+            <div class="symbol symbol-75px w-75px bg-light">
+                @if($project->logo)
+                    <img src="{{ asset('storage/'. $project->logo ) }}" alt="No Logo" class="p-2">
+                @else
+                    <img src="{{ asset('assets/media/logos/avatar.png') }}" alt="No Logo" class="p-3">
+                @endif
+            </div>
+        </div>
     </div>
     <!--end::Input group-->
 
@@ -52,22 +52,15 @@
 
     <div class="row mb-7 fv-plugins-icon-container">
         <div class="col-md-6">
-            <label for="clients" class="required form-label">Select Client</label>
-            <select name="client_id" required class="form-select" data-control="select2"
-                    data-placeholder="Select Client">
-                <option value=""></option>
-                @foreach($clients as $client)
-                    <option value="{{ $client->id }}" {{ ($client->id == $project->client_id) ? 'selected' : '' }}>
-                        {{ $client->company_name }}
+            <label for="employee" class="form-label">Assign Employee</label>
+            <select name="employees[]" multiple class="form-select" data-control="select2"
+                    data-placeholder="Assign Employee">
+                @foreach($employees as $employee)
+                    <option value="{{ $employee->id }}"
+                            @if($project->hasEmployee($employee->id)) selected @endif>
+                        {{ $employee->user->getFullName()}}
                     </option>
                 @endforeach
-            </select>
-        </div>
-        <div class="col-md-6">
-            <label for="employee" class="form-label">Assign Employee</label>
-            <select name="employees"  class="form-select" data-control="select2"
-                    data-placeholder="Assign Employee">
-                <option value=""></option>
             </select>
         </div>
     </div>
@@ -90,34 +83,3 @@
     <!--end::Actions-->
 </form>
 <!--end::Form-->
-
-@push('pageInnerScript')
-    <script>
-        $(document).ready(function () {
-            $("select[name=client_id]").change(function () {
-                let id = $(this).val();
-
-                $.get('/admin/project/get-employees/' + id, function (data) {
-                    let emp = data;
-
-                    $("select[name=employees]").empty();
-                    $.each(emp, function (value, emp) {
-                        $('<option value="' + emp.id + '"> ' + emp.user.first_name + ' ' + emp.user.last_name + ' </option>').appendTo("select[name=employees]");
-                    });
-                });
-            });
-
-            let client = {{ $project->client_id }};
-            let employee = {{$project->employees[0]->id ?? 0}};
-            $.get('/admin/project/get-employees/' + client, function (data) {
-                let emp = data;
-                $("select[name=employees]").empty();
-                $.each(emp, function (value, emp) {
-                    $('<option value="' + emp.id + '" ' +
-                        (emp.id === employee ? 'selected' : '')
-                        +'> ' + emp.user.first_name + ' ' + emp.user.last_name + ' </option>').appendTo("select[name=employees]");
-                });
-            });
-        });
-    </script>
-@endpush

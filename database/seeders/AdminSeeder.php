@@ -1,27 +1,25 @@
 <?php
+declare(strict_types=1);
 
 namespace Database\Seeders;
 
 use App\Models\Admin;
-use App\Models\RoleDim;
-use App\Models\UserDim;
 use Carbon\Carbon;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AdminSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         DB::table('admins')->delete();
 
         Admin::create([
             'first_name' => 'Admin',
             'last_name' => 'User',
-            'phone' => '2818048685',
-            'email' => 'admin@houmanity.com',
+            'phone' => '123456789',
+            'email' => 'admin@mycode.com',
             'user_name' => 'admin',
             'password' => Hash::make('admin123'),
             'status' => Admin::STATUS_ACTIVE,

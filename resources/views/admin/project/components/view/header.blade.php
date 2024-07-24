@@ -2,8 +2,8 @@
 <div class="d-flex flex-wrap flex-sm-nowrap mb-6">
     <!--begin::Image-->
     <div class="d-flex flex-center flex-shrink-0 bg-light rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4">
-        @if($project->client->company_logo)
-            <img class="mw-50px mw-lg-75px" src="{{ asset('storage/'. $project->client->company_logo) }}" alt="image">
+        @if($project->logo)
+            <img class="mw-50px mw-lg-75px" src="{{ asset('storage/'. $project->logo) }}" alt="image">
         @else
             <img class="mw-50px mw-lg-75px" src="{{ asset('assets/media/logos/avatar.png') }}" alt="image">
         @endif
@@ -94,7 +94,7 @@
                 @foreach($project->employees as $employee)
                     <!--begin::User-->
                     <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $employee->user->getFullName() }}">
-                        <span class="symbol-label bg-{{ config('houmanity.settings.symbol_label_colors')[$employee->user->getNameFirstLetter()] }} text-inverse-warning fw-bolder">{{ $employee->user->getNameFirstLetter() }}</span>
+                        <span class="symbol-label bg-{{ config('mycode.settings.symbol_label_colors')[$employee->user->getNameFirstLetter()] }} text-inverse-warning fw-bolder">{{ $employee->user->getNameFirstLetter() }}</span>
                     </div>
                     <!--begin::User-->
                 @endforeach

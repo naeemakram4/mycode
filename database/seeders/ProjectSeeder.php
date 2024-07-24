@@ -19,7 +19,6 @@ class ProjectSeeder extends Seeder
         for ($i = 1; $i <= $totalProjectRecords; $i++) {
             $clientId = rand(1, 10);
             $project = Project::create([
-                'client_id' => $clientId,
                 'name' => $faker->domainWord,
                 'description' => $faker->text(25),
                 'start_date' => Carbon::now()->subWeek(1),

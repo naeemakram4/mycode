@@ -23,7 +23,7 @@ class ServiceController extends Controller
             'pageTitle' => $pageTitle,
             'breadcrumbs' => $breadcrumbs,
             'action' => $action,
-            'services' => Service::withCount('clients', 'leadManagements')->latest()->get()
+            'services' => Service::latest()->get()
         ];
 
         return view('admin.service.index', $viewParams);

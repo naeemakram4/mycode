@@ -4,18 +4,14 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Client;
 use App\Models\Employee;
 use App\Models\Project;
-use App\Models\SalesRepresentativeDim;
-use App\Models\Service;
 use App\Models\Task;
 use App\Models\TaskComment;
 use App\Traits\FileHandling;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
 class ProjectController extends Controller
@@ -32,24 +28,21 @@ class ProjectController extends Controller
         ];
 
         if ($request->ajax()) {
-            $data = Project::with('employees', 'client')->latest();
+            $data = Project::with('employees')->latest();
 
             return Datatables::eloquent($data)
                 ->editColumn('id', function ($data) {
                     return '<a href="' . route('admin.project.show', $data->id) . '" >' . $data->id . '</a>';
                 })
                 ->editColumn('logo', function ($data) {
-                    if ($data->client->company_logo) {
+                    if ($data->logo) {
                         return '<div class="symbol symbol-50px w-50px bg-light">
-                            <img src="' . asset('storage/' . $data->client->company_logo) . '" alt="image" class="p-2">
+                            <img src="' . asset('storage/' . $data->logo) . '" alt="image" class="p-2">
                         </div>';
                     }
                     return '<div class="symbol symbol-50px w-50px bg-light">
                             <img src="' . asset('assets/media/logos/avatar.png') . '" alt="image" class="p-2">
                         </div>';
-                })
-                ->addColumn('client', function ($data) {
-                    return $data->client->user->getFullName();
                 })
                 ->addColumn('start_date', function ($data) {
                     return Carbon::parse($data->start_date)->format('m-d-Y');
@@ -85,16 +78,13 @@ class ProjectController extends Controller
                         $instance->where('status', $request->get('status'));
                     }
 
-                    if ($request->get('client') != '') {
-                        $instance->where('client_id', $request->get('client'));
-                    }
 
                     if (!empty($request->get('search_project'))) {
                         $projectName = $request->get('search_project');
                         $instance->where('name', 'like', '%' . $projectName . '%');
                     }
                 })
-                ->rawColumns(['id', 'logo', 'name', 'description', 'start_date', 'client', 'status'])
+                ->rawColumns(['id', 'logo', 'name', 'description', 'start_date', 'status'])
                 ->make(true);
         }
 
@@ -114,7 +104,6 @@ class ProjectController extends Controller
             'chartLabelAndData' => array_combine($labels, $chartData),
             'projects' => Project::withCount('tasks')->latest()->get(),
             'tasks' => Task::get(),
-            'clients' => Client::get(),
             'status' => Project::getAllProjectStatus()
         ];
         return view('admin.project.index', $viewParams);
@@ -129,7 +118,7 @@ class ProjectController extends Controller
             'pageTitle' => $pageTitle,
             'breadcrumbs' => $breadcrumbs,
             'status' => Project::getAllProjectStatus(),
-            'clients' => Client::get()
+            'employees' => Employee::get()
         ];
 
         return view('admin.project.create', $viewParams);
@@ -142,17 +131,15 @@ class ProjectController extends Controller
             'description' => 'nullable',
             'start_date' => 'nullable',
             'due_date' => 'nullable',
-            'client_id' => 'required',
             'status' => 'required'
         ]);
 
-//        if ($request->file('project_logo')) {
-//            $projectLogo = $this->uploadObject(config('houmanity.filehandling.storage.projects'), $request->file('project_logo'));
-//        }
+        if ($request->file('project_logo')) {
+            $projectLogo = $this->uploadObject(config('mycode.filehandling.storage.projects'), $request->file('project_logo'));
+        }
 
         $project = new Project();
-        $project->client()->associate($validatedData['client_id']);
-//        $project->logo = $projectLogo ?? null; // TODO: Remove this part after some time. We don't need project logo it will be replaced by client logo
+        $project->logo = $projectLogo ?? null; // TODO: Remove this part after some time. We don't need project logo it will be replaced by client logo
         $project->name = $validatedData['project_name'];
         $project->description = $validatedData['description'];
         $project->start_date = $validatedData['start_date'];
@@ -196,7 +183,8 @@ class ProjectController extends Controller
             'breadcrumbs' => $breadcrumbs,
             'project' => $project,
             'status' => Project::getAllProjectStatus(),
-            'clients' => Client::get(),
+            'employees' => Employee::get()
+
         ];
 
         return view('admin.project.edit', $viewParams);
@@ -209,24 +197,22 @@ class ProjectController extends Controller
             'description' => 'nullable',
             'start_date' => 'nullable',
             'due_date' => 'nullable',
-            'client_id' => 'required',
             'status' => 'required'
         ]);
 
         if ($project) {
 
             //TODO: Remove this part after some time. We don't need project logo it will be replaced by client logo
-//            if ($request->hasFile('project_logo')) {
-//                $existingImage = $project->logo;
-//                $projectLogo = $this->uploadObject(config('houmanity.filehandling.storage.projects'), $request->file('project_logo'));
-//                $project->logo = $projectLogo;
-//
-//                if ($existingImage) {
-//                    $this->deleteObject($existingImage);
-//                }
-//            }
+            if ($request->hasFile('project_logo')) {
+                $existingImage = $project->logo;
+                $projectLogo = $this->uploadObject(config('mycode.filehandling.storage.projects'), $request->file('project_logo'));
+                $project->logo = $projectLogo;
 
-            $project->client()->associate($validatedData['client_id']);
+                if ($existingImage) {
+                    $this->deleteObject($existingImage);
+                }
+            }
+
             $project->name = $validatedData['project_name'];
             $project->description = $validatedData['description'];
             $project->start_date = $validatedData['start_date'];
@@ -291,7 +277,7 @@ class ProjectController extends Controller
     public function taskCommentSubmit(Request $request, $id)
     {
         if ($request->file('task_comment_file')) {
-            $taskCommentFile = $this->uploadObject(config('houmanity.filehandling.storage.tasks'), $request->file('task_comment_file'));
+            $taskCommentFile = $this->uploadObject(config('mycode.filehandling.storage.tasks'), $request->file('task_comment_file'));
         }
 
         $taskComment = new TaskComment();
@@ -324,15 +310,5 @@ class ProjectController extends Controller
 
         return redirect()->back()
             ->withErrors('Invalid data!');
-    }
-
-    public function getEmployees($id)
-    {
-        $employees = Employee::with('user')
-            ->whereHas('clients', function ($builder) use ($id) {
-                return $builder->where('id', $id);
-            })->get();
-
-        return response()->json($employees->toArray(), 200);
     }
 }

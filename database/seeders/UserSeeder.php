@@ -30,15 +30,5 @@ class UserSeeder extends Seeder
             'remarks' => 'This is dummy default employee records!',
         ]);
 
-        //Creating default Client
-        User::create([
-            'first_name' => 'Default',
-            'last_name' => 'Client',
-            'role_id' => Role::CLIENT_ROLE,
-            'user_name' => 'customer',
-            'password' => Hash::make('admin123'),
-            'status' => User::STATUS_ACTIVE,
-            'email_verified_at' => Carbon::now()
-        ]);
     }
 }

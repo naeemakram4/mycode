@@ -39,21 +39,7 @@
                 </div>
                 <!--end::Row-->
 
-                <!--begin::Row-->
-                <div class="row mb-5">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fs-5 fw-bold">Client</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8">
-                        <p class="fs-6">
-                            {{ $project->client->user->getFullName() }} <br>
-                            <span class="fw-bold">Company :</span> {{ $project->client->company_name }}
-                        </p>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Row-->
+
 
                 <!--begin::Row-->
                 <div class="row mb-5">

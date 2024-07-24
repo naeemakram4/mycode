@@ -52,22 +52,3 @@ mix.styles([
     .copy([
         'resources/mix/template/plugins/global/fonts'
     ], 'public/css/fonts')
-
-
-//---------Admin Panel mix files----------
-mix.scripts([
-//Template scripts files to mix.
-    'resources/mix/template/js/custom/utilities/modals/create-request-admin.js',
-], 'public/js/admin-create-request-form.js')
-
-//---------Customer Panel mix files----------
-mix.scripts([
-//Template scripts files to mix.
-        'resources/mix/template/js/custom/utilities/modals/create-account.js',
-    ], 'public/js/customer-create-request-form.js')
-
-//---------Employee Panel mix files----------
-mix.scripts([
-//Template scripts files to mix.
-    'resources/mix/template/js/custom/utilities/modals/create-request-employee.js',
-], 'public/js/employee-create-request-form.js')

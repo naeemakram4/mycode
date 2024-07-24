@@ -143,7 +143,7 @@ class ClientController extends Controller
         ]);
 
         if ($request->file('company_logo')) {
-            $companyLogo = $this->uploadObject(config('houmanity.filehandling.storage.clients'), $request->file('company_logo'));
+            $companyLogo = $this->uploadObject(config('mycode.filehandling.storage.clients'), $request->file('company_logo'));
         }
 
         $user = new User();
@@ -255,7 +255,7 @@ class ClientController extends Controller
 
             if ($request->hasFile('company_logo')) {
                 $existingImage = $client->company_logo;
-                $companyLogo = $this->uploadObject(config('houmanity.filehandling.storage.clients'), $request->file('company_logo'));
+                $companyLogo = $this->uploadObject(config('mycode.filehandling.storage.clients'), $request->file('company_logo'));
                 $client->company_logo = $companyLogo;
 
                 if ($existingImage) {

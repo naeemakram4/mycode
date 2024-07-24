@@ -12,6 +12,6 @@ class RequestGeneratedListener
 {
     public function handle(RequestGeneratedEvent $event): void
     {
-        Notification::route('mail', 'admin@houmanity.com')->notify(new RequestGeneratedNotification());
+        Notification::route('mail', 'admin@mycode.com')->notify(new RequestGeneratedNotification());
     }
 }

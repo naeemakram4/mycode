@@ -1,4 +1,4 @@
-@foreach(config('houmanity.menu.admin') as $menu)
+@foreach(config('mycode.menu.admin') as $menu)
         @if(isset($menu['heading']))
             <div class="menu-item">
                 <div class="menu-content pt-8 pb-2">

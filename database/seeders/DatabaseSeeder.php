@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Database\Seeders;
 
@@ -19,25 +20,14 @@ class DatabaseSeeder extends Seeder
                 AdminSeeder::class,
                 UserSeeder::class,
                 ServiceSeeder::class,
-                ClientSeeder::class,
                 EmployeeSeeder::class,
                 ProjectSeeder::class,
-                TaskSeeder::class,
-                RequestTypeSeeder::class,
-                RequestSeeder::class,
-                LeadManagementTypeSeeder::class,
-
-//            DepartmentSeeder::class,
-//            DesignationSeeder::class,
-//            TaskGroupSeeder::class,
             ]);
         } else {
             $this->call([
                 RoleSeeder::class,
                 PermissionSeeder::class,
                 AdminSeeder::class,
-                LeadManagementTypeSeeder::class,
-                RequestTypeSeeder::class,
             ]);
         }
     }

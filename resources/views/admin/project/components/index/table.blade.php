@@ -3,7 +3,6 @@
     <tr>
         <th>ID</th>
         <th>Logo</th>
-        <th>Client</th>
         <th>Name</th>
         <th>Description</th>
         <th>Start Date</th>
@@ -24,7 +23,6 @@
                     url: "{{ route('admin.project.index') }}",
                     data: function (d) {
                         d.status = $('#status').val()
-                        d.client = $('#client').val()
                         d.search_project = $('#search_project').val()
                         d.date_range = $('#kt_daterangepicker_1').val()
                     }
@@ -32,7 +30,6 @@
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'logo', name: 'logo'},
-                    {data: 'client',name: 'client'},
                     {data: 'name', name: 'name'},
                     {data: 'description', name: 'description'},
                     {data: 'start_date', name: 'start_date'},
@@ -40,7 +37,7 @@
                 ],
             });
 
-            $('#status, #client, #kt_daterangepicker_1').change(function () {
+            $('#status, #kt_daterangepicker_1').change(function () {
                 table.draw();
             });
 

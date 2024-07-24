@@ -4,7 +4,6 @@
         <th>Employee</th>
         <th>Username</th>
         <th>Phone</th>
-        <th>Total Clients</th>
         <th>Status</th>
         <th class="text-end">Actions</th>
     </tr>
@@ -36,7 +35,6 @@
                 </td>
                 <td>{{ $employee->user->user_name }}</td>
                 <td>{{ $employee->user->phone }}</td>
-                <td>{{ count($employee->clients) }}</td>
                 <td>
                     @if($employee->user->status == \App\Models\User::STATUS_ACTIVE)
                         <span class="badge badge-light-success">{{ \App\Models\User::STATUS_ACTIVE }}</span>

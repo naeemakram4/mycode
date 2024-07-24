@@ -17,10 +17,6 @@
     </div>
 @endsection
 
-@section('pageInnerModals')
-    @include('admin.project.components.display_all_clients_model')
-@endsection
-
 @section('pageScriptFiles')
     <script src="{{ asset('js/datatable.js') }}"></script>
 @endsection

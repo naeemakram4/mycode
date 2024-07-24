@@ -110,7 +110,7 @@ class RequestController extends Controller
 
         if ($request->file('request_file')) {
             // Uploading request file/image
-            $requestFile = $this->uploadObject(config('houmanity.filehandling.storage.requests'), $request->file('request_file'));
+            $requestFile = $this->uploadObject(config('mycode.filehandling.storage.requests'), $request->file('request_file'));
         }
 
         //Generating Ticket ID

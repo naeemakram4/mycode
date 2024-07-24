@@ -1,4 +1,4 @@
-@foreach(config('houmanity.menu.employee') as $menu)
+@foreach(config('mycode.menu.employee') as $menu)
     @if(in_array($menu['route'], auth()->user()->getAllPermissionsFromRole()) ||
     array_intersect($menu['sub_routes'] ?? [''] ,auth()->user()->getAllPermissionsFromRole()))
         @if(isset($menu['heading']))

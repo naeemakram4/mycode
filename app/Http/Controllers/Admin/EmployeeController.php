@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Client;
-use App\Models\Department;
-use App\Models\Designation;
 use App\Models\Employee;
 use App\Models\Role;
 use App\Models\User;
@@ -32,8 +30,7 @@ class EmployeeController extends Controller
             'pageTitle' => $pageTitle,
             'breadcrumbs' => $breadcrumbs,
             'action' => $action,
-            'clients' => Client::all(),
-            'employees' => Employee::with('department', 'designation')->latest()->get(),
+            'employees' => Employee::latest()->get(),
         ];
 
         return view('admin.company-hq.employee.index', $viewParams);
@@ -46,8 +43,7 @@ class EmployeeController extends Controller
 
         $viewParams = [
             'pageTitle' => $pageTitle,
-            'breadcrumbs' => $breadcrumbs,
-            'clients' => Client::all(),
+            'breadcrumbs' => $breadcrumbs
         ];
 
         return view('admin.company-hq.employee.create', $viewParams);
@@ -61,12 +57,11 @@ class EmployeeController extends Controller
             'user_name' => 'required|unique:users,user_name',
             'email' => 'required|unique:users,email',
             'phone' => 'nullable',
-            'clients' => 'nullable|array',
             'password' => 'required'
         ]);
 
         if (!empty($request->file('employee_image'))) {
-            $employeeImage = $this->uploadObject(config('houmanity.filehandling.storage.employees'), $request->file('employee_image'));
+            $employeeImage = $this->uploadObject(config('mycode.filehandling.storage.employees'), $request->file('employee_image'));
         }
 
         $user = new User;
@@ -86,8 +81,6 @@ class EmployeeController extends Controller
         $employee->remarks = $request->remarks;
 
         if ($employee->save()) {
-            $employee->clients()->sync($request->clients);
-
             Session::flash('successMessage', 'A new employee has been created successfully!');
             return redirect()->route('admin.employee.index');
         }
@@ -118,7 +111,6 @@ class EmployeeController extends Controller
         $viewParams = [
             'pageTitle' => $pageTitle,
             'breadcrumbs' => $breadcrumbs,
-            'clients' => Client::all(),
             'employee' => $employee
         ];
 
@@ -133,7 +125,6 @@ class EmployeeController extends Controller
             'user_name' => 'required|unique:users,user_name,' . $employee->user_id,
             'email' => 'required|email|unique:users,email,' . $employee->user_id,
             'phone' => 'nullable',
-            'clients' => 'nullable|array',
         ]);
 
         $user = User::where('id', $employee->user_id)->first();
@@ -153,7 +144,7 @@ class EmployeeController extends Controller
 
             if ($request->hasFile('employee_image')) {
                 $existingImage = $employee->image;
-                $employeeImage = $this->uploadObject(config('houmanity.filehandling.storage.employees'), $request->file('employee_image'));
+                $employeeImage = $this->uploadObject(config('mycode.filehandling.storage.employees'), $request->file('employee_image'));
                 $employee->image = $employeeImage;
 
                 if ($existingImage) {
@@ -164,8 +155,6 @@ class EmployeeController extends Controller
             $employee->remarks = $request->remarks;
 
             if ($employee->save()) {
-                $employee->clients()->sync($request->clients);
-
                 Session::flash('successMessage', 'Employee has been updated successfully!');
                 return redirect()->route('admin.employee.index');
             }

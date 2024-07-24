@@ -3,8 +3,6 @@
     <tr class="fw-bold fs-6 text-muted">
         <th>ID</th>
         <th>Label</th>
-        <th>Total Clients</th>
-        <th>Total Leads</th>
         <th>Description</th>
         <th>Action</th>
     </tr>
@@ -15,8 +13,6 @@
             <tr>
                 <td>{{ $service->id }}</td>
                 <td>{{ $service->label}}</td>
-                <td>{{ $service->clients_count }}</td>
-                <td>{{ $service->lead_managements_count }}</td>
                 <td>{{ $service->description ?? '--'}}</td>
                 <td>
                     <button class="btn btn-sm btn-light-primary"

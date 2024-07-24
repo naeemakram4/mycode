@@ -59,16 +59,6 @@
     </div>
     <!--end::Input group-->
 
-    <div class="fv-row mb-7 fv-plugins-icon-container">
-        <label for="clients" class="form-label">Assign Clients</label>
-        <select name="clients[]" id="clients" class="form-select" multiple data-control="select2"
-                data-placeholder="Assign Clients">
-            <option value=""></option>
-            @foreach($clients as $client)
-                <option value="{{ $client->id }}">{{ $client->company_name }}</option>
-            @endforeach
-        </select>
-    </div>
 
     <!--begin::Input group-->
     <div class="fv-row mb-7 fv-plugins-icon-container">

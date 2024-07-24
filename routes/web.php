@@ -21,21 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-//Customer panel
-Route::get('/', function(){ return redirect()->route('login'); });
-Route::group(['middleware' => ['auth', 'verified', 'customer.role'], 'prefix' => 'customer', 'as' => 'customer.'], function () {
-    Route::get('/dashboard', [CustomerDashboardController::class, 'index'])->name('dashboard');
-
-    require __DIR__ . '/customer/profile.php';
-    require __DIR__ . '/customer/project.php';
-    require __DIR__ . '/customer/task.php';
-    require __DIR__ . '/customer/invoice.php';
-    require __DIR__ . '/customer/request.php';
-
-    Route::get('seo', [StaticsController::class, 'seo'])->name('statics.seo');
-    Route::get('ppc', [StaticsController::class, 'ppc'])->name('statics.ppc');
-
-});
+Route::get('/', function(){ return redirect()->route('admin.login'); });
 
 //Employee panel
 Route::group(['prefix' => 'employee', 'as' => 'employee.'], function () {

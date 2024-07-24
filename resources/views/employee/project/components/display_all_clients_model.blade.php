@@ -44,8 +44,8 @@
                                     <!--begin::Avatar-->
                                     <a href="{{ route('admin.client.show', $client->id) }}">
                                         <div class="symbol symbol-35px symbol-circle">
-                                            <span class="symbol-label bg-light-{{ config('houmanity.settings.symbol_label_colors')[$client->user->getNameFirstLetter()] }}
-                                            text-{{ config('houmanity.settings.symbol_label_colors')[$client->user->getNameFirstLetter()] }} fw-bold">{{ $client->user->getNameFirstLetter() }}</span>
+                                            <span class="symbol-label bg-light-{{ config('mycode.settings.symbol_label_colors')[$client->user->getNameFirstLetter()] }}
+                                            text-{{ config('mycode.settings.symbol_label_colors')[$client->user->getNameFirstLetter()] }} fw-bold">{{ $client->user->getNameFirstLetter() }}</span>
                                         </div>
                                     </a>
                                     <!--end::Avatar-->

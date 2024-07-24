@@ -12,20 +12,7 @@ class PermissionSeeder extends Seeder
 {
     public function run(): void
     {
-        $permissions = config('houmanity.permissions.customer');
-        foreach ($permissions as $name => $label) {
-            $permission = Permission::create([
-                'name' => $name,
-                'label' => $label
-            ]);
-
-            PermissionRole::create([
-                'permission_id' => $permission->id,
-                'role_id' => Role::CLIENT_ROLE
-            ]);
-        }
-
-        $permissions = config('houmanity.permissions.employee');
+        $permissions = config('mycode.permissions.employee');
         foreach ($permissions as $name => $label) {
             $permission = Permission::create([
                 'name' => $name,

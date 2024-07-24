@@ -34,11 +34,6 @@ class EmployeeSeeder extends Seeder
                 'user_id' => $user->id,
                 'remarks' => 'This is dummy team records!',
             ]);
-
-            DB::table('client_employee')->insert([
-                ['client_id' => rand(1,5), 'employee_id' => $employee->id],
-                ['client_id' => rand(6,10), 'employee_id' => $employee->id],
-            ]);
         }
     }
 }

@@ -33,16 +33,6 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">Select Client:</label>
-                        <select id='client' class="form-select form-select-sm form-select-solid"
-                                data-control="select2" data-hide-search="false">
-                            <option value="">All Clients</option>
-                            @foreach($clients as $client)
-                                <option value="{{ $client->id }}">{{ $client->company_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-3">
                         <label class="form-label">Search by project name:</label>
                         <input type="text" id="search_project" name="search_project" class="form-control form-control-sm" placeholder="Search by project name"/>
                     </div>

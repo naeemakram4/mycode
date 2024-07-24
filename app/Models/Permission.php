@@ -18,7 +18,7 @@ class Permission extends Model
     public static function syncPermissions(): bool
     {
         try {
-            $permissions = config('houmanity.permissions.customer');
+            $permissions = config('mycode.permissions.customer');
             $existingPermissions = self::all()->pluck('name')->toArray();
             $permissionsToBeDeleted = array_diff($existingPermissions, $permissions);
             $permissionsToBeAdded = array_diff($permissions, $existingPermissions);

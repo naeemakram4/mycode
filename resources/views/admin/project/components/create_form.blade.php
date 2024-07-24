@@ -10,11 +10,11 @@
                    value="{{old('project_name')}}">
         </div>
         {{-- TODO: Remove this part after some time. We don't need project logo it will be replaced by client logo--}}
-{{--        <div class="col-md-4">--}}
-{{--            <label class="form-label">Project Logo</label>--}}
-{{--            <input type="file" name="project_logo" class="form-control form-control-solid"--}}
-{{--                   value="{{old('project_logo')}}">--}}
-{{--        </div>--}}
+        <div class="col-md-4">
+            <label class="form-label">Project Logo</label>
+            <input type="file" name="project_logo" class="form-control form-control-solid"
+                   value="{{old('project_logo')}}">
+        </div>
     </div>
     <!--end::Input group-->
 
@@ -42,20 +42,12 @@
 
     <div class="row mb-7 fv-plugins-icon-container">
         <div class="col-md-6">
-            <label for="clients" class="required form-label">Select Client</label>
-            <select name="client_id" required class="form-select" data-control="select2"
-                    data-placeholder="Select Client">
-                <option value=""></option>
-                @foreach($clients as $client)
-                    <option value="{{ $client->id }}">{{ $client->company_name }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="col-md-6">
             <label for="employee" class="form-label">Assign Employee</label>
-            <select name="employees"  class="form-select" data-control="select2"
+            <select name="employees[]" multiple  class="form-select" data-control="select2"
                     data-placeholder="Assign Employee">
-                <option value=""></option>
+                @foreach($employees as $employee)
+                    <option value="{{ $employee->id }}">{{ $employee->user->getFullName()}}</option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -78,35 +70,3 @@
     <!--end::Actions-->
 </form>
 <!--end::Form-->
-
-@push('pageInnerScript')
-    <script>
-        $(document).ready(function () {
-            $("select[name=client_id]").change(function () {
-                let id = $(this).val();
-
-                $.get('/admin/project/get-employees/' + id, function (data) {
-                    let emp = data;
-
-                    $("select[name=employees]").empty();
-                    $.each(emp, function (value, emp) {
-                        $('<option value="' + emp.id + '"> ' + emp.user.first_name + ' ' + emp.user.last_name + ' </option>').appendTo("select[name=employees]");
-                    });
-                });
-            });
-
-            // Select the sales representative
-            {{--let accountManager = {{$store->AccountManagerKey}};--}}
-            {{--let salesRepresentative = {{$store->SalesRepresentativeKey}};--}}
-            {{--$.get('/admin/store/get-sales-representatives/' + accountManager, function (data) {--}}
-            {{--    let sr = data.data;--}}
-            {{--    $("select[name=sales_representative]").empty();--}}
-            {{--    $.each(sr, function (value, sr) {--}}
-            {{--        $('<option value="' + sr.SalesRepresentativeKey + '" ' +--}}
-            {{--            (sr.SalesRepresentativeKey === salesRepresentative ? 'selected' : '')--}}
-            {{--            +'> ' + sr.user.first_name + ' ' + sr.user.last_name + ' </option>').appendTo("select[name=sales_representative]");--}}
-            {{--    });--}}
-            {{--});--}}
-        });
-    </script>
-@endpush

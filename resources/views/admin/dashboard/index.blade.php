@@ -3,7 +3,6 @@
 
 @section('content')
     @include('admin.dashboard.components.cards')
-{{--    @include('admin.dashboard.components.tables')--}}
 @endsection
 
 @push('pageInnerScript')
@@ -17,8 +16,11 @@
                         new Chart(e, {
                             type: "doughnut",
                             data: {
-                                datasets: [{data: [30, 45, 25], backgroundColor: ["#00A3FF", "#50CD89", "#E4E6EF"]}],
-                                labels: ["Active", "Completed", "Yet to start"]
+                                datasets: [{
+                                    data: {{ $chartData }},
+                                    backgroundColor: ["#00A3FF", "#50CD89", "#7239ea"]
+                                }],
+                                labels: {!! $labels !!}
                             },
                             options: {
                                 chart: {fontFamily: "inherit"},

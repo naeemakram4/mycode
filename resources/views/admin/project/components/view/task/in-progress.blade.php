@@ -163,7 +163,7 @@
                     <div class="symbol-group symbol-hover my-1">
                         @foreach($task->employees as $employee)
                             <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $employee->user->getFullName() }}">
-                                <span class="symbol-label bg-{{ config('houmanity.settings.symbol_label_colors')[$employee->user->getNameFirstLetter()] }} text-inverse-warning fw-bolder">{{ $employee->user->getNameFirstLetter() }}</span>
+                                <span class="symbol-label bg-{{ config('mycode.settings.symbol_label_colors')[$employee->user->getNameFirstLetter()] }} text-inverse-warning fw-bolder">{{ $employee->user->getNameFirstLetter() }}</span>
                             </div>
                         @endforeach
                     </div>

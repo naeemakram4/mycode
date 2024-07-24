@@ -121,7 +121,7 @@ class ProjectController extends Controller
     public function taskCommentSubmit(Request $request, $id)
     {
         if ($request->file('task_comment_file')) {
-            $taskCommentFile = $this->uploadObject(config('houmanity.filehandling.storage.tasks'), $request->file('task_comment_file'));
+            $taskCommentFile = $this->uploadObject(config('mycode.filehandling.storage.tasks'), $request->file('task_comment_file'));
         }
 
         $taskComment = new TaskComment();
