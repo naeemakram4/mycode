@@ -11,6 +11,7 @@ Features:
 - Admin can create services
 
 ## Local Setup:
+- Php v: 8.1 | Laravel 10.10
 - git clone
 - setup .env and database
 - npm install and npm run dev
